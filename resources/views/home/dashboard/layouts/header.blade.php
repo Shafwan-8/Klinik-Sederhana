@@ -25,18 +25,24 @@
           <li class="dropdown user-menu">
             <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <img src="/img/trika.png" class="user-image" alt="User Image" />
-              <span class="d-none d-lg-inline-block">Abdus Salam</span>
+              <span class="d-none d-lg-inline-block">{{ auth()->user()->name }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
               <!-- User image -->
               <li class="dropdown-header">
                 <img src="/img/trika.png" class="img-circle" alt="User Image" />
                 <div class="d-inline-block">
-                  Abdus Salam <small class="pt-1">iamabdus@gmail.com</small>
+                  {{ auth()->user()->name }} <small class="pt-1">{{ auth()->user()->email }}</small>
                 </div>
               </li>
               <li class="dropdown-footer">
-                <a href="index.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link d-flex align-items-center gap-2">
+                    <i class="bi bi-box-arrow-left"></i>
+                    Logout
+                    </button>
+                </form>
               </li>
             </ul>
           </li>
@@ -44,3 +50,4 @@
       </div>
     </nav>
   </header>
+
