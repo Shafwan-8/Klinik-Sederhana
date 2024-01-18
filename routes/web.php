@@ -22,4 +22,5 @@ Route::post('/login', [LoginController::class, 'login']);
 
 
 Route::get('/dashboard',[DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dokter',[DashboardController::class, ''])->middleware('auth');
 
