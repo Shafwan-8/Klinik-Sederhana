@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -12,8 +12,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return view('home.content.pengguna', [
+        $user = User::latest()->get();
+        return view('home.content.pengguna.pengguna', [
             'title' => 'Daftar Pengguna',
             'users' => $user
         ]);
@@ -25,7 +25,13 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $roles = User::ROLES;
+        
+        return view('home.content.pengguna.tambah', [
+            'title' => 'Tambah Pengguna',
+            'roles' => $roles,
+        ]);
+        
     }
 
     /**
@@ -33,7 +39,20 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|min:3|max:255',
+            'username' => 'required|min:3|max:255|unique:users',
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required',
+            'role' => 'required',
+        ]);
+
+        User::create($validatedData);
+
+        return to_route('user.index')->with('success', 'Pengguna Berhasil Ditambahkan!');
+
+        // return view('home.content.pengguna.pengguna')
+        //     ->with('success', 'Pengguna Berhasil Ditambahkan');
     }
 
     /**
@@ -42,6 +61,8 @@ class UsersController extends Controller
     public function show(User $user)
     {
 
+
+
     }
 
     /**
@@ -49,7 +70,14 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        $roles = User::ROLES;
+
+        return view('home.content.pengguna.edit', [
+            'title' => 'Edit Pengguna',
+            'user' => $user,
+            'roles' => $roles,
+        ] );
     }
 
     /**
@@ -57,18 +85,37 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|min:3|max:255',
+            'username' => 'required|min:3|max:255|unique:users',
+            'email' => 'required|email:dns|unique:users',
+            'password' => '',
+        ]);
+
+        $user = User::find($id);
+        if (!$request->password) {
+            $user->update([
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+            ]);
+        } else {
+            $user->update($validatedData);
+        }
+
+        return to_route('user.index')->with('success', 'Pengguna Berhasil Diubah!');
+
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $user = User::find($id);
-        
+        $user = User::find($id);        
         $user->delete();
-
-        return view('home.content.pengguna')->with('success', 'Kategori Berhasil Dihapus'); 
+        return to_route('user.index')->with('success', 'Pengguna Berhasil Dihapus!');
     }
 }

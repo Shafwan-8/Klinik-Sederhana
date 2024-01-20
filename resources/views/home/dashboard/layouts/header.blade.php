@@ -11,7 +11,7 @@
           <button type="button" name="search" id="search-btn" class="btn btn-flat">
             <i class="mdi mdi-magnify"></i>
           </button>
-          <input type="text" name="query" id="search-input" class="form-control" placeholder="'button', 'chart' etc."
+          <input type="text" name="query" id="search-input" class="form-control" placeholder="Search..."
             autofocus autocomplete="off" />
         </div>
         <div id="search-results-container">
@@ -24,23 +24,27 @@
           <!-- User Account -->
           <li class="dropdown user-menu">
             <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <img src="/img/trika.png" class="user-image" alt="User Image" />
+              <img src="{{ asset('img/trika.png') }}" class="user-image" alt="User Image" />
               <span class="d-none d-lg-inline-block">{{ auth()->user()->name }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
               <!-- User image -->
               <li class="dropdown-header">
-                <img src="/img/trika.png" class="img-circle" alt="User Image" />
+                <img src="{{ asset('img/trika.png') }}" class="img-circle" alt="User Image" />
                 <div class="d-inline-block">
-                  {{ auth()->user()->name }} <small class="pt-1">{{ auth()->user()->email }}</small>
+                  {{ auth()->user()->name }}
+                  <small class="pt-1">Role: {{ auth()->user()->role }}</small>
+                  <small class="pt-1">{{ auth()->user()->email }}</small>
                 </div>
               </li>
               <li class="dropdown-footer">
                 <form action="/logout" method="POST">
                     @csrf
                     <button type="submit" class="nav-link d-flex align-items-center gap-2">
-                    <i class="bi bi-box-arrow-left"></i>
-                    Logout
+                      
+                      <i class="mdi mdi-logout"></i>
+                      
+                      Logout
                     </button>
                 </form>
               </li>

@@ -13,20 +13,25 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const ROLES = [
+        'admin' => 'Admin',
+        'dokter' => 'Dokter',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    // protected $fillable = [
-    //     'name',
-    //     'username',
-    //     'email',
-    //     'password',
-    //     'role'
-    // ];
+    protected $fillable = [
+        'name',
+        'username',
+        'email',
+        'password',
+        'role'
+    ];
 
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.

@@ -14,12 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Wawan',
-            'username' => 'Shafwan',
-            'email' => 'Shafwan@gmail.com',
-            'password' => 'password',
-            'role' => 'admin'
+        $this->call([
+            UserSeeder::class,
         ]);
     }
 }
