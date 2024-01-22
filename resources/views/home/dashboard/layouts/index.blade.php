@@ -25,11 +25,6 @@
     
     <link href='/plugins/toastr/toastr.min.css' rel='stylesheet'>
     
-    
-    
-    
-    
-    
 
     <!-- SLEEK CSS -->
     <link id="sleek-css" rel="stylesheet" href="/css/sleek.css" />
@@ -77,13 +72,14 @@
             <div class="content">
 		<div class="row">
 			<div class="col-12">
-				
                   <!-- Recent Order Table -->
                   <div class="card card-table-border-none recent-orders" id="recent-orders">
-                    <div class="card-header justify-content-between">
+                    <div class="card-header justify-content-between text-dark">
                       @yield('title')
                     </div>
-                    <div class="card-body pt-0 pb-5">
+                    <div class="card-body pt-0 pb-5 text-dark">
+                        @include('home.dashboard.layouts.alert')
+
                         @yield('container')
                     </div>
                   </div>
@@ -97,7 +93,7 @@
     <footer class="footer mt-auto">
       <div class="copyright bg-white">
         <p>
-          Copyright &copy; <span id="copy-year"></span>
+          Kopi Kanan &copy; <span id="copy-year"></span>
         </p>
       </div>
       <script>
@@ -116,6 +112,8 @@
       const el = document.createElement('pwa-update');
       document.body.appendChild(el);
     </script> -->
+
+    {{ config('abel.nama') }}
 
     <!-- Javascript -->
     <script src="/plugins/jquery/jquery.min.js"></script>
