@@ -10,12 +10,14 @@
 
 @section('container')
 <div class="card">
+    @if (auth()->user()->role == 'admin')
         <div class="card-header p-0 d-flex justify-content-start px-4 py-4">
             <a
                 class="btn btn-dark"
                 href="{{ route('dokter.create') }}"
             >Tambah</a>
         </div>
+    @endif
         <div class="table-responsive">
             <table class="table">
                 <thead class="table-active text-center">
@@ -26,7 +28,9 @@
                       <th>No HP</th>
                       <th>SIP</th>
                       <th>Foto</th>
+                    @if (auth()->user()->role == 'admin')
                       <th>Action</th>
+                    @endif
                     </tr>
                 </thead>
                 <tbody class="text-dark">
@@ -48,6 +52,7 @@
                                     />
                                 @endif
                             </td>
+                        @if (auth()->user()->role == 'admin')
                             <td>
                                 <a href="{{ route('dokter.show', $dokter->id) }}" class="badge bg-info"><span data-feather="eye"></span></a>
                                 <a href="{{ route('dokter.edit', $dokter->id) }}" class="badge bg-warning"><span data-feather="edit"></span></a>
@@ -62,6 +67,7 @@
                                     @method('delete')
                                 </form>
                             </td>
+                        @endif
                         </tr>
                     @empty
                         <tr>

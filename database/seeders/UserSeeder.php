@@ -20,6 +20,13 @@ class UserSeeder extends Seeder
                 'email' => 'admin@contoh.com',
                 'password' => bcrypt('admin'),
                 'role' => 'admin',
+            ],
+            [
+                'name' => 'Rafly',
+                'username' => 'Rafly',
+                'email' => 'Rafly@gmail.com',
+                'password' => 'password',
+                
             ]
         ];
 
