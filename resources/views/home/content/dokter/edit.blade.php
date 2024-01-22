@@ -27,7 +27,7 @@
             @method('PUT')
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -73,7 +73,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -97,7 +97,7 @@
                 </div>
 
                 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                         class="form-label"
@@ -120,30 +120,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
-                    <div class="mb-3">
-                        <label
-                        class="form-label"
-                        for="alamat"
-                        >Alamat</label>
-                        
-                        <input
-                        class="form-control @error('alamat') is-invalid @enderror"
-                        id="alamat"
-                        name="alamat"
-                        type="text"
-                        value="{{ old('alamat') ?? $dokter->alamat }}"
-                        >
-                        
-                        @error('alamat')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                </div>
                 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -165,7 +143,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -183,9 +161,32 @@
                         <small class="text-muted">Kosongkan jika tidak ingin mengubah.</small>
 
                         @error('foto')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label
+                        class="form-label"
+                        for="alamat"
+                        >Alamat</label>
+                        
+                        <input
+                        class="form-control @error('alamat') is-invalid @enderror"
+                        id="alamat"
+                        name="alamat"
+                        type="text"
+                        value="{{ old('alamat') ?? $dokter->alamat }}"
+                        >
+                        
+                        @error('alamat')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
                 </div>
