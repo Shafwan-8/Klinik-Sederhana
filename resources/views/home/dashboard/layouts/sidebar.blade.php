@@ -29,7 +29,7 @@
                           </a>
                         </li>
                         <li class="">
-                          <a class="sidenav-item-link" href="/dokter">
+                          <a class="sidenav-item-link" href="/dashboard/dokter">
                             <span class="nav-text">Dokter</span>
                           </a>
                         </li>

@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     
     Route::get('/dokter',[DashboardController::class, 'index']);
+    Route::resource('/dashboard/dokter', DokterController::class);
 
     Route::get('/pengguna', [UsersController::class, 'index'])->name('user.index');
     Route::get('/pengguna/tambah', [UsersController::class, 'create'])->name('user.create');
@@ -38,7 +39,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pengguna/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
 
 });
-
-
-
 
