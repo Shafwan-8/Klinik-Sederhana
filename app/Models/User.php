@@ -9,9 +9,15 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Dokter;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public const ROLES = [
+        'admin' => 'Admin',
+        'dokter' => 'Dokter',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -20,8 +26,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'role'
     ];
 
     // protected $guarded = ['id'];
