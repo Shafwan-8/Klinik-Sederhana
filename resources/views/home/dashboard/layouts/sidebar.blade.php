@@ -6,7 +6,7 @@
               <!-- Aplication Brand -->
               <div class="app-brand">
                 <a href="/dashboard" title="Klinik Dashboard">
-                  <img src="img/trika.png" alt="Trika Media Solusindo" height="35" width="37" class="rounded-circle brand-icon" viewBox="0 0 50 50">
+                  <img src="/img/trika.png" alt="Trika Media Solusindo" height="35" width="37" class="rounded-circle brand-icon" viewBox="0 0 50 50">
                   <span class="brand-name text-truncate">Trika Klinik</span>
                 </a>
               </div>
@@ -29,7 +29,7 @@
                           </a>
                         </li>
                         <li class="">
-                          <a class="sidenav-item-link" href="/dokter">
+                          <a class="sidenav-item-link" href="/dashboard/dokter">
                             <span class="nav-text">Dokter</span>
                           </a>
                         </li>

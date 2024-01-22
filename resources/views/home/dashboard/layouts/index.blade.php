@@ -29,7 +29,8 @@
     
     
     
-    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <!-- SLEEK CSS -->
     <link id="sleek-css" rel="stylesheet" href="/css/sleek.css" />
@@ -55,6 +56,8 @@
     </script>
 
     <div id="toaster"></div>
+
+    @yield('')
 
     <!-- ====================================
     ——— WRAPPER
@@ -109,6 +112,42 @@
     </div> <!-- End Page Wrapper -->
   </div> <!-- End Wrapper -->
 
+<script>
+    function callToaster(positionClass) {
+    if (document.getElementById("toaster")) {
+      toastr.options = {
+        closeButton: true,
+        debug: false,
+        newestOnTop: false,
+        progressBar: true,
+        positionClass: positionClass,
+        preventDuplicates: false,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "5000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+      };
+      toastr.success("Selamat datang di Trika Klinik", "Halo, {{ auth()->user()->name }}");
+    }
+  }
+
+  function hapusData(name, id) {
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                event.preventDefault();
+                document.getElementById(`hapus-${name}-${id}`).submit();
+            }
+        }
+</script>
+
+<!-- Feather -->
+<script>
+  feather.replace();
+</script>
 
     <!-- <script type="module">
       import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';

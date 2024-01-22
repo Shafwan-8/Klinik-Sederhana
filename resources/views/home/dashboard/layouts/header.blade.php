@@ -36,7 +36,19 @@
                 </div>
               </li>
               <li class="dropdown-footer">
-                <a href="index.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+              <form 
+                action="/logout"
+                method="post"
+              >
+                @csrf
+                <button 
+                  type="submit"
+                  class="dropdown-item"  
+                >
+                    <i class="bi bi-box-arrow-right"></i>
+                    Logout
+                </button>
+              </form>
               </li>
             </ul>
           </li>

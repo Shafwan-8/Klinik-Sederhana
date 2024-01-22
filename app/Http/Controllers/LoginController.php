@@ -29,6 +29,4 @@ class LoginController extends Controller
         
         return back()->with('loginError', 'Login Gagal!');
     }
-
-
 }
