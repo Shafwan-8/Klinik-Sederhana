@@ -147,19 +147,19 @@
                 
                 <div class="col-md-4">
                         <div class="mb-3">
-                                <label
-                                class="form-label"
-                                for="alamat"
-                                >Alamat</label>
-                                
-                                <textarea
+                            <label
+                            class="form-label"
+                            for="alamat"
+                            >Alamat</label>
+                            
+                            <textarea
                                 class="form-control @error('alamat') is-invalid @enderror"
-                            id="alamat"
-                            name="alamat"
-                        >{{ old('alamat') }}</textarea>
+                                id="alamat"
+                                name="alamat"
+                            >{{ old('alamat') }}</textarea>
                         
                         @error('alamat')
-                        <div class="invalid-feedback">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
