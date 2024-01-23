@@ -24,11 +24,11 @@
             >Kembali</a>
         </div>
         
-        <div class="row">
         <div class="card-body text-dark">
             @csrf
-
-                <div class="col-md-12">
+            <div class="row">
+            
+                <div class="col-md-6">
                         <div class="mb-3">
                         <label
                                 class="form-label"
@@ -50,7 +50,7 @@
                         @enderror
                         </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                         <div class="mb-3">
                         <label
                             class="form-label"
@@ -73,7 +73,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -96,7 +96,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -120,34 +120,14 @@
                 </div>
 
                 
-                <div class="col-md-12">
-                        <div class="mb-3">
-                                <label
-                                class="form-label"
-                                for="alamat"
-                                >Alamat</label>
-                                
-                                <textarea
-                                class="form-control @error('alamat') is-invalid @enderror"
-                            id="alamat"
-                            name="alamat"
-                        >{{ old('alamat') }}</textarea>
-
-                        @error('alamat')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
                 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
-                            class="form-label"
-                            for="foto"
+                        class="form-label"
+                        for="foto"
                         >Foto</label>
-
+                        
                         <input
                             class="form-control @error('foto') is-invalid @enderror"
                             id="foto"
@@ -164,7 +144,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -179,6 +159,27 @@
                         </select>
 
                         @error('user_id')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                        <div class="mb-3">
+                                <label
+                                class="form-label"
+                                for="alamat"
+                                >Alamat</label>
+                                
+                                <textarea
+                                class="form-control @error('alamat') is-invalid @enderror"
+                            id="alamat"
+                            name="alamat"
+                        >{{ old('alamat') }}</textarea>
+        
+                        @error('alamat')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
