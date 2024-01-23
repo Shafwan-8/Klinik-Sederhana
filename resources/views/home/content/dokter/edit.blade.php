@@ -108,7 +108,7 @@
                         class="form-control @error('sip') is-invalid @enderror"
                         id="sip"
                         name="sip"
-                        type="text"
+                        type="number"
                         value="{{ old('sip') ?? $dokter->sip }}"
                         >
                         
@@ -128,7 +128,7 @@
                             for="user_id"
                         >Ubah User : </label>
 
-                        <select class="form-control" id="user_id" name="user_id">
+                        <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
                                 <option value="">Pilih</option>
                                 @foreach ($users as $user)
                                     <option @if($dokter->user_id == $user->id) selected @endif value="{{ $user->id }}">{{ $user->name }}</option>

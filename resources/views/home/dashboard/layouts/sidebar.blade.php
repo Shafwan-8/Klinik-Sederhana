@@ -23,14 +23,16 @@
                     </a>
                     <ul class="collapse show" id="dashboard" data-parent="#sidebar-menu">
                       <div class="sub-menu">
-                        <li class="active">
+                        <li class="{{ ($active === "pengguna") ? "active" : "" }}">
                           <a class="sidenav-item-link" href="/pengguna">
-                            <span class="nav-text">Pengguna</span>
+                            <i class="mdi mdi-account-multiple"></i>
+                            <span class="nav-text mx-2">Pengguna</span>
                           </a>
                         </li>
-                        <li class="">
+                        <li class="{{ ($active === "dokter") ? "active" : "" }}">
                           <a class="sidenav-item-link" href="/dokter">
-                            <span class="nav-text">Dokter</span>
+                            <i class="mdi mdi-doctor"></i>
+                            <span class="nav-text mx-2">Dokter</span>
                           </a>
                         </li>
                       </div>

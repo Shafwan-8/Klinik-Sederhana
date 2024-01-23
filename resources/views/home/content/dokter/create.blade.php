@@ -28,7 +28,7 @@
             @csrf
             <div class="row">
             
-                <div class="col-md-6">
+                <div class="col-md-12">
                         <div class="mb-3">
                         <label
                                 class="form-label"
@@ -107,7 +107,7 @@
                             class="form-control @error('sip') is-invalid @enderror"
                             id="sip"
                             name="sip"
-                            type="text"
+                            type="number"
                             value="{{ old('sip') }}"
                         >
 
@@ -121,29 +121,7 @@
 
                 
                 
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label
-                        class="form-label"
-                        for="foto"
-                        >Foto</label>
-                        
-                        <input
-                            class="form-control @error('foto') is-invalid @enderror"
-                            id="foto"
-                            name="foto"
-                            type="file"
-                            value="{{ old('foto') }}"
-                        >
-
-                        @error('foto')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-
+                
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label
@@ -151,7 +129,7 @@
                             for="user_id"
                         >Ubah User :</label>
 
-                        <select class="form-control" id="user_id" name="user_id">
+                        <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
                                         <option value="" selected>Pilih</option>
                                 @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -166,7 +144,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                
+                <div class="col-md-4">
                         <div class="mb-3">
                                 <label
                                 class="form-label"
@@ -178,13 +157,43 @@
                             id="alamat"
                             name="alamat"
                         >{{ old('alamat') }}</textarea>
-        
+                        
                         @error('alamat')
-                            <div class="invalid-feedback">
+                        <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="mb-3">
+                        <label
+                        class="form-label"
+                        for="foto"
+                        >Foto</label>
+                        <input
+                            class="form-control @error('foto') is-invalid @enderror"
+                            id="foto"
+                            name="foto"
+                            type="file"
+                            value="{{ old('foto') }}"
+                            onchange="previewImage()"
+                        >
+                        
+                        @error('foto')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <img 
+                        class="img-preview img-fluid my-3"
+                        width="150px"
+                    />
                 </div>
             </div>
         </div>
@@ -193,6 +202,24 @@
             <button class="btn btn-dark">Simpan</button>
         </div>
     </form>
+    
+<script>
+
+    function previewImage() {
+        const image = document.querySelector('#foto');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader .readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(ofREvent) {
+            imgPreview.src = event.target.result;    
+        }
+    }
+
+</script>
 
 
 @endsection

@@ -17,7 +17,8 @@ class DokterController extends Controller
     {
         $title = 'Master Dokter';
         $dokters = Dokter::latest()->get();
-        return view('home.content.dokter.index', compact('dokters', 'title'));
+        $active = 'dokter';
+        return view('home.content.dokter.index', compact('dokters', 'title', 'active'));
     }
 
     /**
@@ -27,7 +28,8 @@ class DokterController extends Controller
     {
         $users = User::all();
         $title = 'Tambah Dokter';
-        return view('home.content.dokter.create', compact('users', 'title'));
+        $active = 'dokter';
+        return view('home.content.dokter.create', compact('users', 'title', 'active'));
     }
 
     /**
@@ -38,12 +40,12 @@ class DokterController extends Controller
 
         $dokterData = $request->validate([
             'nama' => 'required|string',
-            'no_ktp' => 'required|string|unique:dokter',
+            'no_ktp' => 'required|numeric|unique:dokter',
             'no_hp' => 'required|numeric',
-            'sip' => 'required|string',
+            'sip' => 'required|numeric',
             'alamat' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'user_id' => 'nullable|exists:users,id',
+            'user_id' => 'required|unique:dokter|exists:users,id',
         ]);
     
         // Pilih user berdasarkan user_id yang dikirimkan dalam request
@@ -71,7 +73,8 @@ class DokterController extends Controller
     {
         return view('home.content.dokter.show', [
             'title' => 'Detail Dokter',
-            'dokter' => $dokter
+            'dokter' => $dokter,
+            'active' => 'dokter'
         ]);
     }
 
@@ -83,7 +86,8 @@ class DokterController extends Controller
         $users = User::all();
         $dokter = Dokter::findOrFail($id);
         $title = 'Sunting Dokter';
-        return view('home.content.dokter.edit', compact('users', 'title', 'dokter'));
+        $active = 'dokter';
+        return view('home.content.dokter.edit', compact('users', 'title', 'dokter', 'active'));
     }
 
     /**
@@ -91,18 +95,16 @@ class DokterController extends Controller
      */
     public function update(Request $request, string $id)
     {   
-        $dokter = Dokter::find($id);
-        if (!$dokter) {
-            return to_route('dokter.index')->with('error', 'Data dokter tidak ditemukan');
-        }
+        $dokter = Dokter::findOrFail($id);
+    
         $tervalidasi = $request->validate([
             'nama' => 'required|string',
-            'no_ktp' => 'required|string|unique:dokter',
+            'no_ktp' => 'required|numeric|unique:dokter',
             'no_hp' => 'required|numeric',
-            'sip' => 'required|string',
+            'sip' => 'required|numeric',
             'alamat' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'user_id' => 'nullable|exists:users,id',
+            'user_id' => 'required|unique:dokter|exists:users,id',
         ]);
 
         $dokter->update($tervalidasi);

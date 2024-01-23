@@ -15,7 +15,8 @@ class UsersController extends Controller
         $user = User::latest()->get();
         return view('home.content.pengguna.pengguna', [
             'title' => 'Daftar Pengguna',
-            'users' => $user
+            'users' => $user,
+            'active' => 'pengguna'
         ]);
 
     }
@@ -30,6 +31,7 @@ class UsersController extends Controller
         return view('home.content.pengguna.tambah', [
             'title' => 'Tambah Pengguna',
             'roles' => $roles,
+            'active' => 'pengguna'
         ]);
         
     }
@@ -77,6 +79,7 @@ class UsersController extends Controller
             'title' => 'Edit Pengguna',
             'user' => $user,
             'roles' => $roles,
+            'active' => 'pengguna'
         ] );
     }
 
