@@ -18,14 +18,12 @@
               @if (auth()->check() && auth()->user()->dokter->isNotEmpty())
                   @foreach (auth()->user()->dokter as $dokter)
                     @if ($dokter->foto)
-                        <img src="{{ asset('storage/' . $dokter->foto) }}" class="user-image" alt="User Image" />
+                        <img src="{{ asset('storage/' . $dokter->foto) }}" class="user-image rounded-lg" alt="User Image" />
                       @break {{-- Hentikan iterasi setelah menemukan satu dokter dengan foto --}}
                     @endif
                   @endforeach
                   @else
-                    <div class="profile-image-container">
-                        <img src="{{ asset('img/default-profile.png') }}" class="profile-image" alt="User Image" />
-                    </div>
+                      <img src="{{ asset('img/default-profile.jpg') }}" class="user-image rounded-lg" alt="User Image" />
                 @endif
               <span class="d-none d-lg-inline-block">{{ auth()->user()->name }}</span>
             </button>
@@ -35,16 +33,12 @@
                 @if (auth()->check() && auth()->user()->dokter->isNotEmpty())
                   @foreach (auth()->user()->dokter as $dokter)
                     @if ($dokter->foto)
-                      <div class="profile-image-container">
-                          <img src="{{ asset('storage/' . $dokter->foto) }}" class="profile-image" alt="User Image" />
-                      </div>
+                        <img src="{{ asset('storage/' . $dokter->foto) }}" class="user-image rounded-lg" alt="User Image" />
                       @break {{-- Hentikan iterasi setelah menemukan satu dokter dengan foto --}}
                     @endif
                   @endforeach
                   @else
-                    <div class="profile-image-container">
-                        <img src="{{ asset('img/default-profile.png') }}" class="profile-image" alt="User Image" />
-                    </div>
+                      <img src="{{ asset('img/default-profile.jpg') }}" class="user-image rounded-lg" alt="User Image" />
                 @endif
                 <div class="d-inline-block">
                   {{ auth()->user()->name }}
