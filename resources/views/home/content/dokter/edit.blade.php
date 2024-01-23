@@ -27,7 +27,7 @@
             @method('PUT')
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="mb-3">
                         <label
                             class="form-label"
@@ -131,7 +131,10 @@
                         <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
                                 <option value="">Pilih</option>
                                 @foreach ($users as $user)
-                                    <option @if($dokter->user_id == $user->id) selected @endif value="{{ $user->id }}">{{ $user->name }}</option>
+                                    <option 
+                                        @if($dokter->user_id == $user->id) selected @endif 
+                                        value="{{ $user->id }}">{{ $user->name }}
+                                    </option>
                                 @endforeach
                         </select>
 
@@ -143,45 +146,19 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label
-                            class="form-label"
-                            for="foto"
-                        >Foto</label>
-
-                        <input
-                            class="form-control @error('foto') is-invalid @enderror"
-                            id="foto"
-                            name="foto"
-                            type="file"
-                            value="{{ old('foto') ?? $dokter->foto   }}"
-                        >
-
-                        <small class="text-muted">Kosongkan jika tidak ingin mengubah.</small>
-
-                        @error('foto')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                </div>
                 
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <div class="mb-3">
                         <label
                         class="form-label"
                         for="alamat"
                         >Alamat</label>
                         
-                        <input
+                        <textarea
                         class="form-control @error('alamat') is-invalid @enderror"
                         id="alamat"
                         name="alamat"
-                        type="text"
-                        value="{{ old('alamat') ?? $dokter->alamat }}"
-                        >
+                        >{{ old('alamat') ?? $dokter->alamat}}</textarea>
                         
                         @error('alamat')
                         <div class="invalid-feedback">
@@ -190,6 +167,39 @@
                         @enderror
                     </div>
                 </div>
+                    
+                <div class="col-md-5">
+                    <div class="mb-3">
+                        <label
+                            class="form-label"
+                            for="foto"
+                        >Foto</label>
+            
+                        <input
+                            class="form-control @error('foto') is-invalid @enderror"
+                            id="foto"
+                            name="foto"
+                            type="file"
+                            value="{{ old('foto') ?? $dokter->foto   }}"
+                            onchange="previewImage()"
+                        >
+            
+                        <small class="text-muted">Kosongkan jika tidak ingin mengubah.</small>
+            
+                        @error('foto')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <img 
+                        class="img-preview img-fluid my-3"
+                        width="150px"
+                    />
+                </div>
             </div>
         </div>
 
@@ -197,5 +207,24 @@
             <button class="btn btn-dark" type="submit">Simpan Perubahan</button>
         </div>
     </form>
+
+
+<script>
+
+    function previewImage() {
+        const image = document.querySelector('#foto');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader .readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(ofREvent) {
+            imgPreview.src = event.target.result;    
+        }
+    }
+
+</script>
 
 @endsection
