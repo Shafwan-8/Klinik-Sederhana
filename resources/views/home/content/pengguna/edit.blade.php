@@ -13,7 +13,7 @@
     
     <form
         class="card"
-        action="{{ route('user.update', $user->id) }}"
+        action="{{ route('pengguna.update', $user->id) }}"
         method="POST"
     >
         
@@ -121,7 +121,7 @@
             <button class="btn btn-primary">Simpan</button>
             <a
                 class="btn btn-secondary"
-                href="{{ route('user.index') }}"
+                href="{{ route('pengguna.index') }}"
             >Kembali</a>
         </div>
     </form>

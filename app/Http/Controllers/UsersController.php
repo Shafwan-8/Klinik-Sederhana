@@ -49,7 +49,7 @@ class UsersController extends Controller
 
         User::create($validatedData);
 
-        return to_route('user.index')->with('success', 'Pengguna Berhasil Ditambahkan!');
+        return to_route('pengguna.index')->with('success', 'Pengguna Berhasil Ditambahkan!');
 
         // return view('home.content.pengguna.pengguna')
         //     ->with('success', 'Pengguna Berhasil Ditambahkan');
@@ -103,7 +103,7 @@ class UsersController extends Controller
             $user->update($validatedData);
         }
 
-        return to_route('user.index')->with('success', 'Pengguna Berhasil Diubah!');
+        return to_route('pengguna.index')->with('success', 'Pengguna Berhasil Diubah!');
 
 
 

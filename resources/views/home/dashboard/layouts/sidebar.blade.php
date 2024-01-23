@@ -24,12 +24,12 @@
                     <ul class="collapse show" id="dashboard" data-parent="#sidebar-menu">
                       <div class="sub-menu">
                         <li class="active">
-                          <a class="sidenav-item-link" href="/pengguna">
+                          <a class="sidenav-item-link {{ ($title === 'Daftar Pengguna') ? 'active' : '' }}" href="{{ route('pengguna.index') }}">
                             <span class="nav-text">Pengguna</span>
                           </a>
                         </li>
                         <li class="">
-                          <a class="sidenav-item-link" href="/dashboard/dokter">
+                          <a class="sidenav-item-link {{ ($title === 'Master Dokter') ? 'active' : '' }}" href="{{ route('dokter.index') }}">
                             <span class="nav-text">Dokter</span>
                           </a>
                         </li>

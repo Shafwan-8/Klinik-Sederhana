@@ -6,7 +6,7 @@
 
 
 @section('container')
-    <form class="card" action="{{ route('user.store') }}" method="POST">
+    <form class="card" action="{{ route('pengguna.store') }}" method="POST">
 
 
         <div class="card-body">
@@ -79,7 +79,7 @@
         </div>
         <div class="card-footer">
             <button class="btn btn-primary">Simpan</button>
-            <a class="btn btn-secondary" href="{{ route('user.index') }}">Kembali</a>
+            <a class="btn btn-secondary" href="{{ route('pengguna.index') }}">Kembali</a>
         </div>
     </form>
 @endsection
