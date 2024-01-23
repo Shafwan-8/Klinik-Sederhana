@@ -29,13 +29,14 @@ Route::middleware('auth')->group(function () {
 
     
     Route::resource('/dokter', DokterController::class);
+    Route::resource('/pengguna', UsersController::class);
 
-    Route::get('/pengguna', [UsersController::class, 'index'])->name('user.index');
-    Route::get('/pengguna/tambah', [UsersController::class, 'create'])->name('user.create');
-    Route::post('/pengguna', [UsersController::class, 'store'])->name('user.store');
-    Route::get('/pengguna/{id}/edit', [UsersController::class, 'edit'])->name('user.edit');
-    Route::put('/pengguna/{id}', [UsersController::class, 'update'])->name('user.update');
-    Route::delete('/pengguna/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
+    // Route::get('/pengguna', [UsersController::class, 'index'])->name('user.index');
+    // Route::get('/pengguna/tambah', [UsersController::class, 'create'])->name('user.create');
+    // Route::post('/pengguna', [UsersController::class, 'store'])->name('user.store');
+    // Route::get('/pengguna/{id}/edit', [UsersController::class, 'edit'])->name('user.edit');
+    // Route::put('/pengguna/{id}', [UsersController::class, 'update'])->name('user.update');
+    // Route::delete('/pengguna/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
 
 });
 
