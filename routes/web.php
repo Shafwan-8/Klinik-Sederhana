@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\PatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('/dokter', DokterController::class);
     Route::resource('/pengguna', UsersController::class);
+    Route::resource('/patient', PatientController::class);
 
     // Route::get('/pengguna', [UsersController::class, 'index'])->name('user.index');
     // Route::get('/pengguna/tambah', [UsersController::class, 'create'])->name('user.create');
