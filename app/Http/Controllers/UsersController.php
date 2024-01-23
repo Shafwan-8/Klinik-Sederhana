@@ -116,6 +116,6 @@ class UsersController extends Controller
     {
         $user = User::find($id);        
         $user->delete();
-        return to_route('user.index')->with('success', 'Pengguna Berhasil Dihapus!');
+        return to_route('pengguna.index')->with('success', 'Pengguna Berhasil Dihapus!');
     }
 }
