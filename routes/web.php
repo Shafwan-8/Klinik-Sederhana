@@ -28,8 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[DashboardController::class, 'index']);
 
     
-    Route::get('/dokter',[DashboardController::class, 'index']);
-    Route::resource('/dashboard/dokter', DokterController::class);
+    Route::resource('/dokter', DokterController::class);
 
     Route::get('/pengguna', [UsersController::class, 'index'])->name('user.index');
     Route::get('/pengguna/tambah', [UsersController::class, 'create'])->name('user.create');
