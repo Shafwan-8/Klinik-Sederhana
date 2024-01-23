@@ -7,16 +7,7 @@
       </button>
       <!-- search form -->
       <div class="search-form d-none d-lg-inline-block">
-        <div class="input-group">
-          <button type="button" name="search" id="search-btn" class="btn btn-flat">
-            <i class="mdi mdi-magnify"></i>
-          </button>
-          <input type="text" name="query" id="search-input" class="form-control" placeholder="Search..."
-            autofocus autocomplete="off" />
-        </div>
-        <div id="search-results-container">
-          <ul id="search-results"></ul>
-        </div>
+        {{date('Y-m-d', time())}}
       </div>
 
       <div class="navbar-right ">
@@ -24,13 +15,37 @@
           <!-- User Account -->
           <li class="dropdown user-menu">
             <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <img src="{{ asset('img/trika.png') }}" class="user-image" alt="User Image" />
+              @if (auth()->check() && auth()->user()->dokter->isNotEmpty())
+                  @foreach (auth()->user()->dokter as $dokter)
+                    @if ($dokter->foto)
+                        <img src="{{ asset('storage/' . $dokter->foto) }}" class="user-image" alt="User Image" />
+                      @break {{-- Hentikan iterasi setelah menemukan satu dokter dengan foto --}}
+                    @endif
+                  @endforeach
+                  @else
+                    <div class="profile-image-container">
+                        <img src="{{ asset('img/default-profile.png') }}" class="profile-image" alt="User Image" />
+                    </div>
+                @endif
               <span class="d-none d-lg-inline-block">{{ auth()->user()->name }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
               <!-- User image -->
               <li class="dropdown-header">
-                <img src="{{ asset('img/trika.png') }}" class="img-circle" alt="User Image" />
+                @if (auth()->check() && auth()->user()->dokter->isNotEmpty())
+                  @foreach (auth()->user()->dokter as $dokter)
+                    @if ($dokter->foto)
+                      <div class="profile-image-container">
+                          <img src="{{ asset('storage/' . $dokter->foto) }}" class="profile-image" alt="User Image" />
+                      </div>
+                      @break {{-- Hentikan iterasi setelah menemukan satu dokter dengan foto --}}
+                    @endif
+                  @endforeach
+                  @else
+                    <div class="profile-image-container">
+                        <img src="{{ asset('img/default-profile.png') }}" class="profile-image" alt="User Image" />
+                    </div>
+                @endif
                 <div class="d-inline-block">
                   {{ auth()->user()->name }}
                   <small class="pt-1">Role: {{ auth()->user()->role }}</small>
