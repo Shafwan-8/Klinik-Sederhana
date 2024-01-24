@@ -38,8 +38,8 @@
                       </div>
                     </ul>
                   </li>
-                  <li class="{{ ($active === "dokter") ? "active" : "" }}">
-                    <a class="sidenav-item-link" href="/dokter">
+                  <li class="{{ ($active === "patient") ? "active" : "" }}">
+                    <a class="sidenav-item-link" href="/patient">
                       <i class="mdi mdi-human-handsdown"></i>
                       <span class="nav-text mx-2">Pasien</span>
                     </a>

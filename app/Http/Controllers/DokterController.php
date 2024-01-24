@@ -37,7 +37,6 @@ class DokterController extends Controller
      */
     public function store(Request $request)
     {
-
         $dokterData = $request->validate([
             'nama' => 'required|string',
             'no_ktp' => 'required|numeric|unique:dokter',
@@ -45,23 +44,21 @@ class DokterController extends Controller
             'sip' => 'required|numeric',
             'alamat' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'inisial' => 'required|alpha|max:4|min:4|unique:dokter',
             'user_id' => 'required|unique:dokter|exists:users,id',
         ]);
     
-        // Pilih user berdasarkan user_id yang dikirimkan dalam request
         $user = User::find($dokterData['user_id']);
     
         if (!$user) {
             return redirect()->route('dokter.create')->with('error', 'User not found.');
         }
     
-        // Jika file foto diunggah, simpan dengan nama yang unik
         if ($request->hasFile('foto')) {
             $namaFile = time().'_'.Str::snake($request->foto->getClientOriginalName());
             $dokterData['foto'] = $request->file('foto')->storeAs('images/dokter', $namaFile, 'public');
         }
     
-        // Hubungkan user dengan dokter dan simpan
         $dokters = $user->dokter()->create($dokterData);
         return redirect()->route('dokter.index')->with('success', 'Data dokter berhasil disimpan.');
     }
@@ -103,6 +100,7 @@ class DokterController extends Controller
             'no_hp' => 'required|numeric',
             'sip' => 'required|numeric',
             'alamat' => 'required|string',
+            'inisial' => 'required|alpha|max:4|min:4|unique:dokter',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'user_id' => 'required|unique:dokter|exists:users,id',
         ]);

@@ -15,16 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('nik_numb')->unique();
             $table->string('name');
-            $table->string('jk');
+            $table->string('gender');
             $table->string('date_birth');
             $table->string('address');
             $table->string('hp_numb');
             $table->string('bpjs_numb')->unique();
             $table->string('img_ktp');
-            $table->string('email');
-            $table->string('pekerjaan');
-            $table->string('medicalrecord_numb')->unique();
-            $table->string('img');
+            $table->string('email')->unique();
+            $table->string('job');
+            $table->string('medical_record_numb')->nullable();
             $table->timestamps();
         });
     }

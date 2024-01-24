@@ -21,7 +21,6 @@
                 href="{{ route('dokter.index') }}"
             >Kembali</a>
         </div>
-
         <div class="card-body text-dark">
             @csrf
             @method('PUT')
@@ -147,7 +146,7 @@
                 </div>
 
                 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label
                         class="form-label"
@@ -161,6 +160,29 @@
                         >{{ old('alamat') ?? $dokter->alamat}}</textarea>
                         
                         @error('alamat')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label
+                        class="form-label"
+                        for="inisial"
+                        >Inisial</label>
+                        
+                        <input
+                        class="form-control @error('inisial') is-invalid @enderror"
+                        id="inisial"
+                        name="inisial"
+                        type="text"
+                        value="{{ old('inisial') ?? $dokter->inisial }}"
+                        >
+
+                        @error('inisial')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

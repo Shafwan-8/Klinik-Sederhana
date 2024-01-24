@@ -145,7 +145,7 @@
                 </div>
 
                 
-                <div class="col-md-4">
+                <div class="col-md-6">
                         <div class="mb-3">
                             <label
                             class="form-label"
@@ -166,6 +166,31 @@
                     </div>
                 </div>
 
+                
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label
+                            class="form-label"
+                            for="inisial"
+                        >Inisial</label>
+
+                        <input
+                            class="form-control @error('inisial') is-invalid @enderror"
+                            id="inisial"
+                            name="inisial"
+                            type="text"
+                            value="{{ old('inisial') }}"
+                        >
+
+                        <small>Inisial 4 huruf dan tidak menggunakan spasi.</small>
+
+                        @error('inisial')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
                 <div class="col-md-5">
                     <div class="mb-3">
                         <label

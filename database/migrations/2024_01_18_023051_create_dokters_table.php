@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sip');
             $table->string('alamat');
             $table->string('foto')->nullable();
+            $table->string('inisial');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 

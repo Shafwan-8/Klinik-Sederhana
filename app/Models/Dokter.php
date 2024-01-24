@@ -19,6 +19,7 @@ class Dokter extends Model
         'sip',
         'alamat',
         'foto',
+        'inisial',
         'user_id',
     ];
 
