@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InspectionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,13 +31,8 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('/dokter', DokterController::class);
     Route::resource('/pengguna', UsersController::class);
-
-    // Route::get('/pengguna', [UsersController::class, 'index'])->name('user.index');
-    // Route::get('/pengguna/tambah', [UsersController::class, 'create'])->name('user.create');
-    // Route::post('/pengguna', [UsersController::class, 'store'])->name('user.store');
-    // Route::get('/pengguna/{id}/edit', [UsersController::class, 'edit'])->name('user.edit');
-    // Route::put('/pengguna/{id}', [UsersController::class, 'update'])->name('user.update');
-    // Route::delete('/pengguna/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
+    Route::resource('/pemeriksaan', InspectionsController::class);
+    
 
 });
 

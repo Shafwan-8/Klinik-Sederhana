@@ -45,7 +45,7 @@
                     </a>
                   </li>
                   <li class="{{ ($active === "dokter") ? "active" : "" }}">
-                    <a class="sidenav-item-link" href="/dokter">
+                    <a class="sidenav-item-link" href="{{ route('pemeriksaan.index') }}">
                       <i class="mdi mdi-clipboard-text-outline"></i>
                       <span class="nav-text mx-2">Pemeriksaan</span>
                     </a>

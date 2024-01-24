@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
+            $table->string('no_registrasi')->unique();
             $table->timestamps();
         });
     }
