@@ -43,6 +43,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="/plugins/nprogress/nprogress.js"></script>
+    <script src="{{ asset('js/today.js') }}"></script>
   </head>
 
   <body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
