@@ -74,24 +74,34 @@
           ===================================== -->
           <div class="content-wrapper">
             <div class="content">
-		<div class="row">
-			<div class="col-12">
+              <div class="row">
+                <div class="col-12">
                   <!-- Recent Order Table -->
                   <div class="card card-table-border-none recent-orders" id="recent-orders">
                     <div class="card-header justify-content-between text-dark">
                       @yield('title')
                     </div>
-                    <div class="card-body pt-0 pb-5 text-dark">
+                    <div class="card-body pt-0 pb-2 text-dark">
                         @include('home.dashboard.layouts.alert')
 
                         @yield('container')
                     </div>
-                  </div>
-			</div>
-		</div>
-      </div> <!-- End Content -->
-    </div> <!-- End Content Wrapper -->
-    
+                  </div> 
+                </div>
+                <div class="col-12 p-0">
+                  <!-- Recent Order Table -->
+                  <div class="card card-table-border-none recent-orders" id="recent-orders">
+                    <div class="card-body pt-0 pb-2 text-dark">
+                        @include('home.dashboard.layouts.alert')
+
+                        @yield('container2')
+                    </div>
+                  </div> 
+                </div>
+              </div>
+            </div> <!-- End Content -->
+          </div> <!-- End Content Wrapper -->
+            
     
     <!-- Footer -->
     <footer class="footer mt-auto">

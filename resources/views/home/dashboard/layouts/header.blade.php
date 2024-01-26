@@ -7,7 +7,7 @@
       </button>
       <!-- search form -->
       <div class="search-form d-none d-lg-inline-block">
-        {{date('Y-m-d', time())}}
+        <script src="{{ asset('js/today.js') }}"></script>
       </div>
 
       <div class="navbar-right ">

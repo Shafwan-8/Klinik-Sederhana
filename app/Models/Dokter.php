@@ -26,6 +26,11 @@ class Dokter extends Model
     {
         return $this->belongsTo(User::class, 'user_id','id');
     }
+
+    public function inspection()
+    {
+        return $this->hasMany(Inspection::class);
+    }
     // protected $guarded = ['id'];
 
     // public function user()

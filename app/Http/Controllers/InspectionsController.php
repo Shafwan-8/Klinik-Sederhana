@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inspection;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InspectionsController extends Controller
@@ -11,7 +14,14 @@ class InspectionsController extends Controller
      */
     public function index()
     {
-        return view('home.content.pemeriksaan.index');
+        
+        $user = User::latest()->get();
+        return view('home.content.pemeriksaan.index', [
+            'title' => 'Trika Klinik | Daftar Pengguna',
+            'users' => $user,
+            'active' => 'pengguna'
+        ]);
+
     }
 
     /**
@@ -19,7 +29,11 @@ class InspectionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('home.content.pemeriksaan.tambah', [
+            'title' => 'Trika Klinik | Tambah Riwayat Pemeriksaan',
+            'active' => 'Riwayat'
+            
+        ]);
     }
 
     /**
@@ -33,9 +47,16 @@ class InspectionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Inspection $inspection)
     {
-        //
+        $user = User::latest()->get();
+        $inspection = Inspection::latest()->get();
+        return view('home.content.pemeriksaan.pilih', [
+            'title' => 'Trika Klinik | Riwayat Pemeriksaan',
+            'inspections' => $inspection,
+            'active' => 'pengguna',
+        ]);
+
     }
 
     /**

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
+            // $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('dokter_id')->constrained('dokter')->onDelete('cascade');
+            // $table->foreignId('patient_id')->constrained('patient')->onDelete('cascade');
             $table->string('no_registrasi')->unique();
             $table->timestamps();
         });

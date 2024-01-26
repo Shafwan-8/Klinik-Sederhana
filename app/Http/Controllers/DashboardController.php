@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
     public function index(){
         return view('home.dashboard.layouts.index', [
-            "title" => "Dashboard",
+            "title" => "Trika Klinik | Dashboard",
             "active" => 'dashboard'
         ]);
 
