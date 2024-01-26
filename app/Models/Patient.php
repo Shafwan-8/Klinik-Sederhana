@@ -27,6 +27,12 @@ class Patient extends Model
 
     public function dokter()
     {
-        $this->belongsTo(Dokter::class, 'dokter_id', 'id');
+        return $this->belongsTo(Dokter::class);
     }
-}
+
+    public function inspection()
+    {
+        return $this->hasMany(Inspection::class);
+    }
+    
+}   

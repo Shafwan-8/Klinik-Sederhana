@@ -31,6 +31,12 @@ class Dokter extends Model
     {
         return $this->hasMany(Inspection::class);
     }
+
+    public function patients()
+    {
+        $data = Patient::where('dokter_id', $this->id)->get();
+        return $data;
+    }
     // protected $guarded = ['id'];
 
     // public function user()

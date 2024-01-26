@@ -1,7 +1,7 @@
 @extends('home.dashboard.layouts.index')
 
 @section('title')
-    <h3>Daftar Pengguna :</h3>
+    <h3>Daftar Pasien :</h3>
 @endsection
 
 @section('container')
@@ -20,20 +20,20 @@
                 </thead>
 
                 <tbody class="text-dark">
-                    @forelse ($users as $user)
+                    @forelse ($patients as $patient)
                         <tr class="text-center">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->username }}</td>
+                            <td>{{ $patient->nik_numb }}</td>
+                            <td>{{ $patient->name }}</td>
                             <td>
-                                {{ $user->email }}
+                                {{ $patient->hp_numb }}
                             </td>
                             <td>
-                                {{ $user->role }}
+                                {{ $patient->address }}
                             </td>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <a href='{{ route('pemeriksaan.show', $user->id) }}' class="btn btn-outline-secondary btn-sm">Pilih</a>
+                                        <a href='{{ route('pemeriksaan.show', $patient->id) }}' class="btn btn-outline-secondary btn-sm">Pilih</a>
                                     </div>
                                 </div>
                             </td>

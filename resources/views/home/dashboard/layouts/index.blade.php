@@ -93,8 +93,6 @@
                   <!-- Recent Order Table -->
                   <div class="card card-table-border-none recent-orders" id="recent-orders">
                     <div class="card-body pt-0 pb-2 text-dark">
-                        @include('home.dashboard.layouts.alert')
-
                         @yield('container2')
                     </div>
                   </div> 

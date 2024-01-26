@@ -12,9 +12,15 @@ class Inspection extends Model
     protected $guarded = ['id'];
 
     // protected $dates = ['start_date', 'end_date', 'show_at', 'hide_at', 'created_at', 'updated_at'];
-    public function user()
+    // public function user()
+    // {
+    //     return $this->belongsTo(Dokter::class, 'user_id','id');
+    // }
+
+    public function patient()
     {
-        return $this->belongsTo(Dokter::class, 'user_id','id');
+        return $this->belongsTo(Patient::class, 'patient_id','id');
     }
+
     
 }

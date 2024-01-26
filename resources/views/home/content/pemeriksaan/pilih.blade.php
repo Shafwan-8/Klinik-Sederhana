@@ -1,13 +1,13 @@
 @extends('home.dashboard.layouts.index')
 
 @section('title')
-    <h3>Riwayat Pemeriksaan : <-nama_pasien-></h3>
+    <h3>Riwayat Pemeriksaan : {{ $patient->name }}</h3>
 @endsection
 
 @section('container')
     <div class="card">
         <div class="card-header p-0 d-flex justify-content-end px-3 py-2">
-            <a class="btn btn-dark" href="{{ route('pemeriksaan.create') }}">Tambah</a>
+            <a class="btn btn-dark" href="{{ route('pemeriksaan.create', request('pemeriksaan')) }}">Tambah</a>
         </div>
         <div class="table-responsive">
             <table class="table">

@@ -55,7 +55,7 @@
                         <tr>
                             <td>Tanggal Lahir</td>
                             <td>:</td>
-                            <td>{{ $patient->date_birth }}</td>
+                        <td>{{ $patient->date_birth }}</td>
                         </tr>
                         <tr>
                             <td>Nomor Hp</td>
@@ -77,7 +77,8 @@
 @endsection
 
 @section('container2')
-    <form action="{{ route('pemeriksaan.store', request('pemeriksaan')) }}" method="POST">
+    <form action="{{ route('pemeriksaan.update', ['pemeriksaan' => $inspection->id]) }}" method="POST">
+        @method('PUT')
         <div class="card col-md-12 mt-3 mb-3">
         <div class="card-header border-bottom px-3 py-2">
             <h5>Fisik</h5>
@@ -98,8 +99,8 @@
                         class="form-control @error('td') is-invalid @enderror"
                         id="td"
                         name="td"
-                        type="text"
-                        value="{{ old('td') }}"
+                        type="number"
+                        value="{{ $inspection->td }}"
                     >
             
                     @error('td')
@@ -121,7 +122,7 @@
                         id="suhu"
                         name="suhu"
                         type="number"
-                        value="{{ old('suhu') }}"
+                        value="{{ $inspection->suhu }}"
                     >
 
                     @error('suhu')
@@ -144,7 +145,7 @@
                         id="nadi"
                         name="nadi"
                         type="number"
-                        value="{{ old('nadi') }}"
+                        value="{{ $inspection->nadi }}"
                     >
 
                     @error('nadi')
@@ -167,7 +168,7 @@
                         id="so2"
                         name="so2"
                         type="number"
-                        value="{{ old('so2') }}"
+                        value="{{ $inspection->so2 }}"
                     >
 
                     @error('so2')
@@ -190,7 +191,7 @@
                         id="pernafasan"
                         name="pernafasan"
                         type="number"
-                        value="{{ old('pernafasan') }}"
+                        value="{{ $inspection->pernafasan }}"
                     >
 
                     @error('pernafasan')
@@ -213,7 +214,7 @@
                         id="deha"
                         name="deha"
                         type="number"
-                        value="{{ old('deha') }}"
+                        value="{{ $inspection->deha }}"
                     >
 
                     @error('deha')
@@ -236,7 +237,7 @@
                         id="tb"
                         name="tb"
                         type="number"
-                        value="{{ old('sip') }}"
+                        value="{{ $inspection->tb }}"
                     >
 
                     @error('tb')
@@ -259,7 +260,7 @@
                         id="bb"
                         name="bb"
                         type="number"
-                        value="{{ old('bb') }}"
+                        value="{{ $inspection->bb }}"
                     >
 
                     @error('bb')
@@ -292,7 +293,7 @@
                         class="form-control @error('subjektif') is-invalid @enderror"
                         id="subjektif"
                         name="subjektif"
-                    >{{ old('subjektif') }}</textarea>
+                    >{{ $inspection->subjektif }}</textarea>
             
                     @error('subjektif')
                         <div class="invalid-feedback">
@@ -312,7 +313,7 @@
                         class="form-control @error('objektif') is-invalid @enderror"
                         id="objektif"
                         name="objektif"
-                    >{{ old('objektif') }}</textarea>
+                    >{{ $inspection->objektif }}</textarea>
 
                     @error('objektif')
                         <div class="invalid-feedback">
@@ -333,7 +334,7 @@
                         class="form-control @error('assesment') is-invalid @enderror"
                         id="assesment"
                         name="assesment"
-                    >{{ old('assesment') }}</textarea>
+                    >{{ $inspection->assesment }}</textarea>
 
                     @error('assesment')
                         <div class="invalid-feedback">
@@ -354,7 +355,7 @@
                         class="form-control @error('plan') is-invalid @enderror"
                         id="plan"
                         name="plan"
-                    >{{ old('plan') }}</textarea>
+                    >{{ $inspection->plan }}</textarea>
 
                     @error('plan')
                         <div class="invalid-feedback">
@@ -387,7 +388,7 @@
                     id="diagnosa"
                     name="diagnosa"
                     type="text"
-                    value="{{ old('diagnosa') }}"
+                    value="{{ $inspection->diagnosa }}"
                 >
         
                 @error('diagnosa')
@@ -421,7 +422,7 @@
                     id="tindakan"
                     name="tindakan"
                     type="text"
-                    value="{{ old('tindakan') }}"
+                    value="{{ $inspection->tindakan }}"
                 >
         
                 @error('tindakan')

@@ -108,8 +108,6 @@ class UsersController extends Controller
 
         return to_route('pengguna.index')->with('success', 'Pengguna Berhasil Diubah!');
 
-
-
     }
 
     /**

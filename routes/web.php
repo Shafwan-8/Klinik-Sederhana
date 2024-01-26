@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InspectionsController;
+use App\Models\Inspection;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('/dokter', DokterController::class);
     Route::resource('/pengguna', UsersController::class);
     Route::resource('/pemeriksaan', InspectionsController::class);
+
+    Route::get('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'create'])->name('pemeriksaan.create');
+    Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');
+    // Route::get('/pemeriksaan/{id}/create', InspectionsController::class)->name('pemeriksaan.tambah');
     
 
 });
