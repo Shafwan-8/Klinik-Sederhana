@@ -21,8 +21,9 @@
                 @if ($patient->img_ktp)
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="me-auto ms-2">
+                            <span>Foto KTP</span>
                             <img
-                                class="w-100 rounded-lg"
+                                class="w-100 rounded-lg mt-2"
                                 src="{{ asset('storage/' . $patient->img_ktp) }}"
                                 alt="Foto KTP"
                             />
@@ -57,14 +58,14 @@
 
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="me-auto ms-2">
-                        <span>NO HP</span>
+                        <span>No. HP</span>
                         <div class="fw-bold">{{ $patient->hp_numb }}</div>
                     </div>
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="me-auto ms-2">
-                        <span>BPJS</span>
+                        <span>No. BPJS</span>
                         <div class="fw-bold">{{ $patient->bpjs_numb }}</div>
                     </div>
                 </li>
@@ -75,12 +76,16 @@
                         <div class="fw-bold">{{ $patient->job }}</div>
                     </div>
                 </li>
-
-
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="me-auto ms-2">
                         <span>Alamat</span>
                         <div class="fw-bold">{{ $patient->address }}</div>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto ms-2">
+                        <span>No. Rekam Medis</span>
+                        <div class="fw-bold">{{ $patient->medical_record_numb }}</div>
                     </div>
                 </li>
             </ol>

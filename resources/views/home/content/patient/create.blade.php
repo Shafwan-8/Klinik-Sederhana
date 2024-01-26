@@ -23,7 +23,7 @@
             href="{{ route('patient.index') }}"
             >Kembali</a>
         </div>
-        
+
         <div class="card-body text-dark">
             @csrf
             <div class="row">
@@ -285,6 +285,32 @@
                         @enderror
                     </div>
                 </div>
+
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label
+                            class="form-label"
+                            for="medical_record_numb"
+                        >No Rekam Medis</label>
+
+                        <input
+                            class="form-control @error('medical_record_numb') is-invalid @enderror"
+                            id="medical_record_numb"
+                            name="medical_record_numb"
+                            type="text"
+                            value="{{ old('medical_record_numb') ?? $medical }}"
+                            readonly
+                        >
+
+                        @error('medical_record_numb')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                
             </div>
         </div>
 
@@ -294,6 +320,9 @@
     </form>
 
 <script>
+
+
+
 
 function previewImage() {
     const image = document.querySelector('#img_ktp');

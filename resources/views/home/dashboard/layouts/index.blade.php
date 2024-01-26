@@ -33,6 +33,10 @@
   
     <!-- FAVICON -->
     <link href="/img/trika.png" rel="shortcut icon" />
+
+    <!-- CSS KAMERA -->
+    @yield('cssCamera');
+
   
     <!--
       HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
@@ -139,21 +143,11 @@
                 document.getElementById(`hapus-${name}-${id}`).submit();
             }
         }
-</script>
 
 <!-- Feather -->
-<script>
   feather.replace();
+
 </script>
-
-    <!-- <script type="module">
-      import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
-
-      const el = document.createElement('pwa-update');
-      document.body.appendChild(el);
-    </script> -->
-
-    {{ config('abel.nama') }}
 
     <!-- Javascript -->
     <script src="/plugins/jquery/jquery.min.js"></script>

@@ -100,9 +100,9 @@ class DokterController extends Controller
             'no_hp' => 'required|numeric',
             'sip' => 'required|numeric',
             'alamat' => 'required|string',
-            'inisial' => 'required|alpha|max:4|min:4|unique:dokter',
+            'inisial' => 'required|alpha|max:4|min:4',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'user_id' => 'required|unique:dokter|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
         ]);
 
         $dokter->update($tervalidasi);

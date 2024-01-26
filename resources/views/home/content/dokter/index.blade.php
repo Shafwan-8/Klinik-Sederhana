@@ -27,7 +27,6 @@
                       <th>No KTP</th>
                       <th>No HP</th>
                       <th>SIP</th>
-                      <th>Foto</th>
                       <th>Action</th>
                     </tr>
                 </thead>
@@ -39,17 +38,6 @@
                             <td>{{ $dokter->no_ktp }}</td>
                             <td>{{ $dokter->no_hp }}</td>
                             <td>{{ $dokter->sip }}</td>
-                            <td>
-                                @if ($dokter->foto)
-                                    <img
-                                        class="rounded" 
-                                        height="40"
-                                        width="50"
-                                        src="{{ asset('storage/' . $dokter->foto) }}"
-                                        alt="Foto {{ $dokter->nama }}"
-                                    />
-                                @endif
-                            </td>
                             <td>
                                 <a href="{{ route('dokter.show', $dokter->id) }}" class="badge bg-info"><span data-feather="eye"></span></a>
                                 @if (auth()->user()->role == 'admin')

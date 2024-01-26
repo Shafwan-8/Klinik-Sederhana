@@ -127,7 +127,7 @@
                             for="user_id"
                         >Ubah User : </label>
 
-                        <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
+                        <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id" readonly disabled>
                                 <option value="">Pilih</option>
                                 @foreach ($users as $user)
                                     <option 
@@ -180,6 +180,7 @@
                         name="inisial"
                         type="text"
                         value="{{ old('inisial') ?? $dokter->inisial }}"
+                        readonly
                         >
 
                         @error('inisial')

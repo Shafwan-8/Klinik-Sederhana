@@ -24,4 +24,9 @@ class Patient extends Model
         'job',
         'medical_record_numb',
     ];
+
+    public function dokter()
+    {
+        $this->belongsTo(Dokter::class, 'dokter_id', 'id');
+    }
 }

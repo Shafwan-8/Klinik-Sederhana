@@ -34,18 +34,18 @@ class PatientSeeder extends Seeder
         //     Patient::create($patient);
         // }
 
-        Patient::create([
-            'nik_numb' => '1',
-            'name' => 'nama',
-            'gender' => 'jk',
-            'date_birth' => '2',
-            'address' => 'alamat',
-            'hp_numb' => '3',
-            'bpjs_numb' => '4',
-            'img_ktp' => 'foto ktp',
-            'email' => 'email',
-            'job' => 'pekerjaan',
-            'medical_record_numb' => 'pekerjaan',
-        ]);
+        // Patient::create([
+        //     'nik_numb' => '1',
+        //     'name' => 'nama',
+        //     'gender' => 'jk',
+        //     'date_birth' => '2',
+        //     'address' => 'alamat',
+        //     'hp_numb' => '3',
+        //     'bpjs_numb' => '4',
+        //     'img_ktp' => 'foto ktp',
+        //     'email' => 'email',
+        //     'job' => 'pekerjaan',
+        //     'medical_record_numb' => 'pekerjaan',
+        // ]);
     }
 }

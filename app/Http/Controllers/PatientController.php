@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\Dokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -25,9 +26,45 @@ class PatientController extends Controller
      */
     public function create()
     {
+        // jika admin yang login
+        if(auth()->user()->role == 'admin') {
+            return 'tabe anda admin';
+        }    
         $title = 'Tambah Pasien';
         $active = 'patient';
-        return view('home.content.patient.create', compact('title', 'active'));
+        $dokter = auth()->user()->dokter->first();
+        $patient = Patient::latest()->first();
+        // jika dokter belum buat akun
+        if($dokter === null) {
+            $title = 'Tambah Pasien';
+            $active = 'patient';
+            $errorr = 'Anda belum mendaftar, silahkan membuat akun Dokter terlebih dahulu';
+            $linkTo = '/dokter/create';
+            $backTo = 'ke pendaftaran dokter';
+            return view('error.404', compact('title','active','errorr', 'linkTo', 'backTo'));
+        // jika dokter punya akun
+        }elseif(auth()->user()->dokter->first() ?? $patient === null  ) {
+            $dokter = auth()->user()->dokter->first();
+            $inisial = $dokter->inisial;
+            $patient = Patient::latest()->first();
+            // jika pasiennya tidak ada
+            if($patient == null) {
+                $patientMedic = 0;
+                $lastNumber = (int)substr($patientMedic, -8);
+                $newNumber = $lastNumber + 1;
+                $numberMedic = str_pad($newNumber, 8, '0', STR_PAD_LEFT);
+                $medical = $inisial . '-' .$numberMedic;
+                return view('home.content.patient.create', compact('title', 'active','medical'));
+            // jika pasiennya ada
+            }else { 
+            $lastNumber = (int)substr($patient->medical_record_numb, -8);
+            $newNumber = $lastNumber + 1;
+            $numberMedic = str_pad($newNumber, 8, '0', STR_PAD_LEFT);
+            $medical = $inisial . '-' .$numberMedic; 
+            return view('home.content.patient.create', compact('title', 'active','medical'));
+            }
+        }
+    
     }
 
     /**
@@ -44,9 +81,9 @@ class PatientController extends Controller
             'hp_numb' => 'required|numeric',
             'bpjs_numb' => 'required|numeric|unique:patients',
             'img_ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'email' => 'required|email:dns|unique:patients',
+            'email' => 'required|unique:patients',
             'job' => 'required|string',
-            'medical_record_numb' => 'nullable',
+            'medical_record_numb' => 'required|unique:patients',
         ]);
 
         if ($request->hasFile('img_ktp')) {
