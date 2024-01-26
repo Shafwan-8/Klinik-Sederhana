@@ -7,7 +7,8 @@
 @section('container')
     <div class="card">
         <div class="card-header p-0 d-flex justify-content-end px-3 py-2">
-            <a class="btn btn-dark" href="{{ route('pemeriksaan.create', request('pemeriksaan')) }}">Tambah</a>
+            <a class="btn btn-primary" href="{{ route('pemeriksaan.create', request('pemeriksaan')) }}">Tambah</a>
+            <a class="btn btn-secondary mx-3" href="{{ route('pemeriksaan.index') }}">Kembali</a>
         </div>
         <div class="table-responsive">
             <table class="table">

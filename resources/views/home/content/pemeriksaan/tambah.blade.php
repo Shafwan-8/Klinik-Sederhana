@@ -436,7 +436,7 @@
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('pemeriksaan.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('pemeriksaan.show', request('pemeriksaan')) }}" class="btn btn-secondary">Kembali</a>
     </div>
     </form>
 @endsection

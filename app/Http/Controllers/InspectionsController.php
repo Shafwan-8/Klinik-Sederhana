@@ -89,7 +89,7 @@ class InspectionsController extends Controller
     public function edit(string $id)
     {
         $inspection = Inspection::find($id);
-        $patient = Patient::find($id);
+        $patient = Patient::find($inspection->patient_id);
         return view('home.content.pemeriksaan.edit', [
             'title' => 'Trika Klinik | Edit Riwayat',
             'patient' => $patient,
