@@ -30,9 +30,12 @@ class InspectionsController extends Controller
     public function create($id)
     {
         $patient = Patient::find($id);
+        $waktu = Carbon::setLocale('id');
+        $waktu = Carbon::now()->format('j-M-Y');
         return view('home.content.pemeriksaan.tambah', [
             'title' => 'Trika Klinik | Tambah Riwayat Pemeriksaan',
             'patient' => $patient,
+            'waktu' => $waktu,
             'active' => 'pemeriksaan'
             
         ]);

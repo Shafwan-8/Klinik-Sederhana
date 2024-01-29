@@ -50,7 +50,7 @@
                         <tr>
                             <td>Tanggal Periksa</td>
                             <td>:</td>
-                            <td>-</td>
+                            <td>{{ $waktu }}</td>
                         </tr>
                         <tr>
                             <td>Tanggal Lahir</td>
@@ -98,7 +98,7 @@
                         class="form-control @error('td') is-invalid @enderror"
                         id="td"
                         name="td"
-                        type="text"
+                        type="number"
                         value="{{ old('td') }}"
                     >
             

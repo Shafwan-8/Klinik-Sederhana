@@ -25,9 +25,9 @@
                     @forelse ($inspections as $inspection)
                         <tr class="text-center">
                             <td width="5%">{{ $loop->iteration }}</td>
-                            <td>{{ $inspection->created_at }}</td>
+                            <td>{{ $inspection->created_at->setTimezone('Asia/Makassar')->format('l, d F Y') }}</td>
                             <td>{{ $inspection->no_registrasi }}</td>
-                            <td width="10%>
+                            <td width="10%">
                                 <div class="d-flex justify-content-around">
                                         
                                     <a class="btn btn-warning btn-sm text-white"

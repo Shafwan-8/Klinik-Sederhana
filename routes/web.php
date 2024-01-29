@@ -36,7 +36,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'create'])->name('pemeriksaan.create');
     Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');
-    // Route::get('/pemeriksaan/{id}/create', InspectionsController::class)->name('pemeriksaan.tambah');
     
 
 });
