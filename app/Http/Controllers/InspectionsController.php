@@ -19,7 +19,7 @@ class InspectionsController extends Controller
         return view('home.content.pemeriksaan.index', [
             'title' => 'Trika Klinik | Daftar Pasien',
             'patients' => $patient,
-            'active' => 'pengguna'
+            'active' => 'pemeriksaan'
         ]);
 
     }
@@ -33,7 +33,7 @@ class InspectionsController extends Controller
         return view('home.content.pemeriksaan.tambah', [
             'title' => 'Trika Klinik | Tambah Riwayat Pemeriksaan',
             'patient' => $patient,
-            'active' => 'Riwayat'
+            'active' => 'pemeriksaan'
             
         ]);
     }
@@ -78,7 +78,7 @@ class InspectionsController extends Controller
             'title' => 'Trika Klinik | Riwayat Pemeriksaan',
             'inspections' => $inspection,
             'patient' => $patient,
-            'active' => 'pengguna',
+            'active' => 'pemeriksaan',
         ]);
 
     }
@@ -94,7 +94,7 @@ class InspectionsController extends Controller
             'title' => 'Trika Klinik | Edit Riwayat',
             'patient' => $patient,
             'inspection' => $inspection,
-            'active' => 'pengguna'
+            'active' => 'pemeriksaan'
         ]);
 
         
