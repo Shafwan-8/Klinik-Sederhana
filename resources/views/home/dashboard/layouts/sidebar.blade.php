@@ -15,7 +15,7 @@
               <div class="" data-simplebar style="height: 100%;">
                 <!-- sidebar menu -->
                 <ul class="nav sidebar-inner" id="sidebar-menu">
-                  <li class="has-sub active expand">
+                  <li class="has-sub active expand {{ ($active === "dashboard") ? "active" : "" }}">
                     <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#dashboard"
                       aria-expanded="false" aria-controls="dashboard">
                       <i class="mdi mdi-view-dashboard-outline"></i>
@@ -24,13 +24,13 @@
                     <ul class="collapse show" id="dashboard" data-parent="#sidebar-menu">
                       <div class="sub-menu">
                         <li class="{{ ($active === "pengguna") ? "active" : "" }}">
-                          <a class="sidenav-item-link" href="/pengguna">
+                          <a class="sidenav-item-link" href="{{ route('pengguna.index') }}">
                             <i class="mdi mdi-account-multiple"></i>
                             <span class="nav-text mx-2">Pengguna</span>
                           </a>
                         </li>
                         <li class="{{ ($active === "dokter") ? "active" : "" }}">
-                          <a class="sidenav-item-link" href="/dokter">
+                          <a class="sidenav-item-link" href="{{ route('dokter.index') }}">
                             <i class="mdi mdi-doctor"></i>
                             <span class="nav-text mx-2">Dokter</span>
                           </a>
@@ -44,8 +44,8 @@
                       <span class="nav-text mx-2">Pasien</span>
                     </a>
                   </li>
-                  <li class="{{ ($active === "dokter") ? "active" : "" }}">
-                    <a class="sidenav-item-link" href="/dokter">
+                  <li class="{{ ($active === "pemeriksaan") ? "active" : "" }}">
+                    <a class="sidenav-item-link" href="{{ route('pemeriksaan.index') }}">
                       <i class="mdi mdi-clipboard-text-outline"></i>
                       <span class="nav-text mx-2">Pemeriksaan</span>
                     </a>

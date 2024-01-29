@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
     
         $this->call([
             UserSeeder::class,
-            PatientSeeder::class,
+            PatientSeeder::class
+            // InspectionSedeer::class
         ]);
 
         // Dokter::create([

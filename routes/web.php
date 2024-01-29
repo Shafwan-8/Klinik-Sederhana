@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InspectionsController;
+use App\Models\Inspection;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,13 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/dokter', DokterController::class);
     Route::resource('/pengguna', UsersController::class);
     Route::resource('/patient', PatientController::class);
+    
+    Route::resource('/pemeriksaan', InspectionsController::class);
 
-    // Route::get('/pengguna', [UsersController::class, 'index'])->name('user.index');
-    // Route::get('/pengguna/tambah', [UsersController::class, 'create'])->name('user.create');
-    // Route::post('/pengguna', [UsersController::class, 'store'])->name('user.store');
-    // Route::get('/pengguna/{id}/edit', [UsersController::class, 'edit'])->name('user.edit');
-    // Route::put('/pengguna/{id}', [UsersController::class, 'update'])->name('user.update');
-    // Route::delete('/pengguna/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
+    Route::get('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'create'])->name('pemeriksaan.create');
+    Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');
+    
 
 });
 

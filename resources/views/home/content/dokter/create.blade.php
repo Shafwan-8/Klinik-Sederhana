@@ -130,7 +130,7 @@
                         >Ubah User :</label>
 
                         <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
-                                        <option value="" selected>Pilih</option>
+                                        <option value="" selected disabled>Pilih</option>
                                 @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach

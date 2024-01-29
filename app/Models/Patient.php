@@ -33,4 +33,14 @@ class Patient extends Model
                 ->translatedFormat('d F Y');
     }
 
-}
+    public function dokter()
+    {
+        return $this->belongsTo(Dokter::class);
+    }
+
+    public function inspection()
+    {
+        return $this->hasMany(Inspection::class);
+    }
+    
+}   

@@ -15,7 +15,7 @@ class DokterController extends Controller
      */
     public function index()
     {
-        $title = 'Master Dokter';
+        $title = 'Trika Klinik | Master Dokter';
         $dokters = Dokter::latest()->get();
         $active = 'dokter';
         return view('home.content.dokter.index', compact('dokters', 'title', 'active'));
@@ -27,7 +27,7 @@ class DokterController extends Controller
     public function create()
     {
         $users = User::all();
-        $title = 'Tambah Dokter';
+        $title = 'Trika Klinik | Tambah Dokter';
         $active = 'dokter';
         return view('home.content.dokter.create', compact('users', 'title', 'active'));
     }
@@ -69,7 +69,7 @@ class DokterController extends Controller
     public function show(Dokter $dokter)
     {
         return view('home.content.dokter.show', [
-            'title' => 'Detail Dokter',
+            'title' => 'Trika Klinik | Detail Dokter',
             'dokter' => $dokter,
             'active' => 'dokter'
         ]);
@@ -82,7 +82,7 @@ class DokterController extends Controller
     {
         $users = User::all();
         $dokter = Dokter::findOrFail($id);
-        $title = 'Sunting Dokter';
+        $title = 'Trika Klinik | Sunting Dokter';
         $active = 'dokter';
         return view('home.content.dokter.edit', compact('users', 'title', 'dokter', 'active'));
     }
