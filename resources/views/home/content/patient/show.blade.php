@@ -5,7 +5,6 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom text-dark">
   <h1 class="h2">Detail Pasien : {{ $patient->name }}</h1>
 </div>
-
 @endsection
 @section('container')
     <div class="card">
@@ -26,6 +25,19 @@
                                 class="w-100 rounded-lg mt-2"
                                 src="{{ asset('storage/' . $patient->img_ktp) }}"
                                 alt="Foto KTP"
+                            />
+                        </div>
+                    </li>
+                @endif
+
+                @if ($patient->img)
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="me-auto ms-2">
+                            <span>Foto</span>
+                            <img
+                                class="w-100 rounded-lg mt-2"
+                                src="{{ asset('storage/' . $patient->img) }}"
+                                alt="Foto"
                             />
                         </div>
                     </li>

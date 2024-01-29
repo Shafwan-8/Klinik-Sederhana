@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('img_ktp');
             $table->string('email')->unique();
             $table->string('job');
+            $table->string('img');
             $table->string('medical_record_numb')->unique();
             $table->timestamps();
         });

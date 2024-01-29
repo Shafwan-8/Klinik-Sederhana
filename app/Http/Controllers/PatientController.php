@@ -7,6 +7,7 @@ use App\Models\Dokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class PatientController extends Controller
 {
@@ -32,7 +33,8 @@ class PatientController extends Controller
         }    
         $title = 'Tambah Pasien';
         $active = 'patient';
-        $dokter = auth()->user()->dokter->first();
+        $user = auth()->user();
+        $dokter = $user->dokter->first();
         $patient = Patient::latest()->first();
         // jika dokter belum buat akun
         if($dokter === null) {
@@ -42,36 +44,30 @@ class PatientController extends Controller
             $linkTo = '/dokter/create';
             $backTo = 'ke pendaftaran dokter';
             return view('error.404', compact('title','active','errorr', 'linkTo', 'backTo'));
+        
         // jika dokter punya akun
         }elseif(auth()->user()->dokter->first() ?? $patient === null  ) {
-            $dokter = auth()->user()->dokter->first();
+            $user = auth()->user();
+            $dokter = $user->dokter->first();
             $inisial = $dokter->inisial;
-            $patient = Patient::latest()->first();
-            // jika pasiennya tidak ada
-            if($patient == null) {
-                $patientMedic = 0;
-                $lastNumber = (int)substr($patientMedic, -8);
-                $newNumber = $lastNumber + 1;
-                $numberMedic = str_pad($newNumber, 8, '0', STR_PAD_LEFT);
-                $medical = $inisial . '-' .$numberMedic;
+            $lastNumber = Patient::where('medical_record_numb', 'like', $inisial . '%')->latest()->first();
+            if ($lastNumber === null) {
+                $numberMedic = str_pad(1, 8, '0', STR_PAD_LEFT);
+            } else {
+                $lastNumber = (int)substr($lastNumber->medical_record_numb, -5);
+                $numberMedic = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);
+            }
+                $medical = $inisial . '-' .$numberMedic;  
                 return view('home.content.patient.create', compact('title', 'active','medical'));
-            // jika pasiennya ada
-            }else { 
-            $lastNumber = (int)substr($patient->medical_record_numb, -8);
-            $newNumber = $lastNumber + 1;
-            $numberMedic = str_pad($newNumber, 8, '0', STR_PAD_LEFT);
-            $medical = $inisial . '-' .$numberMedic; 
-            return view('home.content.patient.create', compact('title', 'active','medical'));
             }
         }
     
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
         $tervalidasi = $request->validate([
             'nik_numb' => 'required|numeric|unique:patients',
             'name' => 'required|string',
@@ -83,6 +79,7 @@ class PatientController extends Controller
             'img_ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'email' => 'required|unique:patients',
             'job' => 'required|string',
+            'img' => 'required',
             'medical_record_numb' => 'required|unique:patients',
         ]);
 
@@ -90,7 +87,12 @@ class PatientController extends Controller
             $namaFile = time().'_'.Str::snake($request->img_ktp->getClientOriginalName());
             $tervalidasi['img_ktp'] = $request->file('img_ktp')->storeAs('images/patient', $namaFile, 'public');
         }
-
+        
+        if ($request->hasFile('img')) {
+            $namaFile = time().'_'.Str::snake($request->img->getClientOriginalName());
+            $tervalidasi['img'] = $request->file('img')->storeAs('images/img', $namaFile, 'public');
+        }
+        
         Patient::create($tervalidasi);
 
         return to_route('patient.index')->with('success', 'Data pasien berhasil disimpan.');
@@ -137,10 +139,21 @@ class PatientController extends Controller
             'img_ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'email' => 'required|email:dns|unique:patients',
             'job' => 'required|string',
+            'img' => 'required',
             'medical_record_numb' => 'nullable',
         ]);
 
         $patient->update($tervalidasi);
+
+        if ($request->hasFile('img')) {
+            if ($patient->img) {
+                Storage::disk('public')->delete($patient->img);
+            }
+            
+            $namaFile = time().'_'.Str::snake($request->img->getClientOriginalName());
+            $fotoBaru = $request->file('img')->storeAs('images/img', $namaFile, 'public');
+            $patient->update(['img' => $fotoBaru]);
+        }
 
         if ($request->hasFile('img_ktp')) {
             if ($patient->img_ktp) {
@@ -161,6 +174,10 @@ class PatientController extends Controller
     public function destroy(string $id)
     {
         $patient = Patient::findOrFail($id);
+
+        if ($patient->img) {
+            Storage::disk('public')->delete($patient->img);
+        }
 
         if ($patient->img_ktp) {
             Storage::disk('public')->delete($patient->img_ktp);

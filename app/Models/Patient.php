@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Patient extends Model
 {
@@ -22,11 +23,14 @@ class Patient extends Model
         'img_ktp',
         'email',
         'job',
+        'img',
         'medical_record_numb',
     ];
 
-    public function dokter()
+    public function getDateBirthAttribute()
     {
-        $this->belongsTo(Dokter::class, 'dokter_id', 'id');
+        return Carbon::parse($this->attributes['date_birth'])
+                ->translatedFormat('d F Y');
     }
+
 }
