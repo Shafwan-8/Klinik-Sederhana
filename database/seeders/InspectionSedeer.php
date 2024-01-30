@@ -13,16 +13,7 @@ class InspectionSedeer extends Seeder
      */
     public function run(): void
     {
-        $no = mt_rand(0001, 9999);
-        $rows = ['no_registrasi' => 'INS-' . $no];
-
-        foreach ($rows as $key => $value) {
-            $no = mt_rand(0001, 9999);
-            $value = 'INS-' . $no;
-            Inspection::create([
-                $key => $value
-            ]);
-        }
+        Inspection::factory(15)->create();
 
     }
 }
