@@ -29,7 +29,7 @@ class PatientController extends Controller
     {
         // jika admin yang login
         if(auth()->user()->role == 'admin') {
-            return 'tabe anda admin';
+            return '<marquee> tabe anda admin </marquee>';
         }    
         $title = 'Tambah Pasien';
         $active = 'patient';
@@ -50,6 +50,7 @@ class PatientController extends Controller
             $user = auth()->user();
             $dokter = $user->dokter->first();
             $inisial = $dokter->inisial;
+            $inisiall = strtoupper($inisial);
             $lastNumber = Patient::where('medical_record_numb', 'like', $inisial . '%')->latest()->first();
             if ($lastNumber === null) {
                 $numberMedic = str_pad(1, 8, '0', STR_PAD_LEFT);
@@ -57,7 +58,7 @@ class PatientController extends Controller
                 $lastNumber = (int)substr($lastNumber->medical_record_numb, -5);
                 $numberMedic = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);
             }
-                $medical = $inisial . '-' .$numberMedic;  
+                $medical = $inisiall . '-' .$numberMedic;
                 return view('home.content.patient.create', compact('title', 'active','medical'));
             }
         }

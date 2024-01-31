@@ -6,6 +6,7 @@
 
 
 @section('container')
+<form action="{{ route('pemeriksaan.store', request('pemeriksaan')) }}" method="POST">
 
 <div class="card mb-3 text-dark">
     <div class="card-header border-bottom px-3 py-2">
@@ -19,12 +20,15 @@
                         <tr>
                             <td>Nomor Registrasi</td>
                             <td>:</td>
-                            <td>-</td>
+                            <td>
+                                <input type="hidden" name="no_registrasi" value="{{ $kode }}">
+                                {{ $kode }}
+                            </td>
                         </tr>
                         <tr>
                             <td>Nomor Rekam Medis</td>
                             <td>:</td>
-                            <td>-</td>
+                            <td>{{ $patient->medical_record_numb }}</td>
                         </tr>
                         <tr>
                             <td>Nama</td>
@@ -77,7 +81,6 @@
 @endsection
 
 @section('container2')
-    <form action="{{ route('pemeriksaan.store', request('pemeriksaan')) }}" method="POST">
         <div class="card col-md-12 mt-3 mb-3">
         <div class="card-header border-bottom px-3 py-2">
             <h5>Fisik</h5>
@@ -99,7 +102,6 @@
                         id="td"
                         name="td"
                         type="number"
-                        value="{{ old('td') }}"
                     >
             
                     @error('td')
@@ -121,7 +123,6 @@
                         id="suhu"
                         name="suhu"
                         type="number"
-                        value="{{ old('suhu') }}"
                     >
 
                     @error('suhu')
@@ -144,7 +145,6 @@
                         id="nadi"
                         name="nadi"
                         type="number"
-                        value="{{ old('nadi') }}"
                     >
 
                     @error('nadi')
@@ -167,7 +167,6 @@
                         id="so2"
                         name="so2"
                         type="number"
-                        value="{{ old('so2') }}"
                     >
 
                     @error('so2')
@@ -190,7 +189,6 @@
                         id="pernafasan"
                         name="pernafasan"
                         type="number"
-                        value="{{ old('pernafasan') }}"
                     >
 
                     @error('pernafasan')
@@ -205,18 +203,17 @@
                 <div class="mb-3">
                     <label
                         class="form-label"
-                        for="deha"
-                    >Deha....</label>
+                        for="detail"
+                    >Detail Fisik</label>
 
                     <input
-                        class="form-control @error('deha') is-invalid @enderror"
-                        id="deha"
-                        name="deha"
-                        type="number"
-                        value="{{ old('deha') }}"
+                        class="form-control @error('detail') is-invalid @enderror"
+                        id="detail"
+                        name="detail"
+                        type="text"
                     >
 
-                    @error('deha')
+                    @error('detail')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -236,7 +233,6 @@
                         id="tb"
                         name="tb"
                         type="number"
-                        value="{{ old('sip') }}"
                     >
 
                     @error('tb')
@@ -259,7 +255,6 @@
                         id="bb"
                         name="bb"
                         type="number"
-                        value="{{ old('bb') }}"
                     >
 
                     @error('bb')
@@ -292,7 +287,7 @@
                         class="form-control @error('subjektif') is-invalid @enderror"
                         id="subjektif"
                         name="subjektif"
-                    >{{ old('subjektif') }}</textarea>
+                    ></textarea>
             
                     @error('subjektif')
                         <div class="invalid-feedback">
@@ -312,7 +307,7 @@
                         class="form-control @error('objektif') is-invalid @enderror"
                         id="objektif"
                         name="objektif"
-                    >{{ old('objektif') }}</textarea>
+                    ></textarea>
 
                     @error('objektif')
                         <div class="invalid-feedback">
@@ -333,7 +328,7 @@
                         class="form-control @error('assesment') is-invalid @enderror"
                         id="assesment"
                         name="assesment"
-                    >{{ old('assesment') }}</textarea>
+                    ></textarea>
 
                     @error('assesment')
                         <div class="invalid-feedback">
@@ -354,7 +349,7 @@
                         class="form-control @error('plan') is-invalid @enderror"
                         id="plan"
                         name="plan"
-                    >{{ old('plan') }}</textarea>
+                    ></textarea>
 
                     @error('plan')
                         <div class="invalid-feedback">
@@ -387,7 +382,7 @@
                     id="diagnosa"
                     name="diagnosa"
                     type="text"
-                    value="{{ old('diagnosa') }}"
+                    value=""
                 >
         
                 @error('diagnosa')
@@ -421,7 +416,7 @@
                     id="tindakan"
                     name="tindakan"
                     type="text"
-                    value="{{ old('tindakan') }}"
+                    value=""
                 >
         
                 @error('tindakan')

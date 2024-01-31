@@ -19,12 +19,12 @@
                         <tr>
                             <td>Nomor Registrasi</td>
                             <td>:</td>
-                            <td>-</td>
+                            <td>{{ $kode }}</td>
                         </tr>
                         <tr>
                             <td>Nomor Rekam Medis</td>
                             <td>:</td>
-                            <td>-</td>
+                            <td>{{ $patient->medical_record_numb }}</td>
                         </tr>
                         <tr>
                             <td>Nama</td>
@@ -50,7 +50,7 @@
                         <tr>
                             <td>Tanggal Periksa</td>
                             <td>:</td>
-                            <td>-</td>
+                            <td>{{ $inspection->created_at->translatedFormat('d F Y') }}</td>
                         </tr>
                         <tr>
                             <td>Tanggal Lahir</td>

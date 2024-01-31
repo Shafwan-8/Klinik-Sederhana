@@ -58,7 +58,7 @@
                         <tr>
                             <td colspan="6">
                                 <div class="my-5 text-center">
-                                    Data tidak ditemukan.
+                                    <h4>Data tidak ditemukan.</h4>
                                 </div>
                             </td>
                         </tr>

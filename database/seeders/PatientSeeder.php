@@ -47,13 +47,13 @@ class PatientSeeder extends Seeder
                 'email' => 'email',
                 'job' => 'pekerjaan',
                 'medical_record_numb' => 'pekerjaan',
-                // 'img' => 'foto langsung'
+                'img' => 'foto langsung'
             ],
             [
                 'nik_numb' => '2',
                 'name' => 'name',
                 'gender' => 'cwk',
-                'date_birth' => '2022',
+                'date_birth' => '2',
                 'address' => 'alamat',
                 'hp_numb' => '32',
                 'bpjs_numb' => '41',
@@ -61,13 +61,13 @@ class PatientSeeder extends Seeder
                 'email' => 'emaiasaal',
                 'job' => 'pekerjaan',
                 'medical_record_numb' => 'pekesssrjaan',
-                // 'img' => 'foto langsung'
+                'img' => 'foto langsung'
             ]
         ];
 
-        foreach ($patients as $patient) {
-            Patient::create($patient);
-        }
+        // foreach ($patients as $patient) {
+        //     Patient::create($patient);
+        // }
 
         // Patient::create([
         //     'nik_numb' => '1',
