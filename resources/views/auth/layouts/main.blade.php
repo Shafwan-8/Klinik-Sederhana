@@ -15,7 +15,7 @@
     <link id="sleek-css" rel="stylesheet" href="/css/sleek.css" />
 
     <!-- FAVICON -->
-    <link href="/img/trika.png" rel="shortcut icon" class="rounded-circle"/>
+    <link href="{{ asset('img/trika.png') }}" rel="shortcut icon" class="rounded-circle"/>
 
     <!--
       HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries

@@ -370,12 +370,46 @@
             @csrf
             <div class="row">
             
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="mb-3">
                 <label
                     class="form-label"
                     for="diagnosa"
-                >Cari Diagnosa</label>
+                >Diagnosa utama</label>
+        
+                {{-- <input
+                    class="form-control @error('diagnosa') is-invalid @enderror"
+                    id="diagnosa"
+                    name="diagnosa"
+                    type="text"
+                    value=""
+                > --}}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="diagnosa" id="diagnosa" placeholder="Nama Diagnosa..." aria-label="Nama Diagnosa...">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                    </div>
+                </div>
+        
+                @error('diagnosa')
+                    <div class="invalid-feedback">
+                    {{ $message }}
+                    </div>
+                @enderror
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <-nama-Diagnosa-></-nama-Diagnosa->
+                    </label>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                <label
+                    class="form-label"
+                    for="diagnosa"
+                >Diagnosa lainnya...</label>
         
                 <input
                     class="form-control @error('diagnosa') is-invalid @enderror"
@@ -404,12 +438,46 @@
             @csrf
             <div class="row">
             
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="mb-3">
                 <label
                     class="form-label"
                     for="tindakan"
                 >Layanan / Tindakan</label>
+        
+                {{-- <input
+                    class="form-control @error('tindakan') is-invalid @enderror"
+                    id="tindakan"
+                    name="tindakan"
+                    type="text"
+                    value=""
+                > --}}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="tindakan" id="tindakan" placeholder="Nama Layanan..." aria-label="Nama Layanan...">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                    </div>
+                </div>
+        
+                @error('tindakan')
+                    <div class="invalid-feedback">
+                    {{ $message }}
+                    </div>
+                @enderror
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <-nama-layanan->
+                    </label>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                <label
+                    class="form-label"
+                    for="tindakan"
+                >Layanan lainnya...</label>
         
                 <input
                     class="form-control @error('tindakan') is-invalid @enderror"
