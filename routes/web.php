@@ -6,7 +6,9 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IcdController;
 use App\Http\Controllers\InspectionsController;
+use App\Http\Controllers\ServiceController;
 use App\Models\Inspection;
 
 /*
@@ -39,7 +41,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'create'])->name('pemeriksaan.create');
     Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');
-    
 
+    Route::get('/icd', [IcdController::class, 'action'])->name('icd.cari');
+    Route::get('/service', [ServiceController::class, 'action'])->name('service');
 });
 

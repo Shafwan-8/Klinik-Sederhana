@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokter;
+use App\Models\Icd;
 use App\Models\Inspection;
 use App\Models\Patient;
 use App\Models\User;
@@ -30,6 +31,7 @@ class InspectionsController extends Controller
      */
     public function create($id)
     {
+        $icds = Icd::all();
         $dokter = auth()->user()->dokter->first();
         // $inisial = Dokter::find($id)->latest()->first();
         $patient = Patient::where('id' ,$id)->latest()->first();
@@ -67,6 +69,7 @@ class InspectionsController extends Controller
             'patient' => $patient,
             'kode' => $kode,
             'waktu' => $waktu,
+            // 'icds' => $icd,
             'active' => 'pemeriksaan'
             
         ]);
@@ -79,7 +82,7 @@ class InspectionsController extends Controller
     {
         $request->request->add(['patient_id' => $id]);
         $validatedData = $request->validate([
-            'td' => '',
+            'td' => 'required',
             'suhu' => '',
             'nadi' => '',
             'so2' => '',
@@ -91,8 +94,10 @@ class InspectionsController extends Controller
             'objektif' => '',
             'assesment' => '',
             'plan' => '',
-            'diagnosa' => '',
+            'diagnosa' => 'required',
+            'diagnosa_lainnya' => '',
             'tindakan' => '',
+            'tindakan_lainnya' => '',
             'patient_id' => '',
             'no_registrasi' => 'unique:inspections,no_registrasi',
         ]);

@@ -13,9 +13,9 @@
         <script>
           function updateTime() {
               let now = new Date();
-              let timeString = now.getHours().toString().padStart(1, '0') + ":" +
-                  now.getMinutes().toString().padStart(1, '0') + ":" +
-                  now.getSeconds().toString().padStart(1, '0');
+              let timeString = now.getHours().toString().padStart(2, '0') + ":" +
+                  now.getMinutes().toString().padStart(2, '0') + ":" +
+                  now.getSeconds().toString().padStart(2, '0');
               document.getElementById('realtime-clock').textContent = timeString;
           }
 

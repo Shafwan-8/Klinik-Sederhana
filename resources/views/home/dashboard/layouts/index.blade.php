@@ -47,7 +47,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="/plugins/nprogress/nprogress.js"></script>
-    <script src="{{ asset('js/today.js') }}"></script>
+
+
   </head>
 
   <body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
@@ -161,8 +162,6 @@
     <!-- Javascript -->
     <script src="/plugins/jquery/jquery.min.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/plugins/simplebar/simplebar.min.js"></script>
- 
     <script src='/plugins/toastr/toastr.min.js'></script>
     <script src="/js/sleek.js"></script>
   <link href="/options/optionswitch.css" rel="stylesheet">
