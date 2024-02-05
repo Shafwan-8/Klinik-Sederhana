@@ -20,10 +20,11 @@ class InspectionFactory extends Factory
 
     public function definition()
     {
-        $patients = Patient::pluck('id')->toArray();
-
         return [
-            'patient_id' => $this->faker->randomElement($patients),
+            'patient_id' => function () {
+                // Assuming you have a Patient model
+                return Patient::factory()->create()->id;
+            },
             'td' => $this->faker->randomFloat(2, 70, 180),
             'suhu' => $this->faker->randomFloat(2, 35, 40),
             'nadi' => $this->faker->numberBetween(60, 100),

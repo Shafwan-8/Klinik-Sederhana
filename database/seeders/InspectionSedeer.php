@@ -13,7 +13,7 @@ class InspectionSedeer extends Seeder
      */
     public function run(): void
     {
-        Inspection::factory(15)->create();
+        Inspection::factory(5)->create();
 
     }
 }

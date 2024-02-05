@@ -15,10 +15,17 @@ class PatientController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
+        if(auth()->user()->dokter->first() && auth()->user()->role == 'dokter') {   // dokter yang lagi login saja bisa akses
+            $dokter = auth()->user()->dokter->first();
+            $inisial = $dokter->inisial;
+            $patients = Patient::where('medical_record_numb', 'like', $inisial . '%')->latest()->get();
+        } else {     
+            $patients = Patient::latest()->get(); // bukan dokter yang bisa akses, ya admin lah yang bisa akses
+        }
         $title = 'Master Pasien';
-        $patients = Patient::latest()->get();
         $active = 'patient';
+        
         return view('home.content.patient.index', compact('patients', 'title', 'active'));
     }
 
@@ -27,8 +34,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        // jika admin yang login
-        if(auth()->user()->role == 'admin') {
+        if(auth()->user()->role == 'admin') {    // jika admin yang login
             return 'tabe anda admin';
         }    
         $title = 'Tambah Pasien';
@@ -36,8 +42,7 @@ class PatientController extends Controller
         $user = auth()->user();
         $dokter = $user->dokter->first();
         $patient = Patient::latest()->first();
-        // jika dokter belum buat akun
-        if($dokter === null) {
+        if($dokter === null) {      // jika dokter belum buat akun
             $title = 'Tambah Pasien';
             $active = 'patient';
             $errorr = 'Anda belum mendaftar, silahkan membuat akun Dokter terlebih dahulu';
@@ -45,16 +50,15 @@ class PatientController extends Controller
             $backTo = 'ke pendaftaran dokter';
             return view('error.404', compact('title','active','errorr', 'linkTo', 'backTo'));
         
-        // jika dokter punya akun
-        }elseif(auth()->user()->dokter->first() ?? $patient === null  ) {
+        }elseif(auth()->user()->dokter->first()) {   // jika dokter punya akun
             $user = auth()->user();
             $dokter = $user->dokter->first();
             $inisial = $dokter->inisial;
             $lastNumber = Patient::where('medical_record_numb', 'like', $inisial . '%')->latest()->first();
-            if ($lastNumber === null) {
-                $numberMedic = str_pad(1, 8, '0', STR_PAD_LEFT);
+            if ($lastNumber === null) {     
+                $numberMedic = str_pad(1, 8, '0', STR_PAD_LEFT);   // jika dokter belum buat pasien
             } else {
-                $lastNumber = (int)substr($lastNumber->medical_record_numb, -5);
+                $lastNumber = (int)substr($lastNumber->medical_record_numb, -5);   // bila dokter sudah pernah buat pasien
                 $numberMedic = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);
             }
                 $medical = $inisial . '-' .$numberMedic;  
