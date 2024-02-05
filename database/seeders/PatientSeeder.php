@@ -65,9 +65,9 @@ class PatientSeeder extends Seeder
         //     ]
         // ];
 
-        foreach ($patients as $patient) {
-            Patient::create($patient);
-        }
+        // foreach ($patients as $patient) {
+        //     Patient::create($patient);
+        // }
 
         // Patient::create([
         //     'nik_numb' => '1',

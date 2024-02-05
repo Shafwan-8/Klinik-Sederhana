@@ -17,22 +17,24 @@ return new class extends Migration
             // $table->foreignId('dokter_id')->constrained('dokter')->onDelete('cascade');
             // $table->foreignId('patients_id')->references('id')->on('patients')->onDelete('cascade');
             $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
-            // $table->string('no_registrasi')->unique()->default('1');
+            $table->string('no_registrasi');
 
             $table->string('td');
             $table->string('suhu');
             $table->string('nadi');
             $table->string('so2');
             $table->string('pernafasan');
-            $table->string('deha');
+            $table->string('detail');
             $table->string('tb');
             $table->string('bb');
             $table->string('subjektif');
             $table->string('objektif');
             $table->string('assesment');
             $table->string('plan');
-            $table->string('diagnosa');
+            $table->string('diagnosa')->nullable();
+            $table->string('diagnosa_lainnya');
             $table->string('tindakan');
+            $table->string('tindakan_lainnya');
             $table->timestamps();
         });
     }

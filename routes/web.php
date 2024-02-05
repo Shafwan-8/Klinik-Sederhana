@@ -6,10 +6,12 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IcdController;
 use App\Http\Controllers\InspectionsController;
 use App\Http\Controllers\ReportDiagnosaController;
 use App\Http\Controllers\ReportServiceController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ServiceController;
 use App\Models\Inspection;
 
 /*
@@ -54,5 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan/jumlah-transaksi', [TransactionController::class, 'index'])->name('report.transaction');
     Route::post('/laporan/jumlah-transaksi/view-pdf', [TransactionController::class, 'viewPDF'])->name('view-pdf-transaction');
     Route::post('/laporan/jumlah-transaksi/download-pdf', [TransactionController::class, 'downloadPDF'])->name('download-pdf-transaction');
+
+    Route::get('/icd', [IcdController::class, 'action'])->name('icd.cari');
+    Route::get('/service', [ServiceController::class, 'action'])->name('service');
 });
 
