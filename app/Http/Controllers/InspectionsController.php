@@ -99,7 +99,7 @@ class InspectionsController extends Controller
             'tindakan' => '',
             'tindakan_lainnya' => '',
             'patient_id' => '',
-            'no_registrasi' => '',
+            'no_registrasi' => 'unique:inspections,no_registrasi',
         ]);
 
         Inspection::create($validatedData);

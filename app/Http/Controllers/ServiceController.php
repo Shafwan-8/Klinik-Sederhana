@@ -17,11 +17,11 @@ class ServiceController extends Controller
             if ($query != '') {
                 $data = Service::where('name', 'like', '%' .$query. '%')
                     ->orderBy('id', 'asc')
-                    ->take(5)
+                    ->take(10)
                     ->get();
             } else {
                 $data = Service::orderBy('id', 'asc')
-                ->take(5)
+                ->take(10)
                 ->get();
             }
 

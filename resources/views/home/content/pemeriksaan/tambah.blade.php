@@ -80,7 +80,6 @@
     @section('container2')
     <form action="{{ route('pemeriksaan.store', request('pemeriksaan')) }}" method="POST">
         <input type="hidden" name="no_registrasi" value="{{ $kode }}">
-        {{ $kode }}
         <div class="card col-md-12 mt-3 mb-3">
             <div class="card-header border-bottom px-3 py-2">
                 <h5>Fisik</h5>

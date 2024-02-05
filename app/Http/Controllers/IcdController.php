@@ -77,11 +77,11 @@ class IcdController extends Controller
                     // ->orWhere('icNamaLokal', 'like', '%' .$query. '%')
                     // ->orWhere('icSebabSakit', 'like', '%' .$query. '%')
                     ->orderBy('icId', 'asc')
-                    ->take(5)
+                    ->take(10)
                     ->get();
             } else {
                 $data = Icd::orderBy('id', 'asc')
-                ->take(5)
+                ->take(10)
                 ->get();
             }
 
@@ -91,7 +91,7 @@ class IcdController extends Controller
                 foreach($data as $key => $row) {
                     $output .= '
                         <input class="form-check-input d-flex flex-row" type="radio" name="diagnosa" id="diagnosa_'.$key.'" value="'.$row->icJenisPenyakit.'">
-                        <label class="form-check-label" for="diagnosa_'.$key.'">'.$row->icJenisPenyakit.'</label>
+                        <label class="form-check-label" for="diagnosa_'.$key.'">'.$row->icJenisPenyakit. '/'.'</label>
                     ';
                 }
             } else {
