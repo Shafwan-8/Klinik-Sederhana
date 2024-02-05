@@ -31,10 +31,11 @@ return new class extends Migration
             $table->string('objektif');
             $table->string('assesment');
             $table->string('plan');
-            $table->string('diagnosa')->nullable();
-            $table->string('diagnosa_lainnya');
+            $table->string('diagnosa');
+            $table->string('diagnosa_lainnya', 1000);
             $table->string('tindakan');
-            $table->string('tindakan_lainnya');
+            $table->string('harga_tindakan');
+            $table->string('tindakan_lainnya', 1000);
             $table->timestamps();
         });
     }

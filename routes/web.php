@@ -42,7 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'create'])->name('pemeriksaan.create');
     Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');
 
-    Route::get('/icd', [IcdController::class, 'action'])->name('icd.cari');
+    Route::get('/icd', [IcdController::class, 'action'])->name('icd');
+    Route::get('/icd/lainnya', [IcdController::class, 'actionLainnya'])->name('icd.lainnya');
     Route::get('/service', [ServiceController::class, 'action'])->name('service');
+    Route::get('/service/lainnya', [ServiceController::class, 'actionLainnya'])->name('service.lainnya');
 });
 
