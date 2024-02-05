@@ -6,8 +6,6 @@
 
 
 @section('container')
-    <form action="{{ route('pemeriksaan.store', request('pemeriksaan')) }}" method="POST">
-
         <div class="card mb-3 text-dark">
             <div class="card-header border-bottom px-3 py-2">
                 <h5>Data Pasien</h5>
@@ -77,10 +75,12 @@
                 </div>
             </div>
         </div>
-        </div>
     @endsection
 
     @section('container2')
+    <form action="{{ route('pemeriksaan.store', request('pemeriksaan')) }}" method="POST">
+        <input type="hidden" name="no_registrasi" value="{{ $kode }}">
+        {{ $kode }}
         <div class="card col-md-12 mt-3 mb-3">
             <div class="card-header border-bottom px-3 py-2">
                 <h5>Fisik</h5>
@@ -297,6 +297,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label" for="diagnosa_lainnya">Diagnosa lainnya...</label>

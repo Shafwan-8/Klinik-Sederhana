@@ -80,7 +80,7 @@ class InspectionsController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $request->request->add(['patient_id' => $id]);
+        $request->request->add(['patient_id' => $id, 'no_registrasi' => $request->no_registrasi]);
         $validatedData = $request->validate([
             'td' => 'required',
             'suhu' => '',
@@ -99,7 +99,7 @@ class InspectionsController extends Controller
             'tindakan' => '',
             'tindakan_lainnya' => '',
             'patient_id' => '',
-            'no_registrasi' => 'unique:inspections,no_registrasi',
+            'no_registrasi' => '',
         ]);
 
         Inspection::create($validatedData);
@@ -114,17 +114,6 @@ class InspectionsController extends Controller
     {
         $inspection = Inspection::where('patient_id', $id)->latest()->get();
         $patient = Patient::where('id', $id)->first();
-
-        // $regist = Patient::where('medical_record_numb', $patient->medical_record_numb)->first();
-        
-        // $lastNumber = Patient::where('medical_record_numb', 'like', $inisial . '%')->latest()->first();
-        //     if ($lastNumber === null) {
-        //         $numberMedic = str_pad(1, 8, '0', STR_PAD_LEFT);
-        //     } else {
-        //         $lastNumber = (int)substr($lastNumber->medical_record_numb, -3);
-        //         $numberMedic = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-        //     }
-        //         $medical =$kode.$numberMedic;
 
         return view('home.content.pemeriksaan.pilih', [
             'title' => 'Trika Klinik | Riwayat Pemeriksaan',
