@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('dokter', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('nama');
             $table->string('no_ktp')->unique();
             $table->string('no_hp');
             $table->string('sip');
             $table->string('alamat');
             $table->string('foto')->nullable();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('inisial');
             $table->timestamps();
 
         });

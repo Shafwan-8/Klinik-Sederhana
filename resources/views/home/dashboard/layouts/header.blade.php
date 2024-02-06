@@ -7,9 +7,28 @@
       </button>
       <!-- search form -->
       <div class="search-form d-none d-lg-inline-block">
-        {{date('Y-m-d', time())}}
-      </div>
+        <div class="d-flex justify-content-center align-items-center absolute">
+          {{ \Carbon\Carbon::now()->setTimezone('Asia/Makassar')->format('d F Y') }}
+          </div>
+        <script>
+          function updateTime() {
+              let now = new Date();
+              let timeString = now.getHours().toString().padStart(2, '0') + ":" +
+                  now.getMinutes().toString().padStart(2, '0') + ":" +
+                  now.getSeconds().toString().padStart(2, '0');
+              document.getElementById('realtime-clock').textContent = timeString;
+          }
 
+          window.onload = function() {
+              setInterval(updateTime, 1000);  // Update the time every second
+          }
+      </script>
+          
+          <div id="realtime-clock">
+          {{ \Carbon\Carbon::now()->setTimezone('Asia/Makassar')->format('H:i:s') }}
+          </div>
+
+      </div>
       <div class="navbar-right ">
         <ul class="nav navbar-nav">
           <!-- User Account -->
@@ -24,7 +43,7 @@
                   @endforeach
                   @else
                       <img src="{{ asset('img/default-profile.jpg') }}" class="user-image rounded-lg" alt="User Image" />
-                @endif
+                  @endif
               <span class="d-none d-lg-inline-block">{{ auth()->user()->name }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">

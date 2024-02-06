@@ -28,9 +28,7 @@
                       <th>No HP</th>
                       <th>SIP</th>
                       <th>Foto</th>
-                    @if (auth()->user()->role == 'admin')
                       <th>Action</th>
-                    @endif
                     </tr>
                 </thead>
                 <tbody class="text-dark">
@@ -52,9 +50,9 @@
                                     />
                                 @endif
                             </td>
-                        @if (auth()->user()->role == 'admin')
                             <td>
                                 <a href="{{ route('dokter.show', $dokter->id) }}" class="badge bg-info"><span data-feather="eye"></span></a>
+                                @if (auth()->user()->role == 'admin')
                                 <a href="{{ route('dokter.edit', $dokter->id) }}" class="badge bg-warning"><span data-feather="edit"></span></a>
                                 <a class="badge bg-danger" onclick="hapusData('dokter', '{{ $dokter->id }}')"><span data-feather="trash-2"></span></a>
                                 <form
@@ -66,8 +64,8 @@
                                     @csrf
                                     @method('delete')
                                 </form>
+                                @endif
                             </td>
-                        @endif
                         </tr>
                     @empty
                         <tr>

@@ -15,7 +15,7 @@ class DokterController extends Controller
      */
     public function index()
     {
-        $title = 'Master Dokter';
+        $title = 'Trika Klinik | Master Dokter';
         $dokters = Dokter::latest()->get();
         $active = 'dokter';
         return view('home.content.dokter.index', compact('dokters', 'title', 'active'));
@@ -27,7 +27,7 @@ class DokterController extends Controller
     public function create()
     {
         $users = User::all();
-        $title = 'Tambah Dokter';
+        $title = 'Trika Klinik | Tambah Dokter';
         $active = 'dokter';
         return view('home.content.dokter.create', compact('users', 'title', 'active'));
     }
@@ -37,7 +37,6 @@ class DokterController extends Controller
      */
     public function store(Request $request)
     {
-
         $dokterData = $request->validate([
             'nama' => 'required|string',
             'no_ktp' => 'required|numeric|unique:dokter',
@@ -45,23 +44,21 @@ class DokterController extends Controller
             'sip' => 'required|numeric',
             'alamat' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'inisial' => 'required|alpha|max:4|min:4|unique:dokter',
             'user_id' => 'required|unique:dokter|exists:users,id',
         ]);
     
-        // Pilih user berdasarkan user_id yang dikirimkan dalam request
         $user = User::find($dokterData['user_id']);
     
         if (!$user) {
             return redirect()->route('dokter.create')->with('error', 'User not found.');
         }
     
-        // Jika file foto diunggah, simpan dengan nama yang unik
         if ($request->hasFile('foto')) {
             $namaFile = time().'_'.Str::snake($request->foto->getClientOriginalName());
             $dokterData['foto'] = $request->file('foto')->storeAs('images/dokter', $namaFile, 'public');
         }
     
-        // Hubungkan user dengan dokter dan simpan
         $dokters = $user->dokter()->create($dokterData);
         return redirect()->route('dokter.index')->with('success', 'Data dokter berhasil disimpan.');
     }
@@ -72,7 +69,7 @@ class DokterController extends Controller
     public function show(Dokter $dokter)
     {
         return view('home.content.dokter.show', [
-            'title' => 'Detail Dokter',
+            'title' => 'Trika Klinik | Detail Dokter',
             'dokter' => $dokter,
             'active' => 'dokter'
         ]);
@@ -85,7 +82,7 @@ class DokterController extends Controller
     {
         $users = User::all();
         $dokter = Dokter::findOrFail($id);
-        $title = 'Sunting Dokter';
+        $title = 'Trika Klinik | Sunting Dokter';
         $active = 'dokter';
         return view('home.content.dokter.edit', compact('users', 'title', 'dokter', 'active'));
     }
@@ -103,8 +100,9 @@ class DokterController extends Controller
             'no_hp' => 'required|numeric',
             'sip' => 'required|numeric',
             'alamat' => 'required|string',
+            'inisial' => 'required|alpha|max:4|min:4',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'user_id' => 'required|unique:dokter|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
         ]);
 
         $dokter->update($tervalidasi);

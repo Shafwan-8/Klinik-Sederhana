@@ -33,6 +33,10 @@
   
     <!-- FAVICON -->
     <link href="/img/trika.png" rel="shortcut icon" />
+
+    <!-- CSS KAMERA -->
+    @yield('cssCamera');
+
   
     <!--
       HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
@@ -43,6 +47,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="/plugins/nprogress/nprogress.js"></script>
+
+
   </head>
 
   <body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
@@ -74,24 +80,32 @@
           ===================================== -->
           <div class="content-wrapper">
             <div class="content">
-		<div class="row">
-			<div class="col-12">
+              <div class="row">
+                <div class="col-12">
                   <!-- Recent Order Table -->
                   <div class="card card-table-border-none recent-orders" id="recent-orders">
                     <div class="card-header justify-content-between text-dark">
                       @yield('title')
                     </div>
-                    <div class="card-body pt-0 pb-5 text-dark">
+                    <div class="card-body pt-0 pb-2 text-dark">
                         @include('home.dashboard.layouts.alert')
 
                         @yield('container')
                     </div>
-                  </div>
-			</div>
-		</div>
-      </div> <!-- End Content -->
-    </div> <!-- End Content Wrapper -->
-    
+                  </div> 
+                </div>
+                <div class="col-12 p-0">
+                  <!-- Recent Order Table -->
+                  <div class="card card-table-border-none recent-orders" id="recent-orders">
+                    <div class="card-body pt-0 pb-2 text-dark">
+                        @yield('container2')
+                    </div>
+                  </div> 
+                </div>
+              </div>
+            </div> <!-- End Content -->
+          </div> <!-- End Content Wrapper -->
+            
     
     <!-- Footer -->
     <footer class="footer mt-auto">
@@ -139,27 +153,15 @@
                 document.getElementById(`hapus-${name}-${id}`).submit();
             }
         }
-</script>
 
 <!-- Feather -->
-<script>
   feather.replace();
+
 </script>
-
-    <!-- <script type="module">
-      import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
-
-      const el = document.createElement('pwa-update');
-      document.body.appendChild(el);
-    </script> -->
-
-    {{ config('abel.nama') }}
 
     <!-- Javascript -->
     <script src="/plugins/jquery/jquery.min.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/plugins/simplebar/simplebar.min.js"></script>
- 
     <script src='/plugins/toastr/toastr.min.js'></script>
     <script src="/js/sleek.js"></script>
   <link href="/options/optionswitch.css" rel="stylesheet">

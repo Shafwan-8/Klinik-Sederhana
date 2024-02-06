@@ -14,7 +14,7 @@ class UsersController extends Controller
     {
         $user = User::latest()->get();
         return view('home.content.pengguna.pengguna', [
-            'title' => 'Daftar Pengguna',
+            'title' => 'Trika Klinik | Daftar Pengguna',
             'users' => $user,
             'active' => 'pengguna'
         ]);
@@ -29,7 +29,7 @@ class UsersController extends Controller
         $roles = User::ROLES;
         
         return view('home.content.pengguna.tambah', [
-            'title' => 'Tambah Pengguna',
+            'title' => 'Trika Klinik | Tambah Pengguna',
             'roles' => $roles,
             'active' => 'pengguna'
         ]);
@@ -76,7 +76,7 @@ class UsersController extends Controller
         $roles = User::ROLES;
 
         return view('home.content.pengguna.edit', [
-            'title' => 'Edit Pengguna',
+            'title' => 'Trika Klinik | Edit Pengguna',
             'user' => $user,
             'roles' => $roles,
             'active' => 'pengguna'
@@ -107,8 +107,6 @@ class UsersController extends Controller
         }
 
         return to_route('pengguna.index')->with('success', 'Pengguna Berhasil Diubah!');
-
-
 
     }
 

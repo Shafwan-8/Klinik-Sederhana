@@ -33,7 +33,7 @@
                     
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="me-auto ms-2">
-                            <span>Nama Dokter</span>
+                            <span>Nama @if (auth()->user()->role == 'admin') Admin @else Dokter @endif</span>
                         <div class="fw-bold">{{ $dokter->nama }}</div>
                     </div>
                 </li>
@@ -41,6 +41,12 @@
                     <div class="me-auto ms-2">
                         <span>Nama Akun Pengguna</span>
                         <div class="fw-bold">{{ $dokter->user->name }}</div>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start"> 
+                    <div class="me-auto ms-2">
+                        <span>Inisial</span>
+                        <div class="fw-bold">{{ $dokter->inisial }}</div>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start"> 
