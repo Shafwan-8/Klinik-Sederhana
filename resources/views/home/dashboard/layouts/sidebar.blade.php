@@ -51,7 +51,8 @@
                     </a>
                   </li>
                   <li class="has-sub active expand {{ ($active === "laporan") ? "active" : "" }}">
-                    <a class="sidenav-item-link" href="">
+                    <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#dashboard"
+                    aria-expanded="false" aria-controls="dashboard>
                       <i class="mdi mdi-printer"></i>
                       <span class="nav-text">Laporan</span> <b class="caret"></b>
                     </a>

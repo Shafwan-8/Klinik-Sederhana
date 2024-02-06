@@ -12,6 +12,7 @@ use App\Http\Controllers\ReportDiagnosaController;
 use App\Http\Controllers\ReportServiceController;
 use App\Http\Controllers\ReportTransactionController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\MasterIcdxController;
 use App\Models\Inspection;
 
 /*
@@ -59,5 +60,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/icd', [IcdController::class, 'action'])->name('icd.cari');
     Route::get('/service', [ServiceController::class, 'action'])->name('service');
+
+    Route::resource('/master/icdx', MasterIcdxController::class);
 });
 
