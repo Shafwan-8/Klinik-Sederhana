@@ -34,7 +34,8 @@ class PatientController extends Controller
      */
     public function create()
     {
-        if(auth()->user()->role == 'admin') {    // jika admin yang login
+        // jika admin yang login
+        if(auth()->user()->role == 'admin') {
             return 'tabe anda admin';
         }    
         $title = 'Tambah Pasien';
@@ -57,7 +58,7 @@ class PatientController extends Controller
             $inisiall = strtoupper($inisial);
             $lastNumber = Patient::where('medical_record_numb', 'like', $inisial . '%')->latest()->first();
             if ($lastNumber === null) {     
-                $numberMedic = str_pad(1, 8, '0', STR_PAD_LEFT);   // jika dokter belum buat pasien
+                $numberMedic = str_pad(1, 5, '0', STR_PAD_LEFT);   // jika dokter belum buat pasien
             } else {
                 $lastNumber = (int)substr($lastNumber->medical_record_numb, -5);   // bila dokter sudah pernah buat pasien
                 $numberMedic = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);

@@ -118,11 +118,10 @@ class ReportServiceController extends Controller
         })
         ->toArray();
 
-        $pdf = PDF::loadView('home.content.report.service.report-service',  compact('dataLayanan', 'formatted_start_date', 'formatted_end_date'))
+        $pdf = PDF::loadView('home.content.report.service.report-service',  compact('dataLayanan'))
             ->setPaper('a4','portrait')
             ->set_option('isRemoteEnabled', true);
 
-        return $pdf->download('data-layanan-pasien-[' . $formatted_start_date . '][' . $formatted_end_date . '].pdf');
-
+        return $pdf->download('data-layanan-pasien-[' . $formatted_start_date . '][' . $formatted_end_date . '].pdf'); 
     }
 }

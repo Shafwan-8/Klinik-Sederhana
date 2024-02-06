@@ -89,7 +89,7 @@
                             <ul class="collapse show" id="dashboard" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li class="{{ $active === 'icdx' ? 'active' : '' }}">
-                                        <a class="sidenav-item-link" href="{{ route('icdx.index') }}">
+                                        <a class="sidenav-item-link" href="{{ route('report.diagnosis') }}">
                                             <span class="nav-text mx-2">Icdx</span>
                                         </a>
                                     </li>
@@ -106,4 +106,5 @@
                 </ul>
               </div>
             </div>
-        </aside>
+            </div>
+          </aside>

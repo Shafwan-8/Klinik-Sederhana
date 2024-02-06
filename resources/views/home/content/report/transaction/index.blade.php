@@ -61,6 +61,7 @@
                       <th>Tanggal</th>
                       <th>Nama Pasien</th>
                       <th>Layanan</th>
+                      <th>Harga</th>
                     </tr>
                 </thead>
                 <tbody class="text-dark">
@@ -69,7 +70,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $transaksi->tanggal }}</td>
                             <td>{{ $transaksi->nama_pasien }}</td>
-                            <td>{{ $transaksi->tindakan }}</td>
+                            <td>{{ $transaksi->nama_layanan }}</td>
+                            <td>{{ $transaksi->harga_layanan }}</td>
                         </tr>
                     @empty
                         <tr>

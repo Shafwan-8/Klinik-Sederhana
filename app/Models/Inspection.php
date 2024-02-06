@@ -11,11 +11,6 @@ class Inspection extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = [
-        'tindakan_lainnya' => 'json',
-        'diagnosa_lainnya' => 'json',
-    ];
-
     // protected $dates = ['start_date', 'end_date', 'show_at', 'hide_at', 'created_at', 'updated_at'];
     // public function user()
     // {
