@@ -49,21 +49,25 @@
                 <th style="text-align:center">No.</th>
                 <th style="text-align:center">Nama Layanan</th>
                 <th style="text-align:center">Jumlah</th>
+                <th style="text-align:center">Harga</th>
+                <th style="text-align:center">Total</th>
             </tr>
         </thead>
         <tbody>
-        @foreach ($dataLayanan as $tindakan)
+        @foreach ($dataLayanan as $layanan)
             <tr>
                 <td style="text-align:center; width:5">{{ $loop->iteration }}</td>
-                <td>{{ $tindakan->tindakan }}</td>
-                <td style="text-align:center">{{ $tindakan->jumlah }}</td>
+                <td style="text-align:center">{{ $layanan->nama_layanan }}</td>
+                <td style="text-align:center">{{ $layanan->jumlah_layanan }}</td>
+                <td style="text-align:center">{{ $layanan->harga_layanan }}</td>
+                <td style="text-align:center">{{ $layanan->total_harga }}</td>
             </tr>
-        @endforeach
-        <tr>
+            @endforeach
+        {{-- <tr>
             <td colspan="2" style="text-align:center;background: #3498db;color: white;">Total</td>
 
             <td style="text-align:center;background: #3498db;color: white;  ">{{ array_sum($array) }}</td>
-        </tr>
+        </tr> --}}
 
         </tbody>
     </table>

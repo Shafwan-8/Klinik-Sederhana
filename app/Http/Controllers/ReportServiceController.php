@@ -58,21 +58,32 @@ class ReportServiceController extends Controller
         $formatted_end_date = Carbon::parse($end_date)->format('d-m-Y');
 
         $dataLayanan = DB::table('inspections')
-            ->selectRaw('tindakan, count(tindakan) as jumlah')
-            ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
-            ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
-            ->groupBy('tindakan')
-            ->orderBy('jumlah', 'desc')
-            ->get()
-            ->toArray();
+        ->selectRaw('
+            SUBSTRING_INDEX(tindakan, " ", 1) AS nama_layanan,    
+            SUBSTRING_INDEX(tindakan, " ", -1) AS harga_layanan, 
+            COUNT(tindakan) AS jumlah_layanan, 
+            SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
+        ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
+        ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+        ->groupBy('nama_layanan', 'harga_layanan')
+        ->orderBy('total_harga', 'desc')
+        ->get()
+        ->map(function ($data) {
+            // Konversi harga_layanan ke tipe data string tanpa desimal dan nol di belakangnya
+            $data->harga_layanan = 'Rp. ' . number_format($data->harga_layanan, 0, ',', '.');
+            $data->total_harga = 'Rp. ' . number_format($data->total_harga, 0, ',', '.');
 
-        $array = [];
+            return $data;
+        })
+        ->toArray();
 
-            foreach($dataLayanan as $data) {
-                array_push($array, $data->jumlah);
-            }
+        // $array = [];
 
-        $pdf = PDF::loadView('home.content.report.service.report-service', compact('dataLayanan','formatted_start_date','formatted_end_date','array'))
+        //     foreach($dataLayanan as $data) {
+        //         array_push($array, $data->jumlah);
+        //     }
+
+        $pdf = PDF::loadView('home.content.report.service.report-service', compact('dataLayanan','formatted_start_date','formatted_end_date'))
             ->setPaper('a4','portrait');
 
         return $pdf->stream(); 
@@ -88,13 +99,24 @@ class ReportServiceController extends Controller
         $formatted_end_date = Carbon::parse($end_date)->format('d-m-Y');
 
         $dataLayanan = DB::table('inspections')
-            ->selectRaw('tindakan, count(tindakan) as jumlah')
-            ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
-            ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
-            ->groupBy('tindakan')
-            ->orderBy('jumlah', 'desc')
-            ->get()
-            ->toArray();
+        ->selectRaw('
+            SUBSTRING_INDEX(tindakan, " ", 1) AS nama_layanan,    
+            SUBSTRING_INDEX(tindakan, " ", -1) AS harga_layanan, 
+            COUNT(tindakan) AS jumlah_layanan, 
+            SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
+        ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
+        ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+        ->groupBy('nama_layanan', 'harga_layanan')
+        ->orderBy('total_harga', 'desc')
+        ->get()
+        ->map(function ($data) {
+            // Konversi harga_layanan ke tipe data string tanpa desimal dan nol di belakangnya
+            $data->harga_layanan = 'Rp. ' . number_format($data->harga_layanan, 0, ',', '.');
+            $data->total_harga = 'Rp. ' . number_format($data->total_harga, 0, ',', '.');
+
+            return $data;
+        })
+        ->toArray();
 
         $pdf = PDF::loadView('home.content.report.service.report-service',  compact('dataLayanan'))
             ->setPaper('a4','portrait')
