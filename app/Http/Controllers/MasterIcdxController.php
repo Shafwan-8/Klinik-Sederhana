@@ -12,8 +12,9 @@ class MasterIcdxController extends Controller
      */
     public function index()
     {
-        $icd = Icd::OrderBy('icId', 'desc')->get()->toArray()->paginate(10)->withQuet;
-        dd($icd);
+        $icd = Icd::orderBy('icId', 'desc')->paginate(10)->withQueryString();
+        $icdx = $icd->toArray();
+        return view('home.content.master.icdx.index', compact('icdx'));
     }
 
     /**
