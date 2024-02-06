@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('dokter', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('nama');
             $table->string('no_ktp')->unique();
             $table->string('no_hp');
@@ -20,7 +21,6 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('foto')->nullable();
             $table->string('inisial');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 
         });

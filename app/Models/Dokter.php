@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Patient;
 
 class Dokter extends Model
 {
@@ -37,7 +38,12 @@ class Dokter extends Model
     {
         $data = Patient::where('dokter_id', $this->id)->get();
         return $data;
-    }
+    }   
+
+
+
+    
+
     // protected $guarded = ['id'];
 
     // public function user()

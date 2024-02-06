@@ -34,6 +34,7 @@ class PatientSeeder extends Seeder
         //     Patient::create($patient);
         // }
 
+
         $patients = [
             [
                 'nik_numb' => '1',
@@ -81,6 +82,5 @@ class PatientSeeder extends Seeder
         //     'email' => 'email',
         //     'job' => 'pekerjaan',
         //     'medical_record_numb' => 'pekerjaan',
-        // ]);
-    }
+    }    // ]);
 }

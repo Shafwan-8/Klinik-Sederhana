@@ -17,10 +17,17 @@ class InspectionsController extends Controller
      */
     public function index()
     {   
-        $patient = Patient::latest()->get();
+        if(auth()->user()->dokter->first() && auth()->user()->role == 'dokter') {   // dokter yang lagi login saja bisa akses
+            $dokter = auth()->user()->dokter->first();
+            $inisial = $dokter->inisial;
+            $patients = Patient::where('medical_record_numb', 'like', $inisial . '%')->latest()->get();
+        } else {     
+            $patients = Patient::latest()->get(); // bukan dokter yang bisa akses, ya admin lah yang bisa akses
+        }
+
         return view('home.content.pemeriksaan.index', [
             'title' => 'Trika Klinik | Daftar Pasien',
-            'patients' => $patient,
+            'patients' => $patients,
             'active' => 'pemeriksaan'
         ]);
 
