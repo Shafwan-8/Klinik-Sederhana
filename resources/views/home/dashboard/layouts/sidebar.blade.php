@@ -50,7 +50,7 @@
                       <span class="nav-text mx-2">Pemeriksaan</span>
                     </a>
                   </li>
-                  <li class="has-sub active expand {{ ($active === "laporan") ? "active" : "" }}">
+                  <li class="has-sub active {{ ($active === "laporan") ? "active" : "" }}">
                     <a class="sidenav-item-link" href="">
                       <i class="mdi mdi-printer"></i>
                       <span class="nav-text">Laporan</span> <b class="caret"></b>

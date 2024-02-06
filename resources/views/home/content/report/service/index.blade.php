@@ -60,6 +60,8 @@
                       <th>#</th>
                       <th>Nama Layanan</th>
                       <th>Jumlah</th>
+                      <th>Harga</th>
+                      <th>Total</th>
                     </tr>
                 </thead>
                 <tbody class="text-dark">
