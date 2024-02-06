@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use PDF;
 use Carbon\Carbon;
 
-class TransactionController extends Controller
+class ReportTransactionController extends Controller
 {
     public function index(Request $request) 
     {
@@ -23,11 +23,20 @@ class TransactionController extends Controller
 
         $dataTransaksi = DB::table('inspections')
         ->join('patients', 'inspections.patient_id', '=', 'patients.id')
-        ->selectRaw('DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal, patients.name as nama_pasien, inspections.tindakan')
+        ->selectRaw('
+            DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
+            patients.name as nama_pasien, 
+            SUBSTRING_INDEX(inspections.tindakan, " ", 1) AS nama_layanan,    
+            SUBSTRING_INDEX(inspections.tindakan, " ", -1) AS harga_layanan') 
         ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
         ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
         ->orderBy('tanggal', 'asc')
         ->get()
+        ->map(function ($data) {
+            $data->harga_layanan = 'Rp. ' . number_format($data->harga_layanan, 0, ',', '.');
+
+            return $data;
+        })
         ->toArray();
 
         return view('home.content.report.transaction.index', compact('dataTransaksi','title','active','start_date'));
@@ -43,11 +52,20 @@ class TransactionController extends Controller
 
         $dataTransaksi = DB::table('inspections')
             ->join('patients', 'inspections.patient_id', '=', 'patients.id')
-            ->selectRaw('DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal, patients.name as nama_pasien, inspections.tindakan')
+            ->selectRaw('
+                DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
+                patients.name as nama_pasien, 
+                SUBSTRING_INDEX(inspections.tindakan, " ", 1) AS nama_layanan,    
+                SUBSTRING_INDEX(inspections.tindakan, " ", -1) AS harga_layanan') 
             ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
             ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
             ->orderBy('tanggal', 'asc')
             ->get()
+            ->map(function ($data) {
+                $data->harga_layanan = 'Rp. ' . number_format($data->harga_layanan, 0, ',', '.');
+    
+                return $data;
+            })
             ->toArray();
 
         // $array = [];
@@ -72,11 +90,20 @@ class TransactionController extends Controller
 
         $dataTransaksi = DB::table('inspections')
             ->join('patients', 'inspections.patient_id', '=', 'patients.id')
-            ->selectRaw('DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal, patients.name as nama_pasien, inspections.tindakan')
+            ->selectRaw('
+                DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
+                patients.name as nama_pasien, 
+                SUBSTRING_INDEX(inspections.tindakan, " ", 1) AS nama_layanan,    
+                SUBSTRING_INDEX(inspections.tindakan, " ", -1) AS harga_layanan') 
             ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
             ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
             ->orderBy('tanggal', 'asc')
             ->get()
+            ->map(function ($data) {
+                $data->harga_layanan = 'Rp. ' . number_format($data->harga_layanan, 0, ',', '.');
+    
+                return $data;
+            })
             ->toArray();
 
         $pdf = PDF::loadView('home.content.report.transaction.report-transaction',  compact('dataTransaksi','formatted_start_date','formatted_end_date'))
