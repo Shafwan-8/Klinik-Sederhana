@@ -83,7 +83,7 @@ class ReportDiagnosaController extends Controller
             ->get()
             ->toArray();
 
-        $pdf = PDF::loadView('home.content.report.diagnosis.report-diagnosis', compact('dataDiagnosa'))
+        $pdf = PDF::loadView('home.content.report.diagnosis.report-diagnosis', compact('dataDiagnosa', 'formatted_start_date', 'formatted_end_date'))
             ->setPaper('a4','portrait')
             ->set_option('isRemoteEnabled', true);
 

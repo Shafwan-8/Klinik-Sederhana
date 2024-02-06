@@ -66,8 +66,10 @@
                     @forelse ($dataLayanan as $tindakan)
                         <tr class="text-center">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $tindakan->tindakan }}</td>
-                            <td>{{ $tindakan->jumlah }}</td>
+                            <td>{{ $tindakan->nama_layanan }}</td>
+                            <td>{{ $tindakan->jumlah_layanan }}</td>
+                            <td>{{ $tindakan->harga_layanan }}</td>
+                            <td>{{ $tindakan->total_harga }}</td>
                         </tr>
                     @empty
                         <tr>
