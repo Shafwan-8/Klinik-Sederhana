@@ -76,6 +76,7 @@ class ServiceController extends Controller
                     $output .= '
                         <input class="form-check-input d-flex flex-row" type="checkbox" name="tindakan_lainnya[]" id="tindakan_lainnya[]" value="'.$row->name. ' ' .$row->rates.'">
                         <label class="form-check-label" for="tindakan_lainnya[]">'.$row->name. ' Rp.' .$row->rates.'</label> <br>
+
                     ';
                 }
             } else {

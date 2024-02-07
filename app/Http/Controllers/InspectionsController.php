@@ -39,33 +39,46 @@ class InspectionsController extends Controller
     public function create($id)
     {
         $icds = Icd::all();
-        $dokter = auth()->user()->dokter->first();
         // $inisial = Dokter::find($id)->latest()->first();
         $patient = Patient::where('id' ,$id)->latest()->first();
         $waktu = Carbon::setLocale('id');
         $waktu = Carbon::now()->format('j-M-Y');
+        $dokter = auth()->user()->dokter->first();
+        if (!$dokter){
+            return redirect()->back()->with('error', 'Anda belum buat akun dokter, Silahkan hubungi admin bila ingin membuat akun dokter.');
+        }
         $inisial = $dokter->inisial;
-        
-        
         $inisial = strtoupper($inisial);
         $kode = $inisial.'-'.date("y").date("m").date("d");
+        $lastNumber = Inspection::where('no_registrasi', 'like', $inisial . '%')->latest()->first();
+        if ($lastNumber === null) {     
+            $no_regis = str_pad(1, 3, '0', STR_PAD_LEFT);   // jika dokter belum buat riwayat pasien
+        } else {
+            $lastNumber = (int)substr($lastNumber->no_registrasi, -3);   // bila dokter sudah pernah buat riwayat pasien
+            $no_regis = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+        }
+            $kode = $kode . $no_regis;
         
-            // Ambil nilai terakhir dari angka 001
-            $lastNumber = Inspection::where('patient_id', $id)->latest()->first();
-            if ($lastNumber === null) {
-                // Jika tidak ada angka 001, buat angka 001
-                $kode = $kode . str_pad(1, 3, '0', STR_PAD_LEFT);
+        
+            // // Ambil nilai terakhir dari angka 001t()->first();
+            // if ($lastNumber === null) {
+            // $lastNumber = Inspection::where('patient_id', $id)->lates
+            //     // Jika tidak ada angka 001, buat angka 001
+            //     $kode = $kode . str_pad(1, 3, '0', STR_PAD_LEFT);
                 
-            }else{
+            // }else{
                 
-                $lastNumber = $lastNumber ? (int)substr($lastNumber->no_registrasi, -3) : 0;
+            //     $lastNumber = $lastNumber ? (int)substr($lastNumber->no_registrasi, -3) : 0;
                 
-                // Tambahkan 1 ke nilai terakhir dari angka 001
-                $lastNumber++;
+            //     // Tambahkan 1 ke nilai terakhir dari angka 001
+            //     $lastNumber++;
                 
-                // Buat kode baru dengan menambahkan angka 001 ke kode lama
-                $kode = $kode . str_pad($lastNumber, 3, '0', STR_PAD_LEFT);
-            }
+            //     // Buat kode baru dengan menambahkan angka 001 ke kode lama
+            //     $kode = $kode . str_pad($lastNumber, 3, '0', STR_PAD_LEFT);
+            // }
+
+
+
         // Simpan kode baru ke database
         // Inspection::create([
         //     'no_registrasi' => $kodeBaru 
@@ -87,35 +100,27 @@ class InspectionsController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $data_lainnya = ($request->tindakan_lainnya);
-        $diagnosa_lainnya = ($request->diagnosa_lainnya);
-        // foreach ($request->tindakan_lainnya as $key => $value) {
-            // $data_lainnya[] = $value;
-
-            $request->request->add(['patient_id' => $id, 'no_registrasi' => $request->no_registrasi, 'tindakan_lainnya' => json_encode($data_lainnya), 'diagnosa_lainnya' => json_encode($diagnosa_lainnya)]);
-            $validatedData = $request->validate([
-                'td' => 'required',
-                'suhu' => '',
-                'nadi' => '',
-                'so2' => '',
-                'pernafasan' => '',
-                'detail' => '',
-                'tb' => '',
-                'bb' => '',
-                'subjektif' => '',
-                'objektif' => '',
-                'assesment' => '',
-                'plan' => '',
-                'diagnosa' => 'required',
-                'diagnosa_lainnya' => '',
-                'tindakan' => '',
-                'harga_tindakan' => '',
-                'tindakan_lainnya' => '',
-                'patient_id' => '',
-                'no_registrasi' => '',
-            ]);
-
-        // }
+        $request->request->add(['patient_id' => $id, 'no_registrasi' => $request->no_registrasi]);
+        $validatedData = $request->validate([
+            'td' => 'required',
+            'suhu' => '',
+            'nadi' => '',
+            'so2' => '',
+            'pernafasan' => '',
+            'detail' => '',
+            'tb' => '',
+            'bb' => '',
+            'subjektif' => '',
+            'objektif' => '',
+            'assesment' => '',
+            'plan' => '',
+            'diagnosa' => 'required',
+            'diagnosa_lainnya' => '',
+            'tindakan' => '',
+            'tindakan_lainnya' => '',
+            'patient_id' => '',
+            'no_registrasi' => 'unique:inspections,no_registrasi',
+        ]);
 
         Inspection::create($validatedData);
 
