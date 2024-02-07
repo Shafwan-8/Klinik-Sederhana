@@ -11,7 +11,9 @@ class Service extends Model
 
     protected $table = 'services';
 
-    use HasFactory;
+    protected $guarded = [];
 
-    protected $guarded = ['id'];
+    public $incrementing = false;
+
+    public $primaryKey = 'id';
 }

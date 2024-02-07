@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Service;
+use Illuminate\Support\Str;
 
 class MasterLayananController extends Controller
 {
@@ -32,9 +33,11 @@ class MasterLayananController extends Controller
      */
     public function create()
     {
+        $uuid = Str::uuid()->toString();
         return view('home.content.master.layanan.create', [
             'title' => 'Trika Klinik | Tambah Layanan',
-            'active' => 'services'
+            'active' => 'services',
+            'uuid' => $uuid,
         ]);  
     }
 
@@ -43,7 +46,19 @@ class MasterLayananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $validatedData = $request->validate([
+            'id' => '',
+            'name' => 'required',
+            'rates' => '',
+            'payment_method' => 'required',
+            'keterangan' => 'nullable'
+        ]);
+
+        Service::create($validatedData);
+
+        return to_route('layanan.index')->with('success', 'Layanan Berhasil Ditambahkan!');
     }
 
     /**

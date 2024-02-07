@@ -8,7 +8,7 @@
 @section('container')
     <form class="card" action="{{ route('layanan.store') }}" method="POST">
 
-
+        <input type="hidden" value="{{ $uuid }}" name="id">
         <div class="card-body">
             @csrf
 
@@ -25,19 +25,38 @@
                 @enderror
             </div>
 
-
             <div class="mb-3">
                 <label class="form-label" for="rates">Harga</label>
-
+                
                 <input class="form-control @error('rates') is-invalid @enderror" id="rates" name="rates"
-                    type="text" value="{{ old('rates') }}">
-
+                type="text" value="{{ old('rates') }}">
+                
                 @error('rates')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="payment_method">Metode Pembayaran</label>
+
+                <select class="form-control" name="payment_method" id="payment_method">
+                    <option value="" selected disabled>Pilih...</option>
+                    <option value="Umum (Karyawan)">Umum (Karyawan)</option>
+                    <option value="Umum (Masyarakat)">Umum (Masyarakat)</option>
+                    <option value="BPJS">BPJS<option>
+                </select>
+                {{-- <input class="form-control @error('payment_method') is-invalid @enderror" id="payment_method" name="payment_method" type="text"
+                    value="{{ old('payment_method') }}"> --}}
+
+                @error('payment_method')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
+
             <div class="mb-3">
                 <label class="form-label" for="keterangan">Keterangan</label>
 
