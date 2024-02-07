@@ -31,7 +31,7 @@ class ServiceController extends Controller
                 foreach($data as $key => $row) {
                     $output .= '
                         <input class="form-check-input d-flex flex-row" type="radio" name="tindakan" id="tindakan_'.$key.'" value="'.$row->name. ' ' .$row->rates.'">
-                        <label class="form-check-label" for="tindakan_'.$key.'">'.$row->name. ' Rp.' .$row->rates.'</label>
+                        <label class="form-check-label" for="tindakan_'.$key.'">'.$row->name. ' Rp.' .$row->rates.'</label> <br>
                         <input type="hidden" name="harga_tindakan" id="harga_tindakan_'.$key.'" value="'.$row->rates.'">
                     ';
                 }
@@ -75,7 +75,7 @@ class ServiceController extends Controller
                 foreach($data as $key => $row) {
                     $output .= '
                         <input class="form-check-input d-flex flex-row" type="checkbox" name="tindakan_lainnya[]" id="tindakan_lainnya[]" value="'.$row->name. ' ' .$row->rates.'">
-                        <label class="form-check-label" for="tindakan_lainnya[]">'.$row->name. ' Rp.' .$row->rates.'</label>
+                        <label class="form-check-label" for="tindakan_lainnya[]">'.$row->name. ' Rp.' .$row->rates.'</label> <br>
                     ';
                 }
             } else {

@@ -90,8 +90,8 @@ class IcdController extends Controller
 
                 foreach($data as $key => $row) {
                     $output .= '
-                        <input class="form-check-input d-flex flex-row" type="radio" name="diagnosa" id="diagnosa_'.$key.'" value="'.$row->icJenisPenyakit.'">
-                        <label class="form-check-label" for="diagnosa_'.$key.'">'.$row->icJenisPenyakit. '/'.'</label>
+                        <input class="form-check-input d-flex flex-row" type="radio" name="diagnosa" id="diagnosa_'.$key.'" value="'.$row->icJenisPenyakit.'"> 
+                        <label class="form-check-label" for="diagnosa_'.$key.'">'.$row->icJenisPenyakit.'</label> <br>
                     ';
                 }
             } else {
@@ -136,8 +136,8 @@ class IcdController extends Controller
 
                 foreach($data as $key => $row) {
                     $output .= '
-                        <input class="form-check-input d-flex flex-row" type="checkbox" name="diagnosa_lainnya[]" id="diagnosa_lainnya[]" value="'.$row->icJenisPenyakit.'">
-                        <label class="form-check-label" for="diagnosa_lainnya[]">'.$row->icJenisPenyakit. '/'.'</label>
+                        <input class="form-check-input d-flex flex-row" type="checkbox" name="diagnosa_lainnya[]" id="diagnosa_lainnya[]" value="'.$row->icJenisPenyakit.'"> 
+                        <label class="form-check-label" for="diagnosa_lainnya[]">'.$row->icJenisPenyakit.'</label> <br>
                     ';
                 }
             } else {
