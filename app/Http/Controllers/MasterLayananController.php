@@ -36,8 +36,8 @@ class MasterLayananController extends Controller
         $uuid = Str::uuid()->toString();
         return view('home.content.master.layanan.create', [
             'title' => 'Trika Klinik | Tambah Layanan',
-            'active' => 'services'
-            'uuid' => 
+            'active' => 'services',
+            'uuid' => $uuid,
         ]);  
     }
 
@@ -47,7 +47,6 @@ class MasterLayananController extends Controller
     public function store(Request $request)
     {
 
-        $request->request->add(['id' => $uuid]);
 
         $validatedData = $request->validate([
             'id' => '',

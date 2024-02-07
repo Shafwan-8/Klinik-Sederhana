@@ -8,7 +8,7 @@
 @section('container')
     <form class="card" action="{{ route('layanan.store') }}" method="POST">
 
-
+        <input type="hidden" value="{{ $uuid }}" name="id">
         <div class="card-body">
             @csrf
 
@@ -56,7 +56,7 @@
                     </div>
                 @enderror
             </div>
-            
+
             <div class="mb-3">
                 <label class="form-label" for="keterangan">Keterangan</label>
 
