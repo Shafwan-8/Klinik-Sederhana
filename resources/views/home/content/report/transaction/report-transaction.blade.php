@@ -50,15 +50,17 @@
                 <th style="text-align:center">Tanggal</th>
                 <th style="text-align:center">Nama Pasien</th>
                 <th style="text-align:center">Layanan</th>
+                <th style="text-align:center">Harga</th>
             </tr>
         </thead>
         <tbody>
         @foreach ($dataTransaksi as $transaksi)
             <tr>
-                <td style="text-align:center">{{ $loop->iteration }}</td>
+                <td style="text-align:center; width:5">{{ $loop->iteration }}</td>
                 <td style="text-align:center">{{ $transaksi->tanggal }}</td>
                 <td style="text-align:center">{{ $transaksi->nama_pasien }}</td>
-                <td style="text-align:center">{{ $transaksi->tindakan }}</td>
+                <td style="text-align:center">{{ $transaksi->nama_layanan }}</td>
+                <td style="text-align:center">{{ $transaksi->harga_layanan }}</td>
             </tr>
         @endforeach
 

@@ -59,6 +59,11 @@
                 <td style="text-align:center">{{ $diagnosa->jumlah }}</td>
             </tr>
         @endforeach
+            <tr>
+                <td colspan="2" style="text-align:center;background: #3498db;color: white;">Total</td>
+
+                <td style="text-align:center;background: #3498db;color: white;  ">{{ array_sum($array) }}</td>
+            </tr>
 
         </tbody>
     </table>

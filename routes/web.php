@@ -11,8 +11,9 @@ use App\Http\Controllers\InspectionsController;
 use App\Http\Controllers\MasterLayananController;
 use App\Http\Controllers\ReportDiagnosaController;
 use App\Http\Controllers\ReportServiceController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ReportTransactionController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\MasterIcdxController;
 use App\Models\Inspection;
 
 /*
@@ -54,15 +55,19 @@ Route::middleware('auth')->group(function () {
     Route::post('/laporan/layanan/view-pdf', [ReportServiceController::class, 'viewPDF'])->name('view-pdf-service');
     Route::post('/laporan/layanan/download-pdf', [ReportServiceController::class, 'downloadPDF'])->name('download-pdf-service');
 
-    Route::get('/laporan/jumlah-transaksi', [TransactionController::class, 'index'])->name('report.transaction');
-    Route::post('/laporan/jumlah-transaksi/view-pdf', [TransactionController::class, 'viewPDF'])->name('view-pdf-transaction');
-    Route::post('/laporan/jumlah-transaksi/download-pdf', [TransactionController::class, 'downloadPDF'])->name('download-pdf-transaction');
+    Route::get('/laporan/jumlah-transaksi', [ReportTransactionController::class, 'index'])->name('report.transaction');
+    Route::post('/laporan/jumlah-transaksi/view-pdf', [ReportTransactionController::class, 'viewPDF'])->name('view-pdf-transaction');
+    Route::post('/laporan/jumlah-transaksi/download-pdf', [ReportTransactionController::class, 'downloadPDF'])->name('download-pdf-transaction');
 
-    Route::get('/icd', [IcdController::class, 'action'])->name('icd');
-    Route::get('/icd/lainnya', [IcdController::class, 'actionLainnya'])->name('icd.lainnya');
+    Route::get('/icd', [IcdController::class, 'action'])->name('icd.cari');
     Route::get('/service', [ServiceController::class, 'action'])->name('service');
+
     Route::get('/service/lainnya', [ServiceController::class, 'actionLainnya'])->name('service.lainnya');
 
     Route::resource('/layanan', MasterLayananController::class);
+
+
+    Route::resource('/master/icdx', MasterIcdxController::class);
+
 });
 

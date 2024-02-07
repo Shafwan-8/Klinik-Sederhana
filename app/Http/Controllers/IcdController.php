@@ -110,6 +110,7 @@ class IcdController extends Controller
 
         }
     }
+
     public function actionLainnya(Request $request)
     {
         $data = Icd::first();

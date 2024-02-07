@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Icd extends Model
 {
-    protected $table = 'icdx';
-
     use HasFactory;
 
-    protected $guarded = ['icId'];
+    protected $table = 'icdx';
+    protected $primaryKey = 'icId';
+    public $incrementing = false;
 
+    protected $guarded = [''];
+
+    public $timestamps = false;
 }
