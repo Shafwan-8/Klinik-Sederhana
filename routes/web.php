@@ -8,6 +8,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IcdController;
 use App\Http\Controllers\InspectionsController;
+use App\Http\Controllers\MasterLayananController;
 use App\Http\Controllers\ReportDiagnosaController;
 use App\Http\Controllers\ReportServiceController;
 use App\Http\Controllers\ReportTransactionController;
@@ -61,6 +62,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/icd', [IcdController::class, 'action'])->name('icd.cari');
     Route::get('/service', [ServiceController::class, 'action'])->name('service');
 
+    Route::get('/service/lainnya', [ServiceController::class, 'actionLainnya'])->name('service.lainnya');
+
+    Route::resource('/layanan', MasterLayananController::class);
+
+
     Route::resource('/master/icdx', MasterIcdxController::class);
+
 });
 

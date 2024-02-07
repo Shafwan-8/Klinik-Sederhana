@@ -94,7 +94,7 @@
                                         </a>
                                     </li>
                                     <li class="{{ $active === 'services' ? 'active' : '' }}">
-                                        <a class="sidenav-item-link" href="{{ route('report.service') }}">
+                                        <a class="sidenav-item-link" href="{{ route('layanan.index') }}">
                                             <span class="nav-text mx-2">Layanan</span>
                                         </a>
                                     </li>
