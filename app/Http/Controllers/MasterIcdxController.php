@@ -12,9 +12,11 @@ class MasterIcdxController extends Controller
      */
     public function index()
     {
+        $title = 'Trika Klinik | Master ICDX';
+        $active = 'icdx';
         $icd = Icd::orderBy('icId', 'desc')->paginate(10)->withQueryString();
-        $icdx = $icd->toArray();
-        return view('home.content.master.icdx.index', compact('icdx'));
+        $dataIcdx = $icd;
+        return view('home.content.master.icdx.index', compact('dataIcdx','title','active'));
     }
 
     /**
@@ -22,7 +24,9 @@ class MasterIcdxController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Trika Klinik | Master ICDX';
+        $active = 'icdx';
+        return view('home.content.master.icdx.create', compact('title','active'));
     }
 
     /**
@@ -30,7 +34,18 @@ class MasterIcdxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $icdxData = $request->validate([
+            'icId' => 'required|unique:icdx',
+            "icJenisPenyakit" => 'nullable',
+            "icNamaLokal" => 'nullable',
+            "icDTD" => 'nullable',
+            "icSebabSakit" => 'nullable',
+        ]);
+
+
+        Icd::create($icdxData);
+    
+        return to_route('icdx.index')->with('success', 'Data ICDX berhasil disimpan.');
     }
 
     /**
@@ -44,24 +59,48 @@ class MasterIcdxController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $icId)
     {
-        //
+        $icdx = Icd::where('icId', $icId)->firstOrFail();
+        $title = 'Sunting ICDX';
+        $active = 'icdx';
+        return view('home.content.master.icdx.edit', compact('title', 'icdx', 'active'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $icId)
     {
-        //
+        $icdx = Icd::where('icId', $icId)->firstOrFail();
+    
+        $icdxData = $request->validate([
+            "icJenisPenyakit" => 'nullable',
+            "icNamaLokal" => 'nullable',
+            "icDTD" => 'nullable',
+            "icSebabSakit" => 'nullable',
+        ]);
+
+        
+        $icdx->update([
+            "icJenisPenyakit" => $request->icJenisPenyakit,
+            "icNamaLokal" => $request->icNamaLokal,
+            "icDTD" => $request->icDTD,
+            "icSebabSakit" => $request->icSebabSakit,
+        ]);
+        
+        return to_route('icdx.index')->with('success', 'Data ICDX berhasil disunting');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $icId)
     {
-        //
+        $icdx = Icd::findOrFail($icId);
+
+        $icdx->delete();
+
+        return redirect()->back()->with('success', 'Data pasien berhasil dihapus');
     }
 }

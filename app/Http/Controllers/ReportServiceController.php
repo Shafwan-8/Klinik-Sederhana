@@ -22,26 +22,39 @@ class ReportServiceController extends Controller
         $title = 'Trika Klinik | Laporan Layanan';
         $active = 'layanan';
 
+        // Menentukan pola ekspresi reguler
+        $pattern = '/^(.*?)\s+(\d+)$/';
+
         $dataLayanan = DB::table('inspections')
         ->selectRaw('
-            SUBSTRING_INDEX(tindakan, " ", 1) AS nama_layanan,    
-            SUBSTRING_INDEX(tindakan, " ", -1) AS harga_layanan, 
-            COUNT(tindakan) AS jumlah_layanan, 
+            tindakan as layanan_harga,
+            COUNT(tindakan) AS jumlah_layanan,
             SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
-        ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
-        ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
-        ->groupBy('nama_layanan', 'harga_layanan')
+        ->whereDate('created_at', '>=', $start_date)
+        ->whereDate('created_at', '<=', $end_date)
+        ->groupBy('layanan_harga')
         ->orderBy('total_harga', 'desc')
         ->get()
-        ->map(function ($data) {
-            // Konversi harga_layanan ke tipe data string tanpa desimal dan nol di belakangnya
-            $data->harga_layanan = 'Rp. ' . number_format($data->harga_layanan, 0, ',', '.');
-            $data->total_harga = 'Rp. ' . number_format($data->total_harga, 0, ',', '.');
+        ->map(function ($data) use ($pattern) {
+            // Melakukan pencocokan pola ekspresi reguler
+            if (preg_match($pattern, $data->layanan_harga, $matches)) {
+                // Membuat nama_layanan berdasarkan hasil pencocokan
+                $nama_layanan = $matches[1];
+
+                // Mengubah nilai nama_layanan
+                $data->nama_layanan = $nama_layanan;
+
+                // Mengubah format harga_layanan
+                $data->harga_layanan = 'Rp. ' . number_format($matches[2], 0, ',', '.');
+
+                // Mengubah format total_harga seperti harga_layanan
+                $data->total_harga = 'Rp. ' . number_format($data->total_harga, 0, ',', '.');
+            }
 
             return $data;
         })
         ->toArray();
-
+    
 
 
         return view('home.content.report.service.index', compact('dataLayanan','title','active','start_date'));

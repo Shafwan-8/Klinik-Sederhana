@@ -18,7 +18,7 @@ return new class extends Migration
                 $table->string('icNamaLokal', 255)->nullable();
                 $table->string('icDTD', 100)->nullable();
                 $table->string('icSebabSakit', 255)->nullable();
-                $table->string('icKelompok', 20);
+                $table->string('icKelompok', 20)->nullable();
                 $table->enum('icAktif', ['0', '1'])->default('1');
                 $table->string('uCreate', 100)->nullable();
                 $table->string('uUpdate', 100)->nullable();
