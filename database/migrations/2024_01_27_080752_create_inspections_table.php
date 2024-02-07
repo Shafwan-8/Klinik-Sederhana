@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('diagnosa')->nullable();
             $table->string('diagnosa_lainnya');
             $table->string('tindakan');
+            $table->string('harga_tindakan');
             $table->string('tindakan_lainnya');
             $table->timestamps();
         });
