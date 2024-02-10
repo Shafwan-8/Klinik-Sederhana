@@ -16,4 +16,11 @@ class Service extends Model
     public $incrementing = false;
 
     public $primaryKey = 'id';
+
+    public const methodPayment = [
+        'Umum (Karyawan)' => 'Umum (Karyawan)',
+        'Umum (Masyarakat)' => 'Umum (Masyarakat)',
+        'Umum' => 'Umum',
+        'BPJS' => 'BPJS',
+    ];
 }
