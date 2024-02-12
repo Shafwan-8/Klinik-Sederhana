@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Inspection;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
 class ReportServiceController extends Controller
@@ -30,8 +30,8 @@ class ReportServiceController extends Controller
             tindakan as layanan_harga,
             COUNT(tindakan) AS jumlah_layanan,
             SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
-        ->whereDate('created_at', '>=', $start_date)
-        ->whereDate('created_at', '<=', $end_date)
+        ->whereDate('created_at', '>=',  date('Y-m-d', strtotime($start_date)))
+        ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
         ->groupBy('layanan_harga')
         ->orderBy('total_harga', 'desc')
         ->get()
@@ -54,7 +54,6 @@ class ReportServiceController extends Controller
             return $data;
         })
         ->toArray();
-    
 
 
         return view('home.content.report.service.index', compact('dataLayanan','title','active','start_date'));
