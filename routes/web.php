@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/patient', PatientController::class);
     
     Route::resource('/pemeriksaan', InspectionsController::class);
+    Route::get('/pemeriksaan/{pemeriksaan}/detail', [InspectionsController::class, 'detail'])->name('pemeriksaan.detail');
 
     Route::get('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'create'])->name('pemeriksaan.create');
     Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');

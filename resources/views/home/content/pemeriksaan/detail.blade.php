@@ -1,7 +1,7 @@
 @extends('home.dashboard.layouts.index')
 
 @section('title')
-    <h3>Edit Riwayat: <u>{{ $patient->name }}</u></h3>
+    <h3>Detail Riwayat: <u>{{ $patient->name }}</u></h3>
 @endsection
 
 
@@ -77,15 +77,12 @@
 @endsection
 
 @section('container2')
-    <form action="{{ route('pemeriksaan.update', ['pemeriksaan' => $inspection->id]) }}" method="POST">
-        @method('PUT')
         <div class="card col-md-12 mt-3 mb-3">
-        <div class="card-header border-bottom px-3 py-2">
-            <h5>Fisik</h5>
-        </div>
+            <div class="card-header border-bottom px-3 py-2">
+                <h5>Fisik</h5>
+            </div>
 
         <div class="card-body text-dark">
-            @csrf
             <div class="row">
             
             <div class="col-md-6">
@@ -101,6 +98,7 @@
                         name="td"
                         type="number"
                         value="{{ $inspection->td }}"
+                        readonly
                     >
             
                     @error('td')
@@ -123,6 +121,7 @@
                         name="suhu"
                         type="number"
                         value="{{ $inspection->suhu }}"
+                        readonly
                     >
 
                     @error('suhu')
@@ -146,6 +145,7 @@
                         name="nadi"
                         type="number"
                         value="{{ $inspection->nadi }}"
+                        readonly
                     >
 
                     @error('nadi')
@@ -169,6 +169,7 @@
                         name="so2"
                         type="number"
                         value="{{ $inspection->so2 }}"
+                        readonly
                     >
 
                     @error('so2')
@@ -192,6 +193,7 @@
                         name="pernafasan"
                         type="number"
                         value="{{ $inspection->pernafasan }}"
+                        readonly
                     >
 
                     @error('pernafasan')
@@ -215,6 +217,7 @@
                         name="deha"
                         type="number"
                         value="{{ $inspection->deha }}"
+                        readonly
                     >
 
                     @error('deha')
@@ -238,6 +241,7 @@
                         name="tb"
                         type="number"
                         value="{{ $inspection->tb }}"
+                        readonly
                     >
 
                     @error('tb')
@@ -261,6 +265,7 @@
                         name="bb"
                         type="number"
                         value="{{ $inspection->bb }}"
+                        readonly
                     >
 
                     @error('bb')
@@ -289,11 +294,14 @@
                         for="subjektif"
                     >Subjective (Subjektif)</label>
             
-                    <textarea
-                        class="form-control @error('subjektif') is-invalid @enderror"
+                    <input
+                        type="text"
+                        class="form-control"
                         id="subjektif"
                         name="subjektif"
-                    >{{ $inspection->subjektif }}</textarea>
+                        value="{{ $inspection->subjektif }}"
+                        readonly
+                    >
             
                     @error('subjektif')
                         <div class="invalid-feedback">
@@ -309,11 +317,14 @@
                         for="objektif"
                     >Objective (Objektif)</label>
 
-                    <textarea
-                        class="form-control @error('objektif') is-invalid @enderror"
+                    <input
+                        type="text"
+                        class="form-control"
                         id="objektif"
                         name="objektif"
-                    >{{ $inspection->objektif }}</textarea>
+                        value="{{ $inspection->objektif }}"
+                        readonly
+                    >
 
                     @error('objektif')
                         <div class="invalid-feedback">
@@ -330,12 +341,14 @@
                         for="assesment"
                     >Assessment (Penilaian)</label>
 
-                    <textarea
-                        class="form-control @error('assesment') is-invalid @enderror"
+                    <input
+                        type="text"
+                        class="form-control"
                         id="assesment"
                         name="assesment"
-                    >{{ $inspection->assesment }}</textarea>
-
+                        value="{{ $inspection->assesment }}"
+                        readonly
+                    >
                     @error('assesment')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -351,17 +364,15 @@
                         for="plan"
                     >Plan (Perencanaan)</label>
 
-                    <textarea
-                        class="form-control @error('plan') is-invalid @enderror"
+                    <input
+                        type="text"
+                        class="form-control"
                         id="plan"
                         name="plan"
-                    >{{ $inspection->plan }}</textarea>
+                        value="{{ $inspection->plan }}"
+                        readonly
+                    >
 
-                    @error('plan')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
                 </div>
             </div>
         </div>
@@ -380,12 +391,9 @@
                         <label class="form-label" for="diagnosa">Diagnosa utama</label>
 
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="search" id="search" placeholder="Nama Diagnosa...">
+                            <input type="text" class="form-control" name="search" id="search" placeholder="Nama Diagnosa..." value="{{ $inspection->diagnosa }}" readonly>
                         </div>
 
-                        <div class="form-check" name="list" id="list">
-
-                        </div>
                     </div>
                 </div>
 
@@ -393,12 +401,14 @@
                     <div class="mb-3">
                         <label class="form-label" for="diagnosa_lainnya">Diagnosa lainnya...</label>
 
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="searchIcdLainnya" id="searchIcdLainnya" placeholder="...">
-                        </div>
-
-                        <div class="form-check" name="listIcdLainnya" id="listIcdLainnya">
-
+                        <div class="card" style="width: 18rem; background-color: rgb(233,236,239)">
+                            <div class="card-body px-3 py-3">
+                                <ul>
+                                    @foreach ($diagnosa_lainnya as $row )
+                                        <li><b>-</b> {{ $row }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -418,13 +428,18 @@
                     <div class="mb-3">
                         <label class="form-label" for="tindakan">Layanan / Tindakan</label>
 
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="searchLayanan" id="searchLayanan"
-                                placeholder="Nama Layanan..." aria-label="Nama Layanan...">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="searchLayanan" id="searchLayanan" value="{{ $inspection->tindakan }}" readonly> 
                         </div>
-
-                        <div class="form-check" name="listLayanan" id="listLayanan">
-                            
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label for="harga" class="px-1">Harga:</label>
+                                </div>
+                                <div class="col-auto p-0">
+                                    <input name="harga_tindakan" class="form-control form-control-sm w-50" value="{{ $inspection->harga_tindakan }}" readonly/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -432,12 +447,14 @@
                     <div class="mb-3">
                         <label class="form-label" for="tindakan_lainnya">Layanan lainnya...</label>
 
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="searchLayananLainnya" id="searchLayananLainnya" placeholder="...">
-                        </div>
-
-                        <div class="form-check" name="listLayananLainnya" id="listLayananLainnya">
-
+                        <div class="card" style="width: 18rem; background-color: rgb(233,236,239)">
+                            <div class="card-body px-3 py-3">
+                                <ul>
+                                    @foreach ($layanan_lainnya as $row )
+                                        <li><b>-</b> {{ $row }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -446,7 +463,6 @@
     </div>
     </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('pemeriksaan.show', $patient->id ) }}" class="btn btn-secondary">Kembali</a>
     </div>
     <script src="{{ asset('js/jquery.js') }}"></script>
@@ -560,5 +576,4 @@
                 });
             });
         </script>
-    </form>
 @endsection
