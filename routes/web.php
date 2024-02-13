@@ -59,8 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/laporan/jumlah-transaksi/view-pdf', [ReportTransactionController::class, 'viewPDF'])->name('view-pdf-transaction');
     Route::post('/laporan/jumlah-transaksi/download-pdf', [ReportTransactionController::class, 'downloadPDF'])->name('download-pdf-transaction');
 
-    Route::get('/icd', [IcdController::class, 'action'])->name('icd.cari');
+    // Route liveSearch
+    Route::get('/icd', [IcdController::class, 'action'])->name('icd');
+    Route::get('/icd/lainnya', [IcdController::class, 'actionLainnya'])->name('icd.lainnya');
     Route::get('/service', [ServiceController::class, 'action'])->name('service');
+    Route::get('/service/lainnya', [ServiceController::class, 'actionLainnya'])->name('service.lainnya');
 
     Route::get('/service/lainnya', [ServiceController::class, 'actionLainnya'])->name('service.lainnya');
 

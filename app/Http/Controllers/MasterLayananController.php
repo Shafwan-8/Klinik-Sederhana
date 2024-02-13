@@ -33,11 +33,14 @@ class MasterLayananController extends Controller
      */
     public function create()
     {
+        $payment = Service::methodPayment;
+
         $uuid = Str::uuid()->toString();
         return view('home.content.master.layanan.create', [
             'title' => 'Trika Klinik | Tambah Layanan',
             'active' => 'services',
             'uuid' => $uuid,
+            'payment' => $payment,
         ]);  
     }
 
@@ -46,7 +49,6 @@ class MasterLayananController extends Controller
      */
     public function store(Request $request)
     {
-
 
         $validatedData = $request->validate([
             'id' => '',
@@ -74,7 +76,15 @@ class MasterLayananController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $services = Service::find($id);
+        $payment = Service::methodPayment;
+
+        return view('home.content.master.layanan.edit', [
+            'service' => $services,
+            'payment' => $payment,
+            'title' => 'Trika Klink | Edit',
+            'active' => 'service'
+        ]);
     }
 
     /**
@@ -82,7 +92,18 @@ class MasterLayananController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'id' => '',
+            'name' => 'required',
+            'rates' => '',
+            'payment_method' => 'required',
+            'keterangan' => 'nullable'
+        ]);
+
+        $layanan = Service::find($id);
+        $layanan->update($validatedData);
+
+        return to_route('layanan.index')->with('success', 'Layanan Berhasil Diedit!');
     }
 
     /**
@@ -90,6 +111,9 @@ class MasterLayananController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $layanan = Service::find($id);
+        $layanan->delete();
+
+        return redirect()->back()->with('success', 'Layanan Berhasil Dihapus');
     }
 }

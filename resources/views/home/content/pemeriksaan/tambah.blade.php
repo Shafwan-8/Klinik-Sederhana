@@ -302,10 +302,12 @@
                             <label class="form-label" for="diagnosa_lainnya">Diagnosa lainnya...</label>
 
                             <div class="input-group mb-3">
-                                {{-- <input type="text" class="form-control" name="search" id="search" placeholder="..."> --}}
-                                <textarea class="form-control" name="diagnosa_lainnya" id="diagnosa_lainnya" cols="10" rows="1"></textarea>
+                                <input type="text" class="form-control" name="searchIcdLainnya" id="searchIcdLainnya" placeholder="...">
                             </div>
 
+                            <div class="form-check" name="listIcdLainnya" id="listIcdLainnya">
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -338,8 +340,11 @@
                             <label class="form-label" for="tindakan_lainnya">Layanan lainnya...</label>
 
                             <div class="input-group mb-3">
-                                {{-- <input type="text" class="form-control" name="search" id="search" placeholder="..."> --}}
-                                <textarea class="form-control" name="tindakan_lainnya" id="tindakan_lainnya" cols="10" rows="1"></textarea>
+                                <input type="text" class="form-control" name="searchLayananLainnya" id="searchLayananLainnya" placeholder="...">
+                            </div>
+
+                            <div class="form-check" name="listLayananLainnya" id="listLayananLainnya">
+
                             </div>
                         </div>
                     </div>
@@ -361,7 +366,7 @@
                     // alert('test' + '' + query);
 
                     $.ajax({
-                        url: "{{ route('icd.cari') }}",
+                        url: "{{ route('icd') }}",
                         method: 'GET',
                         data: {
                             query: query
@@ -377,6 +382,30 @@
                 }
 
                 $(document).on('keyup', '#search', function() {
+                    let query = $(this).val();
+                    fetch_icdx_data(query);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                fetch_icdx_data();
+                function fetch_icdx_data(query = '') {
+                    // alert('test' + '' + query);
+                    $.ajax({
+                        url: "{{ route('icd.lainnya') }}",
+                        method: 'GET',
+                        data: {
+                            query: query
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            console.log(data);
+                            $('#listIcdLainnya').html(data.table_data);
+                        }
+                    })
+                }
+                $(document).on('keyup', '#searchIcdLainnya', function() {
                     let query = $(this).val();
                     fetch_icdx_data(query);
                 });
@@ -408,6 +437,30 @@
                 }
 
                 $(document).on('keyup', '#searchLayanan', function() {
+                    let query = $(this).val();
+                    fetch_service_data(query);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                fetch_service_data();
+                function fetch_service_data(query = '') {
+                    // alert('test' + '' + query);
+                    $.ajax({
+                        url: "{{ route('service.lainnya') }}",
+                        method: 'GET',
+                        data: {
+                            query: query
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            console.log(data);
+                            $('#listLayananLainnya').html(data.table_data);
+                        }
+                    })
+                }
+                $(document).on('keyup', '#searchLayananLainnya', function() {
                     let query = $(this).val();
                     fetch_service_data(query);
                 });

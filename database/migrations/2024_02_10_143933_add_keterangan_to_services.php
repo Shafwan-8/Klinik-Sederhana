@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->uuid('id')->change();
+            $table->string('keterangan', 255)->after('is_active')->nullable();
         });
     }
 

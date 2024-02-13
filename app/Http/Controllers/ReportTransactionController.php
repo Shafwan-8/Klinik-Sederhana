@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
 class ReportTransactionController extends Controller
@@ -30,8 +30,8 @@ class ReportTransactionController extends Controller
             DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
             patients.name as nama_pasien, 
             inspections.tindakan as layanan_harga') 
-        ->whereDate('inspections.created_at', '>=', $start_date)
-        ->whereDate('inspections.created_at', '<=', $end_date)
+        ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
+        ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
         ->orderBy('tanggal', 'desc')
         ->get()
         ->map(function ($data) use ($pattern) {
@@ -71,8 +71,8 @@ class ReportTransactionController extends Controller
             DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
             patients.name as nama_pasien, 
             inspections.tindakan as layanan_harga') 
-        ->whereDate('inspections.created_at', '>=', $start_date)
-        ->whereDate('inspections.created_at', '<=', $end_date)
+        ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
+        ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
         ->orderBy('tanggal', 'desc')
         ->get()
         ->map(function ($data) use ($pattern) {
@@ -121,8 +121,8 @@ class ReportTransactionController extends Controller
             DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
             patients.name as nama_pasien, 
             inspections.tindakan as layanan_harga') 
-        ->whereDate('inspections.created_at', '>=', $start_date)
-        ->whereDate('inspections.created_at', '<=', $end_date)
+        ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
+        ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
         ->orderBy('tanggal', 'desc')
         ->get()
         ->map(function ($data) use ($pattern) {

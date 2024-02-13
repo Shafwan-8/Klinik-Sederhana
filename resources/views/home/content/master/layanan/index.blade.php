@@ -1,7 +1,7 @@
 @extends('home.dashboard.layouts.index')
 
 @section('title')
-    <h3>Daftar Pengguna :</h3>
+    <h3>Daftar Layanan :</h3>
 @endsection
 
 @section('container')
@@ -13,7 +13,7 @@
                 <div class="col-6 p-0 mt-3">
                     <form action="{{ route('layanan.index') }}">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Nama Layanan...">
+                            <input type="text" class="form-control" name="search" placeholder="Nama Layanan..." value="{{ request('search') }}" autocomplete="off">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Cari</button>
                             </div>
@@ -47,7 +47,8 @@
                             <td>
                                 <div class="d-flex justify-content-around">
 
-                                    <a class="btn btn-warning btn-sm text-white" href=""><svg
+                                    <a class="btn btn-warning btn-sm text-white" href="{{ route('layanan.edit', $service->id) }}">
+                                        <svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                             <path
@@ -56,17 +57,18 @@
                                     </a>
 
                                     <a class="btn btn-danger btn-sm text-white"
-                                        onclick="if(confirm('Apakah anda yakin ingin menghapus pengguna ini?')) {
+                                        onclick="if(confirm('Apakah anda yakin ingin menghapus layanan ini?')) {
                                                 event.preventDefault();
-                                                document.getElementById('hapus-user').submit(); }"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                document.getElementById('hapus-user').submit(); }">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                             <path
                                                 d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
-                                        </svg>
+                                            </svg>
                                     </a>
 
-                                    <form id="hapus-user" action="" method="post">
+                                    <form id="hapus-user" action="{{ route('layanan.destroy', $service->id) }}" method="post">
                                         @csrf
                                         @method('delete')
 

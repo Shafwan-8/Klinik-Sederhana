@@ -100,27 +100,35 @@ class InspectionsController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $request->request->add(['patient_id' => $id, 'no_registrasi' => $request->no_registrasi]);
-        $validatedData = $request->validate([
-            'td' => 'required',
-            'suhu' => '',
-            'nadi' => '',
-            'so2' => '',
-            'pernafasan' => '',
-            'detail' => '',
-            'tb' => '',
-            'bb' => '',
-            'subjektif' => '',
-            'objektif' => '',
-            'assesment' => '',
-            'plan' => '',
-            'diagnosa' => 'required',
-            'diagnosa_lainnya' => '',
-            'tindakan' => '',
-            'tindakan_lainnya' => '',
-            'patient_id' => '',
-            'no_registrasi' => 'unique:inspections,no_registrasi',
-        ]);
+        $data_lainnya = ($request->tindakan_lainnya);
+        $diagnosa_lainnya = ($request->diagnosa_lainnya);
+        // foreach ($request->tindakan_lainnya as $key => $value) {
+            // $data_lainnya[] = $value;
+
+            $request->request->add(['patient_id' => $id, 'no_registrasi' => $request->no_registrasi, 'tindakan_lainnya' => json_encode($data_lainnya), 'diagnosa_lainnya' => json_encode($diagnosa_lainnya)]);
+            $validatedData = $request->validate([
+                'td' => 'required',
+                'suhu' => '',
+                'nadi' => '',
+                'so2' => '',
+                'pernafasan' => '',
+                'detail' => '',
+                'tb' => '',
+                'bb' => '',
+                'subjektif' => '',
+                'objektif' => '',
+                'assesment' => '',
+                'plan' => '',
+                'diagnosa' => 'required',
+                'diagnosa_lainnya' => '',
+                'tindakan' => '',
+                'harga_tindakan' => '',
+                'tindakan_lainnya' => '',
+                'patient_id' => '',
+                'no_registrasi' => '',
+            ]);
+
+        // }
 
         Inspection::create($validatedData);
 
