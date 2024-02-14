@@ -25,8 +25,8 @@ class ReportDiagnosaController extends Controller
 
         $dataDiagnosa = DB::table('inspections')
             ->selectRaw('diagnosa, count(diagnosa) as jumlah')
-            ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
-            ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+            ->whereDate('created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+            ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
             ->groupBy('diagnosa')
             ->orderBy('jumlah', 'desc')
             ->get()
@@ -48,8 +48,8 @@ class ReportDiagnosaController extends Controller
 
         $dataDiagnosa = DB::table('inspections')
             ->selectRaw('diagnosa, count(diagnosa) as jumlah')
-            ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
-            ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+            ->whereDate('created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+            ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
             ->groupBy('diagnosa')
             ->orderBy('jumlah', 'desc')
             ->get();
@@ -76,8 +76,8 @@ class ReportDiagnosaController extends Controller
 
         $dataDiagnosa = DB::table('inspections')
             ->selectRaw('diagnosa, count(diagnosa) as jumlah')
-            ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
-            ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+            ->whereDate('created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+            ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
             ->groupBy('diagnosa')
             ->orderBy('jumlah', 'desc')
             ->get()

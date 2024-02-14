@@ -30,8 +30,8 @@ class ReportServiceController extends Controller
             tindakan as layanan_harga,
             COUNT(tindakan) AS jumlah_layanan,
             SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
-        ->whereDate('created_at', '>=',  date('Y-m-d', strtotime($start_date)))
-        ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+        ->whereDate('created_at', '>=',  date('Y-m-d H:i:s', strtotime($start_date)))
+        ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
         ->groupBy('layanan_harga')
         ->orderBy('total_harga', 'desc')
         ->get()
@@ -75,8 +75,8 @@ class ReportServiceController extends Controller
             SUBSTRING_INDEX(tindakan, " ", -1) AS harga_layanan, 
             COUNT(tindakan) AS jumlah_layanan, 
             SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
-        ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
-        ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+        ->whereDate('created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+        ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
         ->groupBy('nama_layanan', 'harga_layanan')
         ->orderBy('total_harga', 'desc')
         ->get()
@@ -116,8 +116,8 @@ class ReportServiceController extends Controller
             SUBSTRING_INDEX(tindakan, " ", -1) AS harga_layanan, 
             COUNT(tindakan) AS jumlah_layanan, 
             SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
-        ->whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
-        ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+        ->whereDate('created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+        ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
         ->groupBy('nama_layanan', 'harga_layanan')
         ->orderBy('total_harga', 'desc')
         ->get()

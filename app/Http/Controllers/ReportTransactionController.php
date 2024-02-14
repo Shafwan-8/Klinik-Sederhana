@@ -27,11 +27,11 @@ class ReportTransactionController extends Controller
         $dataTransaksi = DB::table('inspections')
         ->join('patients', 'inspections.patient_id', '=', 'patients.id')
         ->selectRaw('
-            DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
+            DATE_FORMAT(inspections.created_at, "%d %M %Y %H:%i:%s") as tanggal,
             patients.name as nama_pasien, 
             inspections.tindakan as layanan_harga') 
-        ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
-        ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
+        ->whereDate('inspections.created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+        ->whereDate('inspections.created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
         ->orderBy('tanggal', 'desc')
         ->get()
         ->map(function ($data) use ($pattern) {
@@ -68,11 +68,11 @@ class ReportTransactionController extends Controller
         $dataTransaksi = DB::table('inspections')
         ->join('patients', 'inspections.patient_id', '=', 'patients.id')
         ->selectRaw('
-            DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
+            DATE_FORMAT(inspections.created_at, "%d %M %Y %H:%i:%s") as tanggal,
             patients.name as nama_pasien, 
             inspections.tindakan as layanan_harga') 
-        ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
-        ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
+        ->whereDate('inspections.created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+        ->whereDate('inspections.created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
         ->orderBy('tanggal', 'desc')
         ->get()
         ->map(function ($data) use ($pattern) {
@@ -118,11 +118,11 @@ class ReportTransactionController extends Controller
         $dataTransaksi = DB::table('inspections')
         ->join('patients', 'inspections.patient_id', '=', 'patients.id')
         ->selectRaw('
-            DATE_FORMAT(inspections.created_at, "%d-%m-%Y") as tanggal,
+            DATE_FORMAT(inspections.created_at, "%d %M %Y %H:%i:%s") as tanggal,
             patients.name as nama_pasien, 
             inspections.tindakan as layanan_harga') 
-        ->whereDate('inspections.created_at', '>=', date('Y-m-d', strtotime($start_date)))
-        ->whereDate('inspections.created_at', '<=', date('Y-m-d', strtotime($end_date)))
+        ->whereDate('inspections.created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+        ->whereDate('inspections.created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
         ->orderBy('tanggal', 'desc')
         ->get()
         ->map(function ($data) use ($pattern) {
@@ -141,6 +141,7 @@ class ReportTransactionController extends Controller
             return $data;
         })
         ->toArray();
+ 
 
         $pdf = PDF::loadView('home.content.report.transaction.report-transaction',  compact('dataTransaksi','formatted_start_date','formatted_end_date'))
             ->setPaper('a4','portrait')

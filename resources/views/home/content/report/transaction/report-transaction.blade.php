@@ -39,7 +39,7 @@
         </div>
         <div style="width: 50%; float: left; margin-bottom: 40px;">
             <span style="font-size: 35px; font-weight: bolder">Data Jumlah Transaksi Pasien</span> <br>
-            <span> {{ $formatted_start_date }} / {{ $formatted_end_date }}</span>
+            <span> {{ $formatted_start_date }} s/d {{ $formatted_end_date }}</span>
         </div>
     </div>
 
