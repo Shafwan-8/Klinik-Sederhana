@@ -12,6 +12,7 @@ class ReportServiceController extends Controller
 {
     public function index(Request $request)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $start_date = $request->start_date;
         $end_date = $request->end_date;
 
@@ -56,7 +57,7 @@ class ReportServiceController extends Controller
         ->toArray();
 
 
-        return view('home.content.report.service.index', compact('dataLayanan','title','active','start_date'));
+        return view('home.content.report.service.index', compact('dataLayanan','title','active','start_date', 'idDokter'));
 
         
     }

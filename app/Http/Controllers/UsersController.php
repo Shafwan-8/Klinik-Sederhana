@@ -12,10 +12,12 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $user = User::latest()->get();
         return view('home.content.pengguna.pengguna', [
             'title' => 'Trika Klinik | Daftar Pengguna',
             'users' => $user,
+            'idDokter' => $idDokter,
             'active' => 'pengguna'
         ]);
 
@@ -26,11 +28,13 @@ class UsersController extends Controller
      */
     public function create()
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $roles = User::ROLES;
         
         return view('home.content.pengguna.tambah', [
             'title' => 'Trika Klinik | Tambah Pengguna',
             'roles' => $roles,
+            'idDokter' => $idDokter,
             'active' => 'pengguna'
         ]);
         
@@ -72,12 +76,14 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $user = User::find($id);
         $roles = User::ROLES;
 
         return view('home.content.pengguna.edit', [
             'title' => 'Trika Klinik | Edit Pengguna',
             'user' => $user,
+            'idDokter' => $idDokter,
             'roles' => $roles,
             'active' => 'pengguna'
         ] );

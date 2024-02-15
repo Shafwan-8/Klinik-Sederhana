@@ -65,10 +65,15 @@
                   <small class="pt-1">{{ auth()->user()->email }}</small>
                 </div>
               </li>
+              <li>
+                <a href="/dokter/{{ $idDokter }}">
+                  <i class="mdi mdi-account"></i> My Profile
+                </a>
+              </li>
               <li class="dropdown-footer">
                 <form action="/logout" method="POST">
                     @csrf
-                    <button type="submit" class="nav-link d-flex align-items-center gap-2">
+                    <button type="submit" class="nav-link d-flex align-items-center gap-2 w-100">
                       
                       <i class="mdi mdi-logout"></i>
                       

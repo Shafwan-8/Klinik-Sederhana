@@ -13,6 +13,7 @@ class MasterLayananController extends Controller
      */
     public function index(Request $request)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $query = $request->search;
         if ($query != null){
             $services = Service::where('name', 'like', '%' . $query . '%')
@@ -24,6 +25,7 @@ class MasterLayananController extends Controller
         return view('home.content.master.layanan.index', [
             'title' => 'Trika Klinik | Daftar Layanan',
             'services' => $services,
+            'idDokter' => $idDokter,
             'active' => 'services'
         ]);
     }
@@ -33,6 +35,7 @@ class MasterLayananController extends Controller
      */
     public function create()
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $payment = Service::methodPayment;
 
         $uuid = Str::uuid()->toString();
@@ -40,6 +43,7 @@ class MasterLayananController extends Controller
             'title' => 'Trika Klinik | Tambah Layanan',
             'active' => 'services',
             'uuid' => $uuid,
+            'idDokter' => $idDokter,
             'payment' => $payment,
         ]);  
     }
@@ -76,12 +80,14 @@ class MasterLayananController extends Controller
      */
     public function edit(string $id)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $services = Service::find($id);
         $payment = Service::methodPayment;
 
         return view('home.content.master.layanan.edit', [
             'service' => $services,
             'payment' => $payment,
+            'idDokter' => $idDokter,
             'title' => 'Trika Klink | Edit',
             'active' => 'service'
         ]);

@@ -16,7 +16,8 @@ class InspectionsController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
+        $idDokter = $this->getIdDokterYangLogin();
         if(auth()->user()->dokter->first() && auth()->user()->role == 'dokter') {   // dokter yang lagi login saja bisa akses
             $dokter = auth()->user()->dokter->first();
             $inisial = $dokter->inisial;
@@ -28,6 +29,7 @@ class InspectionsController extends Controller
         return view('home.content.pemeriksaan.index', [
             'title' => 'Trika Klinik | Daftar Pasien',
             'patients' => $patients,
+            'idDokter' => $idDokter,
             'active' => 'pemeriksaan'
         ]);
 
@@ -38,7 +40,7 @@ class InspectionsController extends Controller
      */
     public function create($id)
     {
-        $icds = Icd::all();
+        $idDokter = $this->getIdDokterYangLogin();
         // $inisial = Dokter::find($id)->latest()->first();
         $patient = Patient::where('id' ,$id)->latest()->first();
         $waktu = Carbon::setLocale('id');
@@ -89,7 +91,7 @@ class InspectionsController extends Controller
             'patient' => $patient,
             'kode' => $kode,
             'waktu' => $waktu,
-            // 'icds' => $icd,
+            'idDokter' => $idDokter,
             'active' => 'pemeriksaan'
             
         ]);
@@ -144,6 +146,7 @@ class InspectionsController extends Controller
      */
     public function show($id)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $inspection = Inspection::where('patient_id', $id)->latest()->get();
         $patient = Patient::where('id', $id)->first();
 
@@ -151,6 +154,7 @@ class InspectionsController extends Controller
             'title' => 'Trika Klinik | Riwayat Pemeriksaan',
             'inspections' => $inspection,
             'patient' => $patient,
+            'idDokter' => $idDokter,
             'active' => 'pemeriksaan',
         ]);
 
@@ -161,6 +165,7 @@ class InspectionsController extends Controller
      */
     public function edit(string $id)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $inspection = Inspection::find($id);
         $patient = Patient::find($inspection->patient_id);
         return view('home.content.pemeriksaan.edit', [
@@ -168,6 +173,7 @@ class InspectionsController extends Controller
             'patient' => $patient,
             'kode' => $inspection->no_registrasi,
             'inspection' => $inspection,
+            'idDokter' => $idDokter,
             'active' => 'pemeriksaan'
         ]);
 
@@ -233,6 +239,7 @@ class InspectionsController extends Controller
 
     public function detail(string $id) 
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $inspection = Inspection::find($id);
 
         $diagnosa_lainnya = json_decode($inspection->diagnosa_lainnya);
@@ -246,6 +253,7 @@ class InspectionsController extends Controller
             'inspection' => $inspection,
             'diagnosa_lainnya' => $diagnosa_lainnya,
             'layanan_lainnya' => $layanan_lainnya,
+            'idDokter' => $idDokter,
             'active' => 'pemeriksaan'
         ]);
 
