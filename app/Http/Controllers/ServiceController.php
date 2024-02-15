@@ -30,7 +30,7 @@ class ServiceController extends Controller
 
                 foreach($data as $key => $row) {
                     $output .= '
-                        <input class="form-check-input" type="radio" name="tindakan" id="tindakan_'.$key.'" value="'.$row->name. ' ' .$row->rates.'" harga="Rp.'.$row->rates.'">
+                        <input class="form-check-input" type="radio" name="tindakan" id="tindakan_'.$key.'" value="'.$row->name.'" harga="Rp.'.$row->rates.'">
                         <label class="form-check-label" for="tindakan_'.$key.'">'.$row->name. '</label> <br>
 
                     ';
