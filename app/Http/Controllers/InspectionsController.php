@@ -105,7 +105,11 @@ class InspectionsController extends Controller
         // foreach ($request->tindakan_lainnya as $key => $value) {
             // $data_lainnya[] = $value;
             
-            $request->request->add(['patient_id' => $id, 'no_registrasi' => $request->no_registrasi, 'tindakan_lainnya' => json_encode($data_lainnya), 'diagnosa_lainnya' => json_encode($diagnosa_lainnya)]);
+            $request->request->add(['patient_id' => $id, 
+                                    'no_registrasi' => $request->no_registrasi, 
+                                    'tindakan_lainnya' => json_encode($data_lainnya), 
+                                    'diagnosa_lainnya' => json_encode($diagnosa_lainnya)]);
+
             $validatedData = $request->validate([
                 'td' => 'required',
                 'suhu' => '',
@@ -177,8 +181,18 @@ class InspectionsController extends Controller
     {
         $inspection = Inspection::find($id);
 
+        $data_lainnya = ($request->tindakan_lainnya);
+        $diagnosa_lainnya = ($request->diagnosa_lainnya);
+
+        $request->request->add(['patient_id' => $inspection->patient_id, 
+                                'no_registrasi' => $request->no_registrasi, 
+                                'tindakan_lainnya' => json_encode($data_lainnya), 
+                                'diagnosa_lainnya' => json_encode($diagnosa_lainnya),
+                                'no_registrasi' => $inspection->no_registrasi
+                            ]);
+
         $validatedData = $request->validate([
-            'td' => '',
+            'td' => 'required',
             'suhu' => '',
             'nadi' => '',
             'so2' => '',
@@ -190,8 +204,13 @@ class InspectionsController extends Controller
             'objektif' => '',
             'assesment' => '',
             'plan' => '',
-            'diagnosa' => '',
+            'diagnosa' => 'required',
+            'diagnosa_lainnya' => '',
             'tindakan' => '',
+            'harga_tindakan' => '',
+            'tindakan_lainnya' => '',
+            'patient_id' => '',
+            'no_registrasi' => '',
         ]);
 
         
@@ -221,7 +240,7 @@ class InspectionsController extends Controller
 
         $patient = Patient::find($inspection->patient_id);
         return view('home.content.pemeriksaan.detail', [
-            'title' => 'Trika Klinik | Edit Riwayat',
+            'title' => 'Trika Klinik | Detail Riwayat',
             'patient' => $patient,
             'kode' => $inspection->no_registrasi,
             'inspection' => $inspection,

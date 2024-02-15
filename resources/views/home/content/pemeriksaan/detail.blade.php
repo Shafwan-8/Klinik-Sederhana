@@ -208,19 +208,19 @@
                 <div class="mb-3">
                     <label
                         class="form-label"
-                        for="deha"
-                    >Deha....</label>
+                        for="detail"
+                    >Detail fisik</label>
 
                     <input
-                        class="form-control @error('deha') is-invalid @enderror"
-                        id="deha"
-                        name="deha"
-                        type="number"
-                        value="{{ $inspection->deha }}"
+                        class="form-control @error('detail') is-invalid @enderror"
+                        id="detail"
+                        name="detail"
+                        type="text"
+                        value="{{ $inspection->detail }}"
                         readonly
                     >
 
-                    @error('deha')
+                    @error('detail')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -404,9 +404,13 @@
                         <div class="card" style="width: 18rem; background-color: rgb(233,236,239)">
                             <div class="card-body px-3 py-3">
                                 <ul>
-                                    @foreach ($diagnosa_lainnya as $row )
-                                        <li><b>-</b> {{ $row }}</li>
-                                    @endforeach
+                                    @if (!empty($diagnosa_lainnya))
+                                        @foreach ($diagnosa_lainnya as $row )
+                                            <li><b>-</b> {{ $row }}</li>
+                                        @endforeach
+                                    @else
+                                        <li><b>- Tidak ada diaagnosa lainnya ...</b></li>
+                                    @endif
                                 </ul>
                             </div>  
                         </div>
@@ -450,9 +454,13 @@
                         <div class="card" style="width: 18rem; background-color: rgb(233,236,239)">
                             <div class="card-body px-3 py-3">
                                 <ul>
-                                    @foreach ($layanan_lainnya as $row )
-                                        <li><b>-</b> {{ $row }}</li>
-                                    @endforeach
+                                    @if (!empty($layanan_lainnya))
+                                        @foreach ($layanan_lainnya as $row )
+                                            <li><b>-</b> {{ $row }}</li>
+                                        @endforeach
+                                    @else
+                                        <li><b>- Tidak ada layanan lainnya ...</b></li>
+                                    @endif
                                 </ul>
                             </div>  
                         </div>
