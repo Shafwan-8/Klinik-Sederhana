@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     public function action(Request $request)
-    {
+    {       
         $data = Service::first();
         if ($request->ajax()){
 
@@ -30,9 +30,9 @@ class ServiceController extends Controller
 
                 foreach($data as $key => $row) {
                     $output .= '
-                        <input class="form-check-input d-flex flex-row" type="radio" name="tindakan" id="tindakan_'.$key.'" value="'.$row->name. ' ' .$row->rates.'">
-                        <label class="form-check-label" for="tindakan_'.$key.'">'.$row->name. ' Rp.' .$row->rates.'</label> <br>
-                        <input type="hidden" name="harga_tindakan" id="harga_tindakan_'.$key.'" value="'.$row->rates.'">
+                        <input class="form-check-input" type="radio" name="tindakan" id="tindakan_'.$key.'" value="'.$row->name. ' ' .$row->rates.'" harga="Rp.'.$row->rates.'">
+                        <label class="form-check-label" for="tindakan_'.$key.'">'.$row->name. '</label> <br>
+
                     ';
                 }
             } else {

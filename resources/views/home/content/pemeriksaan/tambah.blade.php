@@ -325,11 +325,20 @@
                         <div class="mb-3">
                             <label class="form-label" for="tindakan">Layanan / Tindakan</label>
 
-                            <div class="input-group mb-3">
+                            <div class="input-group">
                                 <input type="text" class="form-control" name="searchLayanan" id="searchLayanan"
-                                    placeholder="Nama Layanan..." aria-label="Nama Layanan...">
+                                    placeholder="Nama Layanan..." aria-label="Nama Layanan..."> 
                             </div>
-
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label for="harga" class="px-1">Harga:</label>
+                                    </div>
+                                    <div class="col-auto p-0">
+                                        <input name="harga_tindakan" class="form-control form-control-sm w-50" readonly/>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-check" name="listLayanan" id="listLayanan">
                                 
                             </div>
@@ -431,8 +440,16 @@
                             console.log(data);
                             $('#listLayanan').html(data.table_data);
 
+                            document.querySelectorAll("[name='tindakan']").forEach(i => {
+                                i.onchange = function(radio){
+                                    if(i.checked){
+                                        document.querySelector("[name='harga_tindakan']").value = i.getAttribute("harga");
+                                    }
+                                }
+                            })
                         }
                     })
+
 
                 }
 
@@ -440,6 +457,35 @@
                     let query = $(this).val();
                     fetch_service_data(query);
                 });
+
+                // $('[name="tindakan"] :selected').change(function() {
+
+                //     // Cari inputan type hidden yang sesuai dengan data-target yang sama dengan id radio yang dipilih
+                //     var targetHiddenInput = $('input[type=hidden][data-target=' + selectedRadio + ']');
+
+                //     // Ambil nilai rates dari data-rates pada inputan type radio yang dipilih
+                //     var rates = $(this).data('rates');
+
+                //     // Set nilai dari inputan type hidden sesuai dengan rates dari inputan type radio yang dipilih
+                //     targetHiddenInput.val(rates);
+
+                // })
+
+                // // Ketika inputan type radio dipilih
+                // $('input[type=radio][name=tindakan]').change(function() {
+                //     // Ambil nilai dari inputan type radio yang dipilih
+                //     var selectedRadio = $(this).attr('id');
+                    
+                //     // Cari inputan type hidden yang sesuai dengan data-target yang sama dengan id radio yang dipilih
+                //     var targetHiddenInput = $('input[type=hidden][data-target=' + selectedRadio + ']');
+
+                //     // Ambil nilai rates dari data-rates pada inputan type radio yang dipilih
+                //     var rates = $(this).data('rates');
+
+                //     // Set nilai dari inputan type hidden sesuai dengan rates dari inputan type radio yang dipilih
+                //     targetHiddenInput.val(rates);
+                // });
+
             });
         </script>
         <script>
@@ -466,5 +512,6 @@
                 });
             });
         </script>
+        
     </form>
 @endsection
