@@ -101,6 +101,32 @@
                                 </div>
                             </ul>
                         </li>
+                        <li class="has-sub {{ $active === 'laporan' ? 'active' : '' }}">
+                            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#dashboard" aria-expanded="false"
+                                aria-controls="dashboard">
+                                <i class="mdi mdi-chart-bar"></i>
+                                <span class="nav-text">Grafik</span> <b class="caret"></b>
+                            </a>
+                            <ul class="collapse show" id="dashboard" data-parent="#sidebar-menu">
+                                <div class="sub-menu">
+                                    <li class="{{ $active === 'graph-diagnosis' ? 'active' : '' }}">
+                                        <a class="sidenav-item-link" href="{{ route('grafik.diagnosa') }}">
+                                            <span class="nav-text mx-2">Diagnosa</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ $active === 'layanan' ? 'active' : '' }}">
+                                        <a class="sidenav-item-link" href="{{ route('report.service') }}">
+                                            <span class="nav-text mx-2">Layanan</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ $active === 'transaksi' ? 'active' : '' }}">
+                                        <a class="sidenav-item-link" href="{{ route('report.transaction') }}">
+                                            <span class="nav-text mx-2">Jumlah Transaksi</span>
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
                     </ul>
                   </li>
                 </ul>

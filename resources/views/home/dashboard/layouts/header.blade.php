@@ -1,4 +1,4 @@
-<!-- Header -->
+J<!-- Header -->
 <header class="main-header " id="header">
     <nav class="navbar navbar-static-top navbar-expand-lg">
       <!-- Sidebar toggle button -->
@@ -66,7 +66,7 @@
                 </div>
               </li>
               <li>
-                <a href="/dokter/{{ $idDokter }}">
+                <a href="/dokter/{{ $idDoktercles }}">
                   <i class="mdi mdi-account"></i> My Profile
                 </a>
               </li>

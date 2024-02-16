@@ -14,6 +14,7 @@ use App\Http\Controllers\ReportServiceController;
 use App\Http\Controllers\ReportTransactionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\MasterIcdxController;
+use App\Http\Controllers\GrafikController;
 use App\Models\Inspection;
 
 /*
@@ -73,6 +74,8 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('/master/icdx', MasterIcdxController::class);
+
+    Route::get('/grafik/diagnosa', [GrafikController::class, 'graphDiagnosis'])->name('grafik.diagnosa');
 
 });
 
