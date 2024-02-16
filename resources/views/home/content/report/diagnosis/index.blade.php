@@ -13,7 +13,9 @@
 @else
 @endif --}}
 <div class="p-0 d-flex justify-content-end px-3 py-2">
-    <form action="{{ route('download-pdf-diagnosis') }}" method="post" target="__blank">
+    <a class="btn btn-secondary" href="{{ route('graphic.diagnosis') }}">Grafik</a>
+
+    <form action="{{ route('download-pdf-diagnosis') }}" method="post" target="__blank" class="ml-2">
         @csrf
             <input type="hidden" name="start_date" value="{{ request('start_date') }}">
             <input type="hidden" name="end_date" value="{{ request('end_date') }}">

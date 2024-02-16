@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');
     
     Route::get('/laporan/diagnosa', [ReportDiagnosaController::class, 'index'])->name('report.diagnosis');
+    Route::get('/laporan/diagnosa/graphic', [ReportDiagnosaController::class, 'graphic'])->name('graphic.diagnosis');
     Route::post('/laporan/diagnosa/view-pdf', [ReportDiagnosaController::class, 'viewPDF'])->name('view-pdf-diagnosis');
     Route::post('/laporan/diagnosa/download-pdf', [ReportDiagnosaController::class, 'downloadPDF'])->name('download-pdf-diagnosis');
 
