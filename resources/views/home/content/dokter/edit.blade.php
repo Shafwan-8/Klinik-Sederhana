@@ -179,7 +179,7 @@
                         id="inisial"
                         name="inisial"
                         type="text"
-                        value="{{ old('inisial') ?? $dokter->inisial }}"
+                        value="{{ old('inisial') ?? strtoupper($dokter->inisial) }}"
                         readonly
                         >
 

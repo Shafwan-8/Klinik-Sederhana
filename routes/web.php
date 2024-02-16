@@ -14,6 +14,7 @@ use App\Http\Controllers\ReportServiceController;
 use App\Http\Controllers\ReportTransactionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\MasterIcdxController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Inspection;
 
 /*
@@ -70,8 +71,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/layanan', MasterLayananController::class);
 
-
     Route::resource('/master/icdx', MasterIcdxController::class);
+
+    Route::resource('/profile', ProfileController::class);
 
 });
 

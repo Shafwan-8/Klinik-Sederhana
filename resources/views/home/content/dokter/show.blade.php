@@ -46,7 +46,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start"> 
                     <div class="me-auto ms-2">
                         <span>Inisial</span>
-                        <div class="fw-bold">{{ $dokter->inisial }}</div>
+                        <div class="fw-bold">{{ strtoupper($dokter->inisial) }}</div>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start"> 

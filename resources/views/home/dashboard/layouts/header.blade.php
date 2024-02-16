@@ -65,11 +65,13 @@
                   <small class="pt-1">{{ auth()->user()->email }}</small>
                 </div>
               </li>
+              @if (auth()->user()->role == 'dokter')
               <li>
-                <a href="/dokter/{{ $idDokter }}">
+                <a href="{{ route('profile.show', $idDokter) }}">
                   <i class="mdi mdi-account"></i> My Profile
                 </a>
               </li>
+              @endif
               <li class="dropdown-footer">
                 <form action="/logout" method="POST">
                     @csrf
