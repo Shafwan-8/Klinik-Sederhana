@@ -15,6 +15,7 @@ use App\Http\Controllers\ReportTransactionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\MasterIcdxController;
 use App\Http\Controllers\GrafikController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Inspection;
 
 /*
@@ -72,10 +73,11 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/layanan', MasterLayananController::class);
 
-
     Route::resource('/master/icdx', MasterIcdxController::class);
 
     Route::get('/grafik/diagnosa', [GrafikController::class, 'graphDiagnosis'])->name('grafik.diagnosa');
+
+    Route::resource('/profile', ProfileController::class);
 
 });
 

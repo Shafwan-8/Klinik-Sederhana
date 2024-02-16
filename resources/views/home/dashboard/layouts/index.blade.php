@@ -81,6 +81,9 @@
           <!-- ====================================
           ——— CONTENT WRAPPER
           ===================================== -->
+          @yield('content_profile')
+
+          @if (!request()->is('profile*'))
           <div class="content-wrapper">
             <div class="content">
               <div class="row">
@@ -108,6 +111,8 @@
               </div>
             </div> <!-- End Content -->
           </div> <!-- End Content Wrapper -->
+          @endif
+
             
     
     <!-- Footer -->
