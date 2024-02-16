@@ -6,27 +6,21 @@
   <h1 class="h2">Data Layanan Pasien</h1>
 </div>
 
-@if($start_date == null ) 
-<div class="p-0 d-flex justify-content-end px-3 py-2">
-    <small>Harap memilih tanggal dahulu untuk download PDF</small>
-</div>
-@else
 <div class="p-0 d-flex justify-content-end px-3 py-2">
     <form action="{{ route('download-pdf-service') }}" method="post" target="__blank">
         @csrf
             <input type="hidden" name="start_date" value="{{ request('start_date') }}">
             <input type="hidden" name="end_date" value="{{ request('end_date') }}">
-            <button type="submit" class="btn btn-primary">Download PDF</button>
+            <button type="submit" class="btn btn-primary @if($start_date == null) disabled  @endif" @if($start_date == null) disabled  @endif>Download PDF</button>
     </form>
 
     <form action="{{ route('view-pdf-service') }}" method="post" target="__blank" class="ml-2">
         @csrf
             <input type="hidden" name="start_date" value="{{ request('start_date') }}">
             <input type="hidden" name="end_date" value="{{ request('end_date') }}">
-            <button class="btn btn-success">View PDF</button>
+            <button class="btn btn-success @if($start_date == null) disabled  @endif" @if($start_date == null) disabled  @endif>View PDF</button>
     </form>
 </div>
-@endif
 
 
 @endsection

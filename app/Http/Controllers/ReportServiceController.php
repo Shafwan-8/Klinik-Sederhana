@@ -27,31 +27,19 @@ class ReportServiceController extends Controller
 
         $dataLayanan = DB::table('inspections')
         ->selectRaw('
-            tindakan as layanan_harga,
-            COUNT(tindakan) AS jumlah_layanan,
-            SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
+            tindakan as nama_layanan,
+            harga_tindakan as harga_layanan,
+            COUNT(tindakan) as jumlah_layanan,
+            SUM(harga_tindakan) as total_harga')
         ->whereDate('created_at', '>=',  date('Y-m-d H:i:s', strtotime($start_date)))
         ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
-        ->groupBy('layanan_harga')
-        ->orderBy('total_harga', 'desc')
+        ->groupBy('nama_layanan', 'harga_layanan')
+        ->orderByDesc('total_harga')
         ->get()
-        ->map(function ($data) use ($pattern) {
-            // Melakukan pencocokan pola ekspresi reguler
-            if (preg_match($pattern, $data->layanan_harga, $matches)) {
-                // Membuat nama_layanan berdasarkan hasil pencocokan
-                $nama_layanan = $matches[1];
-
-                // Mengubah nilai nama_layanan
-                $data->nama_layanan = $nama_layanan;
-
-                // Mengubah format harga_layanan
-                $data->harga_layanan = 'Rp. ' . number_format($matches[2], 0, ',', '.');
-
-                // Mengubah format total_harga seperti harga_layanan
-                $data->total_harga = 'Rp. ' . number_format($data->total_harga, 0, ',', '.');
-            }
-
-            return $data;
+        ->map(function ($item) {
+            $item->harga_layanan = 'Rp ' . number_format((float)$item->harga_layanan, 0, ',', '.');
+            $item->total_harga = 'Rp ' . number_format((float)$item->total_harga, 0, ',', '.');
+            return $item;
         })
         ->toArray();
 
@@ -71,21 +59,19 @@ class ReportServiceController extends Controller
 
         $dataLayanan = DB::table('inspections')
         ->selectRaw('
-            SUBSTRING_INDEX(tindakan, " ", 1) AS nama_layanan,    
-            SUBSTRING_INDEX(tindakan, " ", -1) AS harga_layanan, 
-            COUNT(tindakan) AS jumlah_layanan, 
-            SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
-        ->whereDate('created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+            tindakan as nama_layanan,
+            harga_tindakan as harga_layanan,
+            COUNT(tindakan) as jumlah_layanan,
+            SUM(harga_tindakan) as total_harga')
+        ->whereDate('created_at', '>=',  date('Y-m-d H:i:s', strtotime($start_date)))
         ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
         ->groupBy('nama_layanan', 'harga_layanan')
-        ->orderBy('total_harga', 'desc')
+        ->orderByDesc('total_harga')
         ->get()
-        ->map(function ($data) {
-            // Konversi harga_layanan ke tipe data string tanpa desimal dan nol di belakangnya
-            $data->harga_layanan = 'Rp. ' . number_format($data->harga_layanan, 0, ',', '.');
-            $data->total_harga = 'Rp. ' . number_format($data->total_harga, 0, ',', '.');
-
-            return $data;
+        ->map(function ($item) {
+            $item->harga_layanan = 'Rp ' . number_format((float)$item->harga_layanan, 0, ',', '.');
+            $item->total_harga = 'Rp ' . number_format((float)$item->total_harga, 0, ',', '.');
+            return $item;
         })
         ->toArray();
 
@@ -112,25 +98,23 @@ class ReportServiceController extends Controller
 
         $dataLayanan = DB::table('inspections')
         ->selectRaw('
-            SUBSTRING_INDEX(tindakan, " ", 1) AS nama_layanan,    
-            SUBSTRING_INDEX(tindakan, " ", -1) AS harga_layanan, 
-            COUNT(tindakan) AS jumlah_layanan, 
-            SUM(SUBSTRING_INDEX(tindakan, " ", -1)) AS total_harga')
-        ->whereDate('created_at', '>=', date('Y-m-d H:i:s', strtotime($start_date)))
+            tindakan as nama_layanan,
+            harga_tindakan as harga_layanan,
+            COUNT(tindakan) as jumlah_layanan,
+            SUM(harga_tindakan) as total_harga')
+        ->whereDate('created_at', '>=',  date('Y-m-d H:i:s', strtotime($start_date)))
         ->whereDate('created_at', '<=', date('Y-m-d H:i:s', strtotime($end_date)))
         ->groupBy('nama_layanan', 'harga_layanan')
-        ->orderBy('total_harga', 'desc')
+        ->orderByDesc('total_harga')
         ->get()
-        ->map(function ($data) {
-            // Konversi harga_layanan ke tipe data string tanpa desimal dan nol di belakangnya
-            $data->harga_layanan = 'Rp. ' . number_format($data->harga_layanan, 0, ',', '.');
-            $data->total_harga = 'Rp. ' . number_format($data->total_harga, 0, ',', '.');
-
-            return $data;
+        ->map(function ($item) {
+            $item->harga_layanan = 'Rp ' . number_format((float)$item->harga_layanan, 0, ',', '.');
+            $item->total_harga = 'Rp ' . number_format((float)$item->total_harga, 0, ',', '.');
+            return $item;
         })
         ->toArray();
 
-        $pdf = PDF::loadView('home.content.report.service.report-service',  compact('dataLayanan'))
+        $pdf = PDF::loadView('home.content.report.service.report-service',  compact('dataLayanan','formatted_start_date','formatted_end_date'))
             ->setPaper('a4','portrait')
             ->set_option('isRemoteEnabled', true);
 
