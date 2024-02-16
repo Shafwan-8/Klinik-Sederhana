@@ -16,6 +16,7 @@ class PatientController extends Controller
      */
     public function index()
     {   
+        $idDokter = $this->getIdDokterYangLogin();
         if(auth()->user()->dokter->first() && auth()->user()->role == 'dokter') {   // dokter yang lagi login saja bisa akses
             $dokter = auth()->user()->dokter->first();
             $inisial = $dokter->inisial;
@@ -26,7 +27,7 @@ class PatientController extends Controller
         $title = 'Master Pasien';
         $active = 'patient';
         
-        return view('home.content.patient.index', compact('patients', 'title', 'active'));
+        return view('home.content.patient.index', compact('patients', 'title', 'active', 'idDokter'));
     }
 
     /**
@@ -34,6 +35,7 @@ class PatientController extends Controller
      */
     public function create()
     {
+        $idDokter = $this->getIdDokterYangLogin();
         // jika admin yang login
         if(auth()->user()->role == 'admin') {
             return 'tabe anda admin';
@@ -49,7 +51,7 @@ class PatientController extends Controller
             $errorr = 'Anda belum mendaftar, silahkan membuat akun Dokter terlebih dahulu';
             $linkTo = '/dokter/create';
             $backTo = 'ke pendaftaran dokter';
-            return view('error.404', compact('title','active','errorr', 'linkTo', 'backTo'));
+            return view('error.404', compact('title','active','errorr', 'linkTo', 'backTo', 'idDokter'));
         
         }elseif(auth()->user()->dokter->first()) {   // jika dokter punya akun
             $user = auth()->user();
@@ -64,7 +66,7 @@ class PatientController extends Controller
                 $numberMedic = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);
             }
                 $medical = $inisiall . '-' .$numberMedic;
-                return view('home.content.patient.create', compact('title', 'active','medical'));
+                return view('home.content.patient.create', compact('title', 'active','medical', 'idDokter'));
             }
         }
     
@@ -109,9 +111,11 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         return view('home.content.patient.show', [
             'title' => 'Detail Pasien',
             'patient' => $patient,
+            'idDokter' => $idDokter,
             'active' => 'patient'
         ]);
     }
@@ -121,10 +125,11 @@ class PatientController extends Controller
      */
     public function edit(string $id)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $patient = Patient::findOrFail($id);
         $title = 'Sunting Pasien';
         $active = 'patient';
-        return view('home.content.patient.edit', compact('title', 'patient', 'active'));
+        return view('home.content.patient.edit', compact('title', 'patient', 'active', 'idDokter'));
     }
 
     /**

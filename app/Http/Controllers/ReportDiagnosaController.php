@@ -13,6 +13,7 @@ class ReportDiagnosaController extends Controller
     
     public function index(Request $request)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $start_date = $request->start_date;
         $end_date = $request->end_date;
 
@@ -31,11 +32,8 @@ class ReportDiagnosaController extends Controller
             ->orderBy('jumlah', 'desc')
             ->get()
             ->toArray();
-
-        
-
-        
-        return view('home.content.report.diagnosis.index', compact('dataDiagnosa','title','active','start_date'));
+            
+        return view('home.content.report.diagnosis.index', compact('dataDiagnosa','title','active','start_date', 'idDokter'));
     }
 
     public function viewPDF(Request $request)

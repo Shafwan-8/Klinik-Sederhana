@@ -15,10 +15,11 @@ class DokterController extends Controller
      */
     public function index()
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $title = 'Trika Klinik | Master Dokter';
         $dokters = Dokter::latest()->get();
         $active = 'dokter';
-        return view('home.content.dokter.index', compact('dokters', 'title', 'active'));
+        return view('home.content.dokter.index', compact('dokters', 'title', 'active', 'idDokter'));
     }
 
     /**
@@ -26,10 +27,11 @@ class DokterController extends Controller
      */
     public function create()
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $users = User::all();
         $title = 'Trika Klinik | Tambah Dokter';
         $active = 'dokter';
-        return view('home.content.dokter.create', compact('users', 'title', 'active'));
+        return view('home.content.dokter.create', compact('users', 'title', 'active', 'idDokter'));
     }
 
     /**
@@ -68,9 +70,11 @@ class DokterController extends Controller
      */
     public function show(Dokter $dokter)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         return view('home.content.dokter.show', [
             'title' => 'Trika Klinik | Detail Dokter',
             'dokter' => $dokter,
+            'idDokter' => $idDokter,
             'active' => 'dokter'
         ]);
     }
@@ -80,11 +84,12 @@ class DokterController extends Controller
      */
     public function edit(string $id)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $users = User::all();
         $dokter = Dokter::findOrFail($id);
         $title = 'Trika Klinik | Sunting Dokter';
         $active = 'dokter';
-        return view('home.content.dokter.edit', compact('users', 'title', 'dokter', 'active'));
+        return view('home.content.dokter.edit', compact('users', 'title', 'dokter', 'active', 'idDokter'));
     }
 
     /**

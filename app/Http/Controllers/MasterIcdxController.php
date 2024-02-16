@@ -12,11 +12,12 @@ class MasterIcdxController extends Controller
      */
     public function index()
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $title = 'Trika Klinik | Master ICDX';
         $active = 'icdx';
         $icd = Icd::orderBy('icId', 'desc')->paginate(10)->withQueryString();
         $dataIcdx = $icd;
-        return view('home.content.master.icdx.index', compact('dataIcdx','title','active'));
+        return view('home.content.master.icdx.index', compact('dataIcdx','title','active', 'idDokter'));
     }
 
     /**
@@ -24,9 +25,10 @@ class MasterIcdxController extends Controller
      */
     public function create()
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $title = 'Trika Klinik | Master ICDX';
         $active = 'icdx';
-        return view('home.content.master.icdx.create', compact('title','active'));
+        return view('home.content.master.icdx.create', compact('title','active', 'idDokter'));
     }
 
     /**
@@ -61,10 +63,11 @@ class MasterIcdxController extends Controller
      */
     public function edit(string $icId)
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $icdx = Icd::where('icId', $icId)->firstOrFail();
         $title = 'Sunting ICDX';
         $active = 'icdx';
-        return view('home.content.master.icdx.edit', compact('title', 'icdx', 'active'));
+        return view('home.content.master.icdx.edit', compact('title', 'icdx', 'active', 'idDokter'));
     }
 
     /**

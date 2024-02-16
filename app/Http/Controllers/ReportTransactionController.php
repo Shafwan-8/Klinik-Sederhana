@@ -11,6 +11,7 @@ class ReportTransactionController extends Controller
 {
     public function index(Request $request) 
     {
+        $idDokter = $this->getIdDokterYangLogin();
         $start_date = $request->start_date;
         $end_date = $request->end_date;
 
@@ -38,7 +39,7 @@ class ReportTransactionController extends Controller
         })
         ->toArray();
 
-        return view('home.content.report.transaction.index', compact('dataTransaksi','title','active','start_date'));
+        return view('home.content.report.transaction.index', compact('dataTransaksi','title','active','start_date', 'idDokter'));
     }
 
     public function viewPDF(Request $request)

@@ -206,18 +206,18 @@
                 <div class="mb-3">
                     <label
                         class="form-label"
-                        for="deha"
-                    >Deha....</label>
+                        for="detail"
+                    >Detail Fisik</label>
 
                     <input
-                        class="form-control @error('deha') is-invalid @enderror"
-                        id="deha"
-                        name="deha"
-                        type="number"
-                        value="{{ $inspection->deha }}"
+                        class="form-control @error('detail') is-invalid @enderror"
+                        id="detail"
+                        name="detail"
+                        type="text"
+                        value="{{ $inspection->detail }}"
                     >
 
-                    @error('deha')
+                    @error('detail')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -423,8 +423,18 @@
                                 placeholder="Nama Layanan..." aria-label="Nama Layanan...">
                         </div>
 
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label for="harga" class="px-1">Harga:</label>
+                                </div>
+                                <div class="col-auto p-0">
+                                    <input name="harga_tindakan" class="form-control form-control-sm w-50" readonly/>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-check" name="listLayanan" id="listLayanan">
-                            
+                                
                         </div>
                     </div>
                 </div>
@@ -449,6 +459,7 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('pemeriksaan.show', $patient->id ) }}" class="btn btn-secondary">Kembali</a>
     </div>
+    @dump($errors)
     <script src="{{ asset('js/jquery.js') }}"></script>
         <script>
             $(document).ready(function() {
@@ -525,6 +536,13 @@
                             console.log(data);
                             $('#listLayanan').html(data.table_data);
 
+                            document.querySelectorAll("[name='tindakan']").forEach(i => {
+                                i.onchange = function(radio){
+                                    if(i.checked){
+                                        document.querySelector("[name='harga_tindakan']").value = i.getAttribute("harga");
+                                    }
+                                }
+                            })
                         }
                     })
 
