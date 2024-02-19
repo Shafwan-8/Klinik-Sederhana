@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Inspection extends Model
 {
@@ -14,6 +15,13 @@ class Inspection extends Model
     protected $casts = [
         'tindakan_lainnya' => 'json',
         'diagnosa_lainnya' => 'json',
+    ];
+
+    public const MAIL = [
+        'keterangan_dokter' => 'Keterangan Dokter',
+        'keterangan_sehat' => 'Keterangan Sehat',
+        'keterangan_buta_warna' => 'Keterangan Buta Warna',
+
     ];
 
     // protected $dates = ['start_date', 'end_date', 'show_at', 'hide_at', 'created_at', 'updated_at'];

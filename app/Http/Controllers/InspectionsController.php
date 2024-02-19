@@ -61,31 +61,6 @@ class InspectionsController extends Controller
         }
             $kode = $kode . $no_regis;
         
-        
-            // // Ambil nilai terakhir dari angka 001t()->first();
-            // if ($lastNumber === null) {
-            // $lastNumber = Inspection::where('patient_id', $id)->lates
-            //     // Jika tidak ada angka 001, buat angka 001
-            //     $kode = $kode . str_pad(1, 3, '0', STR_PAD_LEFT);
-                
-            // }else{
-                
-            //     $lastNumber = $lastNumber ? (int)substr($lastNumber->no_registrasi, -3) : 0;
-                
-            //     // Tambahkan 1 ke nilai terakhir dari angka 001
-            //     $lastNumber++;
-                
-            //     // Buat kode baru dengan menambahkan angka 001 ke kode lama
-            //     $kode = $kode . str_pad($lastNumber, 3, '0', STR_PAD_LEFT);
-            // }
-
-
-
-        // Simpan kode baru ke database
-        // Inspection::create([
-        //     'no_registrasi' => $kodeBaru 
-        // ]);
-
         return view('home.content.pemeriksaan.tambah', [
             'title' => 'Trika Klinik | Tambah Riwayat Pemeriksaan',
             'patient' => $patient,
@@ -147,6 +122,7 @@ class InspectionsController extends Controller
     public function show($id)
     {
         $idDokter = $this->getIdDokterYangLogin();
+        $surat = Inspection::MAIL;
         $inspection = Inspection::where('patient_id', $id)->latest()->get();
         $patient = Patient::where('id', $id)->first();
 
@@ -155,6 +131,7 @@ class InspectionsController extends Controller
             'inspections' => $inspection,
             'patient' => $patient,
             'idDokter' => $idDokter,
+            'mails' => $surat,
             'active' => 'pemeriksaan',
         ]);
 
@@ -258,4 +235,5 @@ class InspectionsController extends Controller
         ]);
 
     }
+
 }

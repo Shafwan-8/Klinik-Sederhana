@@ -110,7 +110,7 @@
             >Role</label>
 
             <select name="role" id="role" class="form-control">
-                <option value="" selected disabled>Pilih...</option>
+                <option value="" selected disabled hidden>Pilih...</option>
                 @foreach ($roles as $key => $name)
                     <option value="{{ $key }}" {{ $user->role == $key ? 'selected' : '' }}>{{ $name }}</option>
                 @endforeach
