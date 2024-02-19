@@ -38,16 +38,19 @@
             <div class="row pb-3">
                 <div class="col-md-4">
                     <label> Tanggal Awal :</label>
-                    <input type="date" name="start_date" class="form-control" required>
+                    <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}" required>
                 </div>
 
                 <div class="col-md-4">
                     <label> Tanggal Akhir :</label>
-                    <input type="date" name="end_date" class="form-control" required>
+                    <input type="date" name="end_date" class="form-control" value="{{ request('end_date') }}" required>
                 </div>
 
                 <div class="col-md-3 py-4">
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                <button class="ladda-button btn btn-primary btn-square btn-ladda" data-style="contract">
+                    <span class="ladda-label">Filter</span>
+                    <span class="ladda-spinner"></span>
+                </button>
                 </div>
             </div>
         </form>

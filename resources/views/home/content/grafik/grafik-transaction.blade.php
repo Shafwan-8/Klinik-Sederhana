@@ -5,11 +5,11 @@
 @endsection
 
 @section('title')
-<h3>Grafik Diagnosa</h3>
+<h3>Grafik Harga Transaksi</h3>
 @endsection
 
 @section('container')
-    <form action="{{ route('grafik.diagnosa') }}" method="GET">
+    <form action="{{ route('grafik.transaksi') }}" method="GET">
         <div class="row">
             <div class="col-sm-2">
                 <select name="tahun" class="form-control">
@@ -21,9 +21,10 @@
             <div class="col-sm-2">
                 <select name="bulan" class="form-control">
                     <option value="">Pilih Bulan</option>
-                    @for($i = 1; $i <= 12; $i++) <option value="{{ $i }}" {{ $bulan==$i ? 'selected' : '' }}>{{ date('F', mktime(0,
+                    @for($i = 1; $i <= 12; $i++) <option value="{{ $i }}" {{ $bulan==$i ? 'selected' : '' }}>{{ date('F',
+                        mktime(0,
                         0, 0, $i, 1)) }}</option>
-                    @endfor
+                        @endfor
                 </select>
             </div>
             <div class="col-sm-2">
@@ -34,18 +35,18 @@
             </div>
         </div>
     </form>
-
-
+        
+        
     @if($tahun)
-        <canvas id="diagnosaChart" width="400" height="200" class="mt-5"></canvas>
+<canvas id="transaksiChart" width="400" height="200" class="mt-5"></canvas>
     @else
-        <h3 class="text-center mt-100 mb-100">Harap memilih tahun atau bulan terlebih dahulu</h3>    
+    <h3 class="text-center mt-100 mb-100">Harap memilih tahun atau bulan terlebih dahulu</h3>
     @endif
 @endsection
 
 @section('footerJs')
-    var ctxDiagnosa = document.getElementById('diagnosaChart').getContext('2d');
-    var myDiagnosaChart = new Chart(ctxDiagnosa, {
+    var ctxTransaksi = document.getElementById('transaksiChart').getContext('2d');
+    var myTransaksiChart = new Chart(ctxTransaksi, {
         type: 'bar',
         data: {
             labels: {!! json_encode($labels) !!},
@@ -56,9 +57,9 @@
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        stepSize: 1 // Langkah sumbu Y
+                        stepSize: @json($bulan ? 10000 : 1000000) // Langkah sumbu Y
                     }
-                }
+                }   
             }
         }
     });

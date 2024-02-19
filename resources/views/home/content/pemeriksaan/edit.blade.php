@@ -459,7 +459,6 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('pemeriksaan.show', $patient->id ) }}" class="btn btn-secondary">Kembali</a>
     </div>
-    @dump($errors)
     <script src="{{ asset('js/jquery.js') }}"></script>
         <script>
             $(document).ready(function() {

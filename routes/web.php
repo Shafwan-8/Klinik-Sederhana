@@ -51,7 +51,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');
     
     Route::get('/laporan/diagnosa', [ReportDiagnosaController::class, 'index'])->name('report.diagnosis');
-    Route::get('/laporan/diagnosa/graphic', [ReportDiagnosaController::class, 'graphic'])->name('graphic.diagnosis');
     Route::post('/laporan/diagnosa/view-pdf', [ReportDiagnosaController::class, 'viewPDF'])->name('view-pdf-diagnosis');
     Route::post('/laporan/diagnosa/download-pdf', [ReportDiagnosaController::class, 'downloadPDF'])->name('download-pdf-diagnosis');
 
@@ -76,6 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/master/icdx', MasterIcdxController::class);
 
     Route::get('/grafik/diagnosa', [GrafikController::class, 'graphDiagnosis'])->name('grafik.diagnosa');
+    Route::get('/grafik/layanan', [GrafikController::class, 'graphService'])->name('grafik.layanan');
+    Route::get('/grafik/transaksi', [GrafikController::class, 'graphTransaction'])->name('grafik.transaksi');
 
     Route::resource('/profile', ProfileController::class);
 

@@ -12,7 +12,7 @@ class DashboardController extends Controller
         
         $idDokter = $this->getIdDokterYangLogin();
 
-        return view('home.dashboard.layouts.index', [
+        return view('home.dashboard.layouts.dashboard', [
             "title" => "Trika Klinik | Dashboard",
             "active" => 'dashboard',
             'idDokter' => $idDokter,

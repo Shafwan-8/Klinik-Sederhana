@@ -1,4 +1,4 @@
-J<!-- Header -->
+<!-- Header -->
 <header class="main-header " id="header">
     <nav class="navbar navbar-static-top navbar-expand-lg">
       <!-- Sidebar toggle button -->
@@ -67,7 +67,7 @@ J<!-- Header -->
               </li>
               @if (auth()->user()->role == 'dokter')
               <li>
-                <a href="{{ route('profile.show', $idDokter) }}">
+                <a href="{{ route('profile.show', auth()->user()->dokter->first()->id) }}">
                   <i class="mdi mdi-account"></i> My Profile
                 </a>
               </li>

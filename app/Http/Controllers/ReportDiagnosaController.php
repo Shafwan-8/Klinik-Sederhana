@@ -87,47 +87,4 @@ class ReportDiagnosaController extends Controller
 
         return $pdf->download('data-diagnosa-pasien-[' . $formatted_start_date . '][' . $formatted_end_date . '].pdf'); 
     }
-
-    public function graphic() 
-    {
-        $title = 'Trika Klinik | Grafik Laporan Diagnosa';
-        $active = 'diagnosa';
-
-        $dataDiagnosa = DB::table('inspections')
-            ->selectRaw('COUNT(*) as count, MONTH(created_at) as month')
-            ->whereYear('created_at', date('Y'))
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
-
-        $labels = [];
-        $data = [];
-        $colors = ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de','#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'];
-
-        for($i=1; $i<=12; $i++) {
-            $month = date('F', mktime(0,0,0,$i,1));
-            $count = 0;
-
-            foreach($dataDiagnosa as $diagnosa) {
-                if($diagnosa->month == $i) {
-                    $count = $diagnosa->count;
-                    break;
-                }
-            }
-
-            array_push($labels, $month);
-            array_push($data, $count);
-        }
-
-        $datasets = 
-        [
-            [
-                'label' => 'Diagnosa',
-                'backgroundColor' => $colors,
-                'data' => $data
-            ]
-        ];
-
-        return view('home.content.report.diagnosis.graphic', compact('labels', 'datasets','title','active'));
-    }
 }

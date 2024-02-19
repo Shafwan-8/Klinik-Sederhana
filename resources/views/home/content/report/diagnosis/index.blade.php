@@ -1,7 +1,6 @@
 @extends('home.dashboard.layouts.index')
 
 @section('title')
-{{ auth()->user()->dokter->first()->id }}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom text-dark">
   <h1 class="h2">Data Diagnosa Pasien</h1>
 </div>
@@ -13,7 +12,7 @@
 @else
 @endif --}}
 <div class="p-0 d-flex justify-content-end px-3 py-2">
-    <a class="btn btn-secondary" href="{{ route('graphic.diagnosis') }}">Grafik</a>
+    <a class="btn btn-secondary" href="{{ route('grafik.diagnosa') }}">Grafik</a>
 
     <form action="{{ route('download-pdf-diagnosis') }}" method="post" target="__blank" class="ml-2">
         @csrf
@@ -40,16 +39,19 @@
             <div class="row pb-3">
                 <div class="col-md-4">
                     <label> Tanggal Awal :</label>
-                    <input type="date" name="start_date" class="form-control" required>
+                    <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}" required>
                 </div>
 
                 <div class="col-md-4">
                     <label> Tanggal Akhir :</label>
-                    <input type="date" name="end_date" class="form-control" required>
+                    <input type="date" name="end_date" class="form-control" value="{{ request('end_date') }}" required>
                 </div>
 
                 <div class="col-md-3 py-4">
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                <button class="ladda-button btn btn-primary btn-square btn-ladda" data-style="contract">
+                    <span class="ladda-label">Filter</span>
+                    <span class="ladda-spinner"></span>
+                </button>
                 </div>
             </div>
         </form>

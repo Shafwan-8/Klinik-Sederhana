@@ -19,8 +19,7 @@
     <link href="/plugins/nprogress/nprogress.css" rel="stylesheet" />
   
     <!-- No Extra plugin used -->
-    <link href='/plugins/jvectormap/jquery-jvectormap-2.0.3.css' rel='stylesheet'>
-    <link href='/plugins/daterangepicker/daterangepicker.css' rel='stylesheet'>
+    <link href='/plugins/ladda/ladda.min.css' rel='stylesheet'>
     
     
     <link href='/plugins/toastr/toastr.min.css' rel='stylesheet'>
@@ -35,10 +34,10 @@
     <link href="/img/trika.png" rel="shortcut icon" />
 
     <!-- CSS KAMERA -->
-    @yield('cssCamera');
+    @yield('cssCamera')
 
     {{-- jsChart --}}
-    @yield('jsChart');
+    @yield('jsChart')
 
   
     <!--
@@ -60,9 +59,8 @@
       NProgress.start();
     </script>
 
-    <div id="toaster"></div>
 
-    @yield('')
+
 
     <!-- ====================================
     ——— WRAPPER
@@ -100,14 +98,16 @@
                     </div>
                   </div> 
                 </div>
-                <div class="col-12 p-0">
-                  <!-- Recent Order Table -->
-                  <div class="card card-table-border-none recent-orders" id="recent-orders">
-                    <div class="card-body pt-0 pb-2 text-dark">
-                        @yield('container2')
+                @if(Route::currentRouteName() == 'pemeriksaan.create' || Route::currentRouteName() == 'pemeriksaan.detail' || Route::currentRouteName() == 'pemeriksaan.edit') 
+                    <div class="col-12 p-0">
+                        <!-- Recent Order Table -->
+                        <div class="card card-table-border-none recent-orders" id="recent-orders">
+                            <div class="card-body pt-0 pb-2 text-dark">
+                                @yield('container2')
+                            </div>
+                        </div> 
                     </div>
-                  </div> 
-                </div>
+                @endif
               </div>
             </div> <!-- End Content -->
           </div> <!-- End Content Wrapper -->
@@ -165,15 +165,43 @@
 <!-- Feather -->
   feather.replace();
 
+  @yield('footerJs')
+
 </script>
 
-    <!-- Javascript -->
+<!-- Javascript -->
+<script src="/js/sleek.js"></script>
     <script src="/plugins/jquery/jquery.min.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src='/plugins/toastr/toastr.min.js'></script>
     <script src="/js/sleek.js"></script>
   <link href="/options/optionswitch.css" rel="stylesheet">
 <script src="/options/optionswitcher.js"></script>
+    <script src='/plugins/ladda/spin.min.js'></script>
+    <script src='/plugins/ladda/ladda.min.js'></script>
+    <script>
+      /*======== 8. LOADING BUTTON ========*/
+      /* 8.1. BIND NORMAL BUTTONS */
+      Ladda.bind(".ladda-button", {
+        timeout: 5000
+      });
+    
+      /* 7.2. BIND PROGRESS BUTTONS AND SIMULATE LOADING PROGRESS */
+      Ladda.bind(".progress-demo button", {
+        callback: function(instance) {
+          var progress = 0;
+          var interval = setInterval(function() {
+            progress = Math.min(progress + Math.random() * 0.1, 1);
+            instance.setProgress(progress);
+    
+            if (progress === 1) {
+              instance.stop();
+              clearInterval(interval);
+            }
+          }, 200);
+        }
+      });
+    </script>
 </body>
 </html>
 

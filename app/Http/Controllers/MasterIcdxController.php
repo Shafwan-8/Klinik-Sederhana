@@ -15,7 +15,7 @@ class MasterIcdxController extends Controller
         $idDokter = $this->getIdDokterYangLogin();
         $title = 'Trika Klinik | Master ICDX';
         $active = 'icdx';
-        $icd = Icd::orderBy('icId', 'desc')->paginate(10)->withQueryString();
+        $icd = Icd::orderBy('icId', 'desc')->paginate(10);
         $dataIcdx = $icd;
         return view('home.content.master.icdx.index', compact('dataIcdx','title','active', 'idDokter'));
     }
