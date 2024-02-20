@@ -166,52 +166,50 @@
                 document.getElementById(`hapus-${name}-${id}`).submit();
             }
         }
+        
+    </script>
 
-<!-- Feather -->
-  feather.replace();
-
+    <script>
+        // <!-- Feather -->
+        feather.replace();
+    </script>
   @yield('footerJs')
 
-    </script>
-    < !--Feather-->
-        feather.replace();
-        </script>
+    <!-- Javascript -->
+    <script src="/js/sleek.js"></script>
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src='/plugins/toastr/toastr.min.js'></script>
+    <script src="/js/sleek.js"></script>
+    <script src="/options/optionswitcher.js"></script>
+    <script src='/plugins/ladda/spin.min.js'></script>
+    <script src='/plugins/ladda/ladda.min.js'></script>
 
-        <!-- Javascript -->
-        <script src="/js/sleek.js"></script>
-        <script src="/plugins/jquery/jquery.min.js"></script>
-        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src='/plugins/toastr/toastr.min.js'></script>
-        <script src="/js/sleek.js"></script>
-        <<<<<<< HEAD <link href="/options/optionswitch.css" rel="stylesheet">
-            <script src="/options/optionswitcher.js"></script>
-            <script src='/plugins/ladda/spin.min.js'></script>
-            <script src='/plugins/ladda/ladda.min.js'></script>
-            <script>
-                /*======== 8. LOADING BUTTON ========*/
-      /* 8.1. BIND NORMAL BUTTONS */
-      Ladda.bind(".ladda-button", {
-        timeout: 5000
-      });
+    <script>        
+        /*======== 8. LOADING BUTTON ========*/
+        /* 8.1. BIND NORMAL BUTTONS */
+        Ladda.bind(".ladda-button", {
+            timeout: 5000
+        });
     
-      /* 7.2. BIND PROGRESS BUTTONS AND SIMULATE LOADING PROGRESS */
-      Ladda.bind(".progress-demo button", {
-        callback: function(instance) {
-          var progress = 0;
-          var interval = setInterval(function() {
-            progress = Math.min(progress + Math.random() * 0.1, 1);
-            instance.setProgress(progress);
-    
-            if (progress === 1) {
-              instance.stop();
-              clearInterval(interval);
+        /* 7.2. BIND PROGRESS BUTTONS AND SIMULATE LOADING PROGRESS */
+        Ladda.bind(".progress-demo button", {
+            callback: function(instance) {
+            var progress = 0;
+            var interval = setInterval(function() {
+                progress = Math.min(progress + Math.random() * 0.1, 1);
+                instance.setProgress(progress);
+        
+                if (progress === 1) {
+                instance.stop();
+                clearInterval(interval);
+                }
+            }, 200);
             }
-          }, 200);
-        }
-      });
-            </script>
-            <link href="/options/optionswitch.css" rel="stylesheet">
-            <script src="/options/optionswitcher.js"></script>
+        });
+    </script>
+    <script src="/options/optionswitcher.js"></script>
+    <link href="/options/optionswitch.css" rel="stylesheet">
 </body>
 
 </html>
