@@ -1,4 +1,4 @@
-<div>
+<div class="card-body">
     <div class="row justify-content-center">
         <div class="col">
             <h2 class="text-center mb-2">

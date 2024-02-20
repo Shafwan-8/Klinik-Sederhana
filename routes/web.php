@@ -8,10 +8,8 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IcdController;
 use App\Http\Controllers\InspectionsController;
-use App\Http\Controllers\mailButaWarnaContorller;
-use App\Http\Controllers\mailDokterController;
-use App\Http\Controllers\mailSehatController;
 use App\Http\Controllers\MasterLayananController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ReportDiagnosaController;
 use App\Http\Controllers\ReportServiceController;
 use App\Http\Controllers\ReportTransactionController;
@@ -50,9 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/pemeriksaan', InspectionsController::class);
     Route::get('/pemeriksaan/{pemeriksaan}/detail', [InspectionsController::class, 'detail'])->name('pemeriksaan.detail');
 
-    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-dokter', [mailDokterController::class, 'index'])->name('surat.dokter');
-    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-sehat', [mailSehatController::class, 'index'])->name('surat.sehat');
-    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-buta-warna', [mailButaWarnaContorller::class, 'index'])->name('surat.buta-warna');
+    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-dokter', [MailController::class, 'mailDokter'])->name('surat.dokter');
+    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-sehat', [MailController::class, 'mailSehat'])->name('surat.sehat');
+    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-buta-warna', [MailController::class, 'mailButaWarna'])->name('surat.buta-warna');
     
     Route::get('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'create'])->name('pemeriksaan.create');
     Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');

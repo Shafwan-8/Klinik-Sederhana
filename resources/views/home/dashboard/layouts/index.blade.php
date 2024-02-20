@@ -93,9 +93,11 @@
                             @yield('headerContainer')
 
                             <div class="card card-table-border-none recent-orders" id="recent-orders">
+                                @if(!request()->is('pemeriksaan/*/surat*'))
                                 <div class="card-header justify-content-between text-dark">
                                     @yield('title')
                                 </div>
+                                @endif
                                 <div class="card-body pt-0 pb-2 text-dark">
                                     @include('home.dashboard.layouts.alert')
 
@@ -103,8 +105,9 @@
                                 </div>
                             </div>
                         </div>
-                        @if(Route::currentRouteName() == 'pemeriksaan.create' || Route::currentRouteName() ==
-                        'pemeriksaan.detail' || Route::currentRouteName() == 'pemeriksaan.edit')
+                        @if(Route::currentRouteName() == 'pemeriksaan.create' ||
+                             Route::currentRouteName() == 'pemeriksaan.detail' ||
+                             Route::currentRouteName() == 'pemeriksaan.edit')
                         <div class="col-12 p-0">
                             <!-- Recent Order Table -->
                             <div class="card card-table-border-none recent-orders" id="recent-orders">
