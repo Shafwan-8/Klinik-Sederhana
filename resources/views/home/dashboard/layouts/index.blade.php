@@ -172,8 +172,8 @@
     <script>
         // <!-- Feather -->
         feather.replace();
+        @yield('footerJs')
     </script>
-  @yield('footerJs')
 
     <!-- Javascript -->
     <script src="/js/sleek.js"></script>
