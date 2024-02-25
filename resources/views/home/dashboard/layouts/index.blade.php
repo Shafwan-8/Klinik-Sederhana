@@ -29,11 +29,17 @@
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- BOOTSTRAP -->
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"> --}}
+
     <!-- SLEEK CSS -->
     <link id="sleek-css" rel="stylesheet" href="/css/sleek.css" />
 
     <!-- FAVICON -->
     <link href="/img/trika.png" rel="shortcut icon" />
+
+    <!-- Datatables from datatables.net -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css" />
 
     <!-- CSS KAMERA -->
     @yield('cssCamera')
@@ -92,6 +98,10 @@
                             <!-- Recent Order Table -->
                             @yield('headerContainer')
 
+                            <!-- For Report Mail -->
+                            @yield('content')
+
+                        @if (!request()->is('surat*'))
                             <div class="card card-table-border-none recent-orders" id="recent-orders">
                                 @if(!request()->is('pemeriksaan/*/surat*'))
                                 <div class="card-header justify-content-between text-dark">
@@ -100,11 +110,12 @@
                                 @endif
                                 <div class="card-body pt-0 pb-2 text-dark">
                                     @include('home.dashboard.layouts.alert')
-
+                                    
                                     @yield('container')
                                 </div>
                             </div>
                         </div>
+                        @endif
                         @if(Route::currentRouteName() == 'pemeriksaan.create' ||
                              Route::currentRouteName() == 'pemeriksaan.detail' ||
                              Route::currentRouteName() == 'pemeriksaan.edit')
@@ -187,8 +198,15 @@
     <script src="/options/optionswitcher.js"></script>
     <script src='/plugins/ladda/spin.min.js'></script>
     <script src='/plugins/ladda/ladda.min.js'></script>
-
-    <script>        
+    {{-- DataTables --}}
+    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+    <script>
+        $('#tableSuratDokter').DataTable( {
+            responsive: true
+        } );
+    </script>
+    
+    <script>
         /*======== 8. LOADING BUTTON ========*/
         /* 8.1. BIND NORMAL BUTTONS */
         Ladda.bind(".ladda-button", {
@@ -210,7 +228,7 @@
             }, 200);
             }
         });
-    </script>
+    </>
     <script src="/options/optionswitcher.js"></script>
     <link href="/options/optionswitch.css" rel="stylesheet">
 </body>

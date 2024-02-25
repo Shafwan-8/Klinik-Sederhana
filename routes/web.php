@@ -85,6 +85,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/profile', ProfileController::class);
 
+    Route::resource('/surat', MailController::class);
+
 
 });
 
