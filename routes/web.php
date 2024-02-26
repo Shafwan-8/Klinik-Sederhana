@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportTransactionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\MasterIcdxController;
 use App\Http\Controllers\GrafikController;
+use App\Http\Controllers\MailButaWarnaController;
 use App\Http\Controllers\MailDokterController;
 use App\Http\Controllers\MailSehatController;
 use App\Http\Controllers\ProfileController;
@@ -89,6 +90,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/surat/keterangan-dokter', MailDokterController::class);
     Route::resource('/surat/keterangan-sehat', MailSehatController::class);
+    Route::resource('/surat/keterangan-buta-warna', MailButaWarnaController::class);
 
 
 });

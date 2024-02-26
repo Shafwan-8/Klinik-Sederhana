@@ -24,6 +24,7 @@ class Mail extends Model
         'jk',
         'pekerjaan',
         'alamat',
+        'kondisi',
         'lama_hari',
         'tanggal_mulai',
         'tanggal_selesai',
@@ -31,6 +32,13 @@ class Mail extends Model
         'lokasi',
         'tanggal',
         'pengirim',
+    ];
+
+    public const KONDISI= [
+        'tidak buta warna ' => 'Buta Warna',
+        'buta warna parsial' => 'Buta Warna Parsial',
+        'buta warna total' => 'Buta Warna Total',
+        
     ];
 
 }

@@ -10,5 +10,9 @@
 
 <x-reportMail.keterangan-sehat.edit :dokter="$dokter" :surat="$surat" />
 
+@elseif ($type == 'suratButaWarna')
+
+<x-reportMail.keterangan-buta-warna.edit :dokter="$dokter" :surat="$surat" :kondisi="$kondisi"/>
+
 @endif
 @endsection

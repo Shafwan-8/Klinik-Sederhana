@@ -100,8 +100,8 @@
                                                     <span class="nav-text">Keterangan Sehat</span">
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="#" class="sidenav-item-link">
+                                            <li class="{{ $active === 'suratButaWarna' ? 'active' : '' }}">
+                                                <a href="{{ route('keterangan-buta-warna.index') }}" class="sidenav-item-link">
                                                     <span class="nav-text">Keterangan Buta Warna</span">
                                                 </a>
                                             </li>

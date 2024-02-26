@@ -70,6 +70,7 @@ class MailDokterController extends Controller
             'pengirim' => '',
             'uuid' => '',
             'type_id' => '',
+            'kondisi' => '',
         ]);
 
         Mail::create($tervalidasi);
@@ -135,6 +136,7 @@ class MailDokterController extends Controller
             'pengirim' => '',
             'uuid' => '',
             'type_id' => '',
+            'kondisi' => '',
         ]);
 
 

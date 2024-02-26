@@ -13,5 +13,9 @@
 
 <x-reportMail.keterangan-sehat.show :surat="$surat" />
 
+@elseif ($type == 'suratButaWarna')
+
+<x-reportMail.keterangan-buta-warna.show :surat="$surat" />
+
 @endif
 @endsection

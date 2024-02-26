@@ -10,6 +10,10 @@
 
 <x-reportMail.keterangan-sehat.partial.header />
 
+@elseif ($type == 'suratButaWarna')
+
+<x-reportMail.keterangan-buta-warna.partial.header />
+
 @endif
 
 @endsection
@@ -25,6 +29,10 @@
 @elseif ($type == 'suratSehat')
 
 <x-reportMail.keterangan-sehat.index :surat="$surat" />
+
+@elseif ($type == 'suratButaWarna')
+
+<x-reportMail.keterangan-buta-warna.index :surat="$surat" />
 
 @endif
 

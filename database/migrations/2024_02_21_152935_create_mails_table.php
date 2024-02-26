@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('jk')->nullable();
             $table->string('pekerjaan')->nullable();
             $table->string('alamat')->nullable();
+            $table->string('kondisi')->nullable();
             $table->string('lama_hari')->nullable();
             $table->string('tanggal_mulai')->nullable();
             $table->string('tanggal_selesai')->nullable();
