@@ -18,8 +18,8 @@
                         <td>
                             <div class="d-flex justify-content-end">
                                 <div class="ms-auto">
-                                    <a class="btn btn-primary btn-sm" role="button" href="{{ route('keterangan-dokter.show', $row->uuid) }}">Detail</a>
-                                    <a class="btn btn-secondary btn-sm" role="button" href="{{ route('keterangan-dokter.edit', $row->uuid) }}">Sunting</a>
+                                    <a class="btn btn-primary btn-sm" role="button" href="{{ route('keterangan-sehat.show', $row->uuid) }}">Detail</a>
+                                    <a class="btn btn-secondary btn-sm" role="button" href="{{ route('keterangan-sehat.edit', $row->uuid) }}">Sunting</a>
                                 </div>
                             </div>
                         </td>

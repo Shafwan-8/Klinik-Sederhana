@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('mails', function (Blueprint $table) {
             $table->id('id');
             $table->uuid('uuid');
+            $table->integer('type_id');
             $table->string('nomor_surat');
             $table->string('departemen')->nullable();
             $table->string('nama');

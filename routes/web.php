@@ -16,6 +16,8 @@ use App\Http\Controllers\ReportTransactionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\MasterIcdxController;
 use App\Http\Controllers\GrafikController;
+use App\Http\Controllers\MailDokterController;
+use App\Http\Controllers\MailSehatController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Inspection;
 
@@ -48,9 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/pemeriksaan', InspectionsController::class);
     Route::get('/pemeriksaan/{pemeriksaan}/detail', [InspectionsController::class, 'detail'])->name('pemeriksaan.detail');
 
-    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-dokter', [MailController::class, 'mailDokter'])->name('surat.dokter');
-    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-sehat', [MailController::class, 'mailSehat'])->name('surat.sehat');
-    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-buta-warna', [MailController::class, 'mailButaWarna'])->name('surat.buta-warna');
+    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-dokter', [MailDokterController::class, 'mailDokter'])->name('surat.dokter');
+    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-sehat', [MailDokterController::class, 'mailSehat'])->name('surat.sehat');
+    Route::get('/pemeriksaan/{pemeriksaan}/surat/keterangan-buta-warna', [MailDokterController::class, 'mailButaWarna'])->name('surat.buta-warna');
     
     Route::get('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'create'])->name('pemeriksaan.create');
     Route::post('/pemeriksaan/{pemeriksaan}/create', [InspectionsController::class, 'store'])->name('pemeriksaan.store');
@@ -85,7 +87,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/profile', ProfileController::class);
 
-    Route::resource('/surat', MailController::class);
+    Route::resource('/surat/keterangan-dokter', MailDokterController::class);
+    Route::resource('/surat/keterangan-sehat', MailSehatController::class);
 
 
 });

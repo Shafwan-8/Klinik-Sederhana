@@ -91,12 +91,12 @@
                                         id="surat">
                                         <div class="sub-menu">
                                             <li class="{{ $active === 'suratDokter' ? 'active' : '' }}">
-                                                <a href="{{ route('surat.index') }}" class="sidenav-item-link">
+                                                <a href="{{ route('keterangan-dokter.index') }}" class="sidenav-item-link">
                                                     <span class="nav-text">Keterangan Dokter</span">
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="#" class="sidenav-item-link">
+                                            <li class="{{ $active === 'suratSehat' ? 'active' : '' }}">
+                                                <a href="{{ route('keterangan-sehat.index') }}" class="sidenav-item-link">
                                                     <span class="nav-text">Keterangan Sehat</span">
                                                 </a>
                                             </li>

@@ -1,6 +1,6 @@
 <div class="card recent-orders">
     <div class="card-body text-dark">
-        <form action="{{ route('surat.store') }}" method="POST">
+        <form action="{{ route('keterangan-dokter.store') }}" method="POST">
             @csrf
             <div class="row justify-content-center">
                 <div class="col">
@@ -202,7 +202,7 @@
     </div>
     <div class="card-footer">
         <div class="row d-flex justify-content-end">
-            <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary" onclick="return confirm('Apakah anda yakin ingin kembali?')">Kembali</a>
             <button type="submit" class="btn btn-primary mx-2">Simpan</button>
         </div>
     </div>

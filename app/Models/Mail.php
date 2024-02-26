@@ -15,6 +15,7 @@ class Mail extends Model
 
     protected $fillable = [
         'uuid',
+        'type_id',
         'nomor_surat',
         'departemen',
         'nama', 

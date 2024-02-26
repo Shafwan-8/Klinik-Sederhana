@@ -11,7 +11,7 @@
 
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
-            <a href="{{ route('keterangan-dokter.create') }}" class="btn d-none d-sm-inline-block btn-primary">
+            <a href="{{ route('keterangan-sehat.create') }}" class="btn d-none d-sm-inline-block btn-primary">
                 <i class="mdi mdi-plus"></i>
                 Tambah Surat Keterangan Dokter
             </a>

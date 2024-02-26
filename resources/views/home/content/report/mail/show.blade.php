@@ -9,5 +9,9 @@
 
 <x-reportMail.keterangan-dokter.show :surat="$surat" />
 
+@elseif ($type == 'suratSehat')
+
+<x-reportMail.keterangan-sehat.show :surat="$surat" />
+
 @endif
 @endsection
