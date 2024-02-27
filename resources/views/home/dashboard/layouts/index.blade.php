@@ -93,9 +93,11 @@
           ===================================== -->
             @yield('content_profile')
 
+            
             @if (!request()->is('profile*'))
             <div class="content-wrapper">
                 <div class="content">
+                    @yield('content_dashboard')
                     <div class="row">
                         <div class="col-12">
                             <!-- Recent Order Table -->
@@ -104,7 +106,7 @@
                             <!-- For Report Mail -->
                             @yield('content')
 
-                        @if (!request()->is('surat*'))
+                        @if (!request()->is('surat*') && !request()->is('dashboard'))
                             <div class="card card-table-border-none recent-orders" id="recent-orders">
                                 @if(!request()->is('pemeriksaan/*/surat*'))
                                 <div class="card-header justify-content-between text-dark">
