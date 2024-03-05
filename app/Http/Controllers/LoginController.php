@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +24,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($validatedData)) {
             $request->session()->regenerate();
+
+            UserLogin::dispatch($request);
 
             return redirect()->intended('/dashboard');
         }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Dokter;
+use App\Models\HistoryLogin;
 
 class ProfileController extends Controller
 {
@@ -39,13 +40,22 @@ class ProfileController extends Controller
      */
     public function show(string $id)
     {
-        $idDokter = $this->getIdDokterYangLogin();
-        $dokter = Dokter::where('id', $id)->first();
-        // dd($dokter);
-        $title = 'Trika Klinik | Profile';
-        $active = 'profile';
-        return view('home.content.profile.index', 
-                compact('title', 'active', 'idDokter', 'dokter'));
+        if (auth()->user()->role == 'dokter') {
+            $dokter = Dokter::where('user_id', $id)->first();
+            $title = 'Trika Klinik | Profile';
+            $active = 'profile';
+            return view('home.content.profile.index', 
+                compact('title', 'active', 'dokter'));
+
+        } else {
+
+            $admin = User::where('id', $id)->first();
+            $title = 'Trika Klinik | Profile';
+            $active = 'profile';
+            return view('home.content.profile.index', 
+                compact('title', 'active', 'admin'));
+
+        }
     }
 
     /**
@@ -63,6 +73,7 @@ class ProfileController extends Controller
     {   
         $dokter = Dokter::findOrFail($id);
         $user = User::findOrFail($dokter->user_id);
+        $historyAvatar = HistoryLogin::where('foto', $user->avatar)->first();
 
         $tervalidasi = $request->validate([
             'no_ktp' => 'numeric',
@@ -78,15 +89,14 @@ class ProfileController extends Controller
             'password' => ''
         ]));
         
-
-        if ($request->hasFile('foto')) {
-            if ($dokter->foto) {
-                Storage::disk('public')->delete($dokter->foto);
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
             }
             
-            $namaFile = time() .'_'. Str::snake($request->foto->getClientOriginalName());
-            $fotoBaru = $request->file('foto')->storeAs('images/dokter', $namaFile, 'public');
-            $dokter->update(['foto' => $fotoBaru]);
+            $namaFile = time() .'_'. Str::snake($request->avatar->getClientOriginalName());
+            $fotoBaru = $request->file('avatar')->storeAs('images/avatar', $namaFile, 'public');
+            $user->update(['avatar' => $fotoBaru]);
         }
         
         return redirect()->back()->with('success', 'Profile berhasil disunting');
@@ -98,5 +108,46 @@ class ProfileController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function updateAdmin(Request $request, $id) {
+
+        $user = User::findOrFail($id);
+        $historyAvatar = HistoryLogin::where('foto', $user->avatar)->first();
+
+        $tervalidasi = $request->validate([
+            'name' => 'nullable|string|min:3',
+            'email' => 'email|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:3', // Tidak wajib memvalidasi password jika tidak diberikan
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $user->update($tervalidasi);
+
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            
+            $namaFile = time() .'_'. Str::snake($request->avatar->getClientOriginalName());
+            $fotoBaru = $request->file('avatar')->storeAs('images/avatar', $namaFile, 'public');
+            $user->update(['avatar' => $fotoBaru]);
+        }
+
+        if ($request->password) {
+            $user->update($request->validate([
+                'name' => 'nullable|string|min:3',
+                'email' => 'email|unique:users,email,' . $user->id,
+                'password' => 'nullable|min:3' // Tidak wajib memvalidasi password jika tidak diberikan
+            ]));
+        }else {
+            $user->update($request->validate([
+                'name' => 'nullable|string|min:3',
+                'email' => 'email|dns|unique:users,email,' . $user->id,
+            ]));
+        }
+        
+
+        return redirect()->back()->with('success', 'Profile berhasil disunting');
     }
 }

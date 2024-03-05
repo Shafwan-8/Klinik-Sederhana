@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokter;
+use App\Models\HistoryLogin;
 use App\Models\Inspection;
 use App\Models\Patient;
 use Carbon\Carbon;
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         $pasien = Patient::count();
         $pemeriksaan = Inspection::count();
         $grafikDashboard = $this->getGrafikPemeriksaanDashboard();
+        $historyLogin = HistoryLogin::orderBy('id', 'desc')->latest()->get();
 
         return view('home.dashboard.layouts.dashboard', [
             "title" => "Trika Klinik | Dashboard",
@@ -26,7 +28,8 @@ class DashboardController extends Controller
             "pasien" => $pasien,
             "pemeriksaan" => $pemeriksaan,
             'idDokter' => $idDokter,
-            'grafikDashboard' => $grafikDashboard
+            'grafikDashboard' => $grafikDashboard,
+            'historyLogin' => $historyLogin,
         ]);
 
     }

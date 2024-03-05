@@ -29,7 +29,7 @@
                             />
                         </div>
                     </li>
-                    @endif
+                @endif
                     
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="me-auto ms-2">

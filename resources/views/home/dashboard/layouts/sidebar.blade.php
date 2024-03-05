@@ -12,37 +12,16 @@
             </a>
         </div>
 
-        <!-- begin sidebar scrollbar -->
-        <div class="" data-simplebar style="height: 100%;"
-            style="top: 40px;
-                          bottom: 0px;
-                          width: 80px;
-                          overflow: hidden;">
             <!-- sidebar menu -->
-            <div style="height: 150%; overflow-y: scroll; overflow-x:hidden">
+            <div style="">
                 <ul class="nav sidebar-inner" id="sidebar-menu">
                     <li
-                        class="has-sub expand {{ $active === 'dashboard' || $active === 'pengguna' || $active === 'dokter' ? 'active' : '' }}">
-                        <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#dashboard"
-                            aria-expanded="false" aria-controls="dashboard">
+                        class="has-sub expand {{ $active === 'dashboard' ? 'active' : '' }}">
+                        <a class="sidenav-item-link" href="/dashboard"
+                            aria-controls="dashboard">
                             <i class="mdi mdi-view-dashboard-outline"></i>
-                            <span class="nav-text">Dashboard</span> <b class="caret"></b>
+                            <span class="nav-text">Dashboard</span>
                         </a>
-                        <ul class="collapse {{ $active === 'dashboard' || $active === 'pengguna' || $active === 'dokter' ? 'show' : '' }}"
-                            id="dashboard" data-parent="#sidebar-menu">
-                            <div class="sub-menu">
-                                <li class="{{ $active === 'pengguna' ? 'active' : '' }}">
-                                    <a class="sidenav-item-link" href="{{ route('pengguna.index') }}">
-                                        <span class="nav-text mx-2">Pengguna</span>
-                                    </a>
-                                </li>
-                                <li class="{{ $active === 'dokter' ? 'active' : '' }}">
-                                    <a class="sidenav-item-link" href="{{ route('dokter.index') }}">
-                                        <span class="nav-text mx-2">Dokter</span>
-                                    </a>
-                                </li>
-                            </div>
-                        </ul>
                     </li>
                     <li class="{{ $active === 'patient' ? 'active' : '' }}">
                         <a class="sidenav-item-link" href="{{ route('patient.index') }}">
@@ -118,9 +97,19 @@
                             <i class="mdi mdi-database"></i>
                             <span class="nav-text">Master</span> <b class="caret"></b>
                         </a>
-                        <ul class="collapse {{ $active === 'master' || $active === 'icdx' || $active === 'services' ? 'show' : '' }}"
+                        <ul class="collapse {{ $active === 'master' || $active === 'icdx' || $active === 'services' || $active === 'pengguna' || $active === 'dokter' ? 'show' : '' }}"
                             id="master" data-parent="#sidebar-menu">
                             <div class="sub-menu">
+                                <li class="{{ $active === 'pengguna' ? 'active' : '' }}">
+                                    <a class="sidenav-item-link" href="{{ route('pengguna.index') }}">
+                                        <span class="nav-text mx-2">Pengguna</span>
+                                    </a>
+                                </li>
+                                <li class="{{ $active === 'dokter' ? 'active' : '' }}">
+                                    <a class="sidenav-item-link" href="{{ route('dokter.index') }}">
+                                        <span class="nav-text mx-2">Dokter</span>
+                                    </a>
+                                </li>
                                 <li class="{{ $active === 'icdx' ? 'active' : '' }}">
                                     <a class="sidenav-item-link" href="{{ route('icdx.index') }}">
                                         <span class="nav-text mx-2">Icdx</span>
@@ -164,6 +153,5 @@
                     </li>
                 </ul>
             </div>
-        </div>
     </div>
 </aside>

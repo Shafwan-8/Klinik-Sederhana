@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/grafik/transaksi', [GrafikController::class, 'graphTransaction'])->name('grafik.transaksi');
 
     Route::resource('/profile', ProfileController::class);
+    Route::put('/profile/{profile}/user', [ProfileController::class, 'updateAdmin'])->name('profile.update.admin');
 
     Route::resource('/surat/keterangan-dokter', MailDokterController::class);
     Route::resource('/surat/keterangan-sehat', MailSehatController::class);

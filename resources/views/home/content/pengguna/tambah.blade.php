@@ -6,14 +6,14 @@
 
 
 @section('container')
-    <form class="card" action="{{ route('pengguna.store') }}" method="POST">
+    <form class="card" action="{{ route('pengguna.store') }}" enctype="multipart/form-data" method="POST">
 
 
         <div class="card-body">
             @csrf
 
             <div class="mb-3">
-                <label class="form-label" for="name">Name</label>
+                <label class="form-label" for="name">Nama</label>
 
                 <input class="form-control @error('name') is-invalid @enderror" id="name" name="name" type="text"
                     value="{{ old('name') }}">
@@ -63,6 +63,23 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+                <label class="form-label" for="avatar">Avatar</label>
+
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input @error('avatar') is-invalid @enderror" name="avatar" id="avatar" aria-describedby="avatar">
+                      <label class="custom-file-label" for="avatar">Choose file</label>
+                    </div>
+                </div>
+
+                @error('avatar')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+                @dump($errors)
+            </div>
 
 
             <div class="mb-3">

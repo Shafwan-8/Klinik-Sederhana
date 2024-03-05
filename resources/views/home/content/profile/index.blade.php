@@ -3,19 +3,18 @@
 @section('content_profile')
 
 <div class="content-wrapper">
-    <div class="content">
-
-
-
-
-
+<div class="content">
 <div class="bg-white border rounded">
 <div class="row no-gutters">
 <div class="col-lg-4 col-xl-3">
 <div class="profile-content-left profile-left-spacing pt-5 pb-3 px-3 px-xl-5">
 <div class="card text-center widget-profile px-0 border-0">
   <div class="card-img mx-auto rounded-circle">
-    <img src="{{ asset('storage/' . $dokter->foto) }}" alt="profile picture" style="width: 100px; height: 100px;">
+    @if (auth()->user()->avatar)
+        <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="profile picture" style="width: 100px; height: 100px;">
+    @else
+        <img src="{{ asset('img/default-profile.jpg') }}" alt="profile picture" style="width: 100px; height: 100px;">
+    @endif
   </div>
 
   <div class="card-body">
@@ -25,27 +24,11 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-between ">
-  <div class="text-center pb-4">
-    <h6 class="text-dark pb-2">1503</h6>
-    <p>Friends</p>
-  </div>
-
-  <div class="text-center pb-4">
-    <h6 class="text-dark pb-2">2905</h6>
-    <p>Followers</p>
-  </div>
-
-  <div class="text-center pb-4">
-    <h6 class="text-dark pb-2">1200</h6>
-    <p>Following</p>
-  </div>
-</div>
-
 <hr class="w-100">
 
 <div class="contact-info pt-4">
   <h5 class="text-dark mb-1">Contact Information</h5>
+  @if (auth()->user()->role == 'dokter')
   <p class="text-dark font-weight-medium pt-4 mb-2">Email address</p>
   <p>{{ auth()->user()->email }}</p>
   <p class="text-dark font-weight-medium pt-4 mb-2">Nomor Hp</p>
@@ -70,6 +53,28 @@
       <i class="mdi mdi-skype"></i>
     </a>
   </p>
+@else
+<p class="text-dark font-weight-medium pt-4 mb-2">Email address</p>
+  <p>{{ auth()->user()->email }}</p>
+  <p class="text-dark font-weight-medium pt-4 mb-2">Social Profile</p>
+  <p class="pb-3 social-button">
+    <a href="#" class="mb-1 btn btn-outline btn-twitter rounded-circle">
+      <i class="mdi mdi-twitter"></i>
+    </a>
+
+    <a href="#" class="mb-1 btn btn-outline btn-linkedin rounded-circle">
+      <i class="mdi mdi-linkedin"></i>
+    </a>
+
+    <a href="#" class="mb-1 btn btn-outline btn-facebook rounded-circle">
+      <i class="mdi mdi-facebook"></i>
+    </a>
+
+    <a href="#" class="mb-1 btn btn-outline btn-skype rounded-circle">
+      <i class="mdi mdi-skype"></i>
+    </a>
+  </p>
+  @endif
 </div>
 </div>
 </div>
@@ -88,15 +93,16 @@
 
   <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
     <div class="tab-pane-content mt-5">
-      <form action="{{ route('profile.update', $idDokter) }}" method="POST" enctype="multipart/form-data">
+      @if (auth()->user()->role == 'dokter')
+      <form action="{{ route('profile.update', $dokter->id) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="form-group row mb-6">
-          <label for="foto" class="col-sm-4 col-lg-2 col-form-label">User Image</label>
+          <label for="avatar" class="col-sm-4 col-lg-2 col-form-label">User Image</label>
           <div class="col-sm-8 col-lg-10">
               <div class="custom-file mb-1">
-                <input type="file" class="custom-file-input" id="foto" name="foto">
-                <label class="custom-file-label" for="foto">Choose file</label>
+                <input type="file" class="custom-file-input" id="avatar" name="avatar">
+                <label class="custom-file-label" for="avatar">Choose file</label>
               </div>
           </div>
         </div>
@@ -143,7 +149,12 @@
 
         <div class="form-group mb-4">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}">
+          <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ auth()->user()->email }}">
+          @error('email')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+          @enderror
         </div>
 
         <div class="form-group mb-4">
@@ -155,6 +166,58 @@
           <button type="submit" class="btn btn-primary mb-2 btn-pill">Update Profile</button>
         </div>
       </form>
+      @else
+      <form action="{{ route('profile.update.admin', ['profile' => auth()->user()->id]) }}" method="POST" enctype="multipart/form-data">
+        @method('PUT')
+        @csrf
+        <div class="form-group row mb-6">
+          <label for="avatar" class="col-sm-4 col-lg-2 col-form-label">User Image</label>
+          <div class="col-sm-8 col-lg-10">
+              <div class="custom-file mb-1">
+                <input type="file" class="custom-file-input" id="avatar" name="avatar">
+                <label class="custom-file-label" for="avatar">Choose file</label>
+              </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" name="name" id="name" value="{{ auth()->user()->name }}">
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="username">User Name</label>
+              <input type="text" class="form-control" id="username" value="{{ auth()->user()->username }}" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="email">Email</label>
+          <input type="email" class="form-control @error('email') is-invalid @enderror"" id="email" name="email" value="{{ auth()->user()->email }}">
+          @error('email')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+          @enderror
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="password">Password baru</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+
+        <div class="d-flex justify-content-end mt-5">
+          <button type="submit" class="btn btn-primary mb-2 btn-pill">Update Profile</button>
+        </div>
+      </form>
+      @endif
     </div>
   </div>
 </div>

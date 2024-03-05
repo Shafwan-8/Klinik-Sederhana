@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UsersController extends Controller
 {
@@ -51,7 +52,13 @@ class UsersController extends Controller
             'email' => 'required|email:dns|unique:users',
             'password' => 'required',
             'role' => 'required',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $namaFile = time().'_'.Str::snake($request->avatar->getClientOriginalName());
+            $validatedData['avatar'] = $request->file('avatar')->storeAs('images/avatar', $namaFile, 'public');
+        }
 
         User::create($validatedData);
 

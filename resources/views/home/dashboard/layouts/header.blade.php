@@ -34,38 +34,35 @@
                 <!-- User Account -->
                 <li class="dropdown user-menu">
                     <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        @if (auth()->check() && auth()->user()->dokter->isNotEmpty())
-                        @foreach (auth()->user()->dokter as $dokter)
-                        @if ($dokter->foto)
-                        <img src="{{ asset('storage/' . $dokter->foto) }}" class="user-image rounded-lg"
-                            alt="User Image" />
-                        @break
-
-                        {{-- Hentikan iterasi setelah menemukan satu dokter dengan foto --}}
-                        @endif
-                        @endforeach
-                        @else
-                        <img src="{{ asset('img/default-profile.jpg') }}" class="user-image rounded-lg"
-                            alt="User Image" />
-                        @endif
+                        @if (auth()->user()->avatar)
+                                <img src="{{ asset('storage/' . auth()->user()->avatar) }}" class="user-image rounded-lg"
+                                    alt="User Image" />
+                            @else
+                                <img src="{{ asset('img/default-profile.jpg') }}" class="user-image rounded-lg"
+                                    alt="User Image" />
+                            @endif
                         <span class="d-none d-lg-inline-block">{{ auth()->user()->name }}</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <!-- User image -->
                         <li class="dropdown-header">
-                            @if (auth()->check() && auth()->user()->dokter->isNotEmpty())
-                            @foreach (auth()->user()->dokter as $dokter)
-                            @if ($dokter->foto)
-                            <img src="{{ asset('storage/' . $dokter->foto) }}" class="user-image rounded-lg"
-                                alt="User Image" />
-                            @break
-
-                            {{-- Hentikan iterasi setelah menemukan satu dokter dengan foto --}}
-                            @endif
-                            @endforeach
+                            {{-- @if (auth()->user()->role == 'dokter') --}}
+                                {{-- @if (auth()->check() && auth()->user()->dokter->isNotEmpty())
+                                    @foreach (auth()->user()->dokter as $dokter)
+                                        @if ($dokter->foto)
+                                        <img src="{{ asset('storage/' . $dokter->foto) }}" class="user-image rounded-lg"
+                                            alt="User Image" />
+                                        @break
+                                        {{-- Hentikan iterasi setelah menemukan satu dokter dengan foto
+                                        @endif
+                                    @endforeach
+                                @endif --}}
+                            @if (auth()->user()->avatar)
+                                <img src="{{ asset('storage/' . auth()->user()->avatar) }}" class="user-image rounded-lg"
+                                    alt="User Image" />
                             @else
-                            <img src="{{ asset('img/default-profile.jpg') }}" class="user-image rounded-lg"
-                                alt="User Image" />
+                                <img src="{{ asset('img/default-profile.jpg') }}" class="user-image rounded-lg"
+                                    alt="User Image" />
                             @endif
                             <div class="d-inline-block">
                                 {{ auth()->user()->name }}
@@ -73,13 +70,11 @@
                                 <small class="pt-1">{{ auth()->user()->email }}</small>
                             </div>
                         </li>
-                        @if (auth()->user()->role == 'dokter')
                         <li>
-                            <a href="{{ route('profile.show', auth()->user()->dokter->first()->id) }}">
+                            <a href="{{ route('profile.show', auth()->user()->id) }}">
                                 <i class="mdi mdi-account"></i> My Profile
                             </a>
                         </li>
-                        @endif
                         <li class="dropdown-footer">
                             <form action="/logout" method="POST">
                                 @csrf
